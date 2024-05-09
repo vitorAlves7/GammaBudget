@@ -1,65 +1,23 @@
 @import "../../../styles/variables.scss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-
-main {
+.title-section{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: $gray-background;
-    min-height: 100vh;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    overflow-x: hidden;
-    border-radius: 10px;
-    .sign-in{
-        height: 600px;
-        width: 500px;
-        border-radius: 10px;
-        background-color: $white-default;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        
-        .header-section {
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-            background-color: $primary-color;
-            color: $white-default;
-            height: 72px;
-            width: 500px;
-        }
-        .title-section{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .main-section{
-            // width: 500px;
-            // border-radius: 10px;
-            // display: flex;
-            // flex-direction: column;
-            // align-items: center;
-            // justify-content: center;
-            padding: 25px;
-            h2 {
-                color: $secundary-color;
-                font-size: 25px;
-                font-weight: 500;
-            }
-        }
+    h2 {
+        color: $secundary-color;
+        font-size: 25px;
+        font-weight: 500;
     }
-
+}
+.main-section{
+    // width: 500px;
+    // border-radius: 10px;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    padding: 25px;
+    
 }
