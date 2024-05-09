@@ -1,1 +1,33 @@
-<app-default-login-layout></app-default-login-layout>
+<app-default-login-layout>
+    <div class="title-section">
+        <h2>Acesse sua conta</h2>
+    </div>
+    
+    <div class="mb-6">
+
+    </div>
+
+    <form>
+        <div class="mb-6">
+            <label for="email" class="block mb-2 text-sm font-normal text-grayText dark:text-white">Email</label>
+            <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.silva@email.com" required />
+        </div> 
+        <div class="mb-6">
+            <label for="password" class="block mb-2 text-sm font-normal text-grayText dark:text-white">Password</label>
+            <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
+        </div> 
+        <!-- <div class="mb-6">
+            <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+            <input type="password" id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
+        </div>  -->
+        <div class="flex items-start mb-2">
+            <label for="remember" class="ms-2 text-xs font-bold text-grayText dark:text-gray-300">Esqueci minha senha <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">clique aqui</a>.</label>
+        </div>
+        <!-- <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar</button> -->
+        <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center me-2 mb-2">Entrar</button>
+        <div class="flex items-start mb-6">
+            <label for="remember" class="ms-2 text-xs font-bold text-grayText dark:text-gray-300">Ainda não possui uma conta? <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">Inscrever-se</a>.</label>
+        </div>
+    </form>
+
+</app-default-login-layout>
