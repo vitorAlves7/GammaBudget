@@ -6,7 +6,10 @@ module.exports = {
   ],
   theme: {
     colors: {
-      grayText: '#626161'
+      primaryGreen: '#00A897',
+      darkGreen: '#007E71',
+      grayText: '#626161',
+      
       // Configure your color palette here
     },
     extend: {},
