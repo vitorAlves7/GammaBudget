@@ -1,0 +1,49 @@
+<section class="navbar-section">
+  <app-navbar></app-navbar>
+</section>
+
+<section class="cards-section">
+  <div class="px-4 pt-6 2xl:px-0">
+    <div class="grid m-2 gap-4 xl:grid-cols-2 2xl:grid-cols-3">
+      <div
+        class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+        Geral , receitas, despesas e saldo
+      </div>
+      <div
+        class="p-4 m-2 bg-write-600 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+        <app-total-expenses></app-total-expenses>
+      </div>
+    </div>
+    <div class="grid m-2 gap-4 xl:grid-cols-2 2xl:grid-cols-3">
+      <div
+        class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+        <div class="flex items-center justify-between mb-4">
+          Proximas contas a vencer
+        </div>
+      </div>
+      <div
+        class="p-4 bg-write-600 m-2  border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+        <app-top-expenses></app-top-expenses>
+      </div>
+    </div>
+
+    <div class="grid m-2 gap-4 xl:grid-cols-2 2xl:grid-cols-3">
+      <div
+        class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+
+
+        <div id="main-chart">Grafico do mês</div>
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+  </div>
+</section>
