@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+
+
+
+
+
 @Component({
   selector: 'app-total-expenses',
   standalone: true,
@@ -8,5 +13,15 @@ import { Component } from '@angular/core';
   styleUrl: './total-expenses.component.scss'
 })
 export class TotalExpensesComponent {
+  
+  
+  totalToPay: number = 1000; 
+ 
+  constructor() { }
 
+  ngOnInit(): void {
+    
+  }
 }
+
+
