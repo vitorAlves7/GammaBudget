@@ -1,0 +1,300 @@
+<section class="navbar-section">
+    <app-navbar></app-navbar>
+</section>
+    
+
+<section class=" p-3 sm:p-5">
+    <div class="mx-auto max-w-screen-2xl px-4 lg:px-12">
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+              
+                <div class="w-full md:w-1/2">
+                    <form class="flex items-center">
+                        <label for="simple-search" class="sr-only">Search</label>
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <input  type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Buscar" required="">
+                        </div>
+                    </form>
+                    
+                </div>
+                <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                    <button type="button" (click)="openAddModal('receita')" class="flex items-center justify-center text-gray-700 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium  border border-gray-200 rounded-lg text-sm px-4 py-2 ">
+                        <img src="../../../assets/pages/launches/receita.png" alt="Receita" width="30" height="30" style="margin-right: 8px">
+
+                        Receita
+                    </button>
+                    <button type="button" (click)="openAddModal('despesa')" class="flex items-center justify-center text-gray-700 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium border border-gray-200 rounded-lg text-sm px-4 py-2">
+                        <img src="../../../assets/pages/launches/despesa.png" alt="Despesa" width="30" height="30" style="margin-right: 8px">
+                        Despesa
+                    </button>
+                    <div class="flex items-center space-x-3 w-full md:w-auto">
+                        <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200" type="button">
+                            <svg class="-ml-1 mr-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg>
+                            Ações
+                        </button>
+                        <div id="actionsDropdown" class="hidden z-10  bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                <button  (click)="deleteAllItems()" class=" items-center justify-center text-gray-700 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium border border-gray-200 rounded-lg text-sm px-4 py-2">Apagar tudo</button>
+                          
+                        </div>
+                        <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
+                            </svg>
+                            Filtrar
+                            <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg>
+                        </button>
+                        <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                            <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Escolher opção</h6>
+                            <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
+                                <li class="flex items-center">
+                                    <input id="apple" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500">
+                                    <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Categoria</label>
+                                </li>
+                                <li class="flex items-center">
+                                    <input id="fitbit" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 ">
+                                    <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Despesa</label>
+                                </li>
+                                <li class="flex items-center">
+                                    <input id="razor" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500">
+                                    <label for="razor" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Receita</label>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+ 
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 ">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">Descrição</th>
+                            <th scope="col" class="px-4 py-3">Categoria</th>
+                            <th scope="col" class="px-4 py-3">Data</th>
+                            <th scope="col" class="px-4 py-3">Valor</th>
+        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of items ; let i = index" class="border-b cursor-pointer hover:bg-gray-100"
+                            [attr.data-row-id]="i" (click)="openModal(item)">
+                            <td class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap ">{{ item.descricao }}
+                            </td>
+                            <td class="px-4 py-5">{{ item.categoria }}</td>
+                            <td class="px-4 py-5">{{ item.data }} </td>
+                            <td class="px-4 py-5"  [ngClass]="{'text-red-600': item.valor < 0, 'text-green-600': item.valor > 0}">{{  item.valor  | currency:'BRL' : 'symbol':'1.2-2'  }}</td>
+                            <td class="px-4 py-5">
+                                <ng-container *ngIf="item.valor <= 0">
+                                    {{ item.status }}
+                                </ng-container>
+                           </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="text-xl text-center mt-4">
+                    <p>Saldo Previsto (Mês Atual): <span [class.text-green-500]="saldoPrevisto >= 0" [class.text-red-500]="saldoPrevisto < 0">{{ saldoPrevisto | currency:'BRL' : 'symbol':'1.2-2' }}</span></p>
+                  </div>
+                  
+                  
+            </div>
+            
+            
+           
+
+
+        <!-- Add Modal -->
+        <div class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center h-full" tabindex="-1" *ngIf="showAddModal">
+            <div class="absolute inset-0 bg-black bg-opacity-30 backdrop-blur-sm"></div>
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h5 class="text-xl font-semibold text-gray-900 dark:text-white">Adicionar {{itemType}}</h5>
+                        <button type="button" class="close" aria-label="Fechar" (click)="closeAddModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="p-4 md:p-5">
+                        <form class="space-y-4" (ngSubmit)="addItem()">
+                            <div>
+                                <label for="newDescricao" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Descrição</label>
+                                <input type="text" id="newDescricao" [(ngModel)]="newItem.descricao" name="descricao" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg" />
+                            </div>
+                            <label for="newCategoria" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Categoria</label>
+                            <select [(ngModel)]="newItem.categoria" name="category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="" disabled selected></option>
+                                <ng-container *ngIf="itemType == 'despesa'">
+                                    <option value="Alimentação">Alimentação</option>
+                                    <option value="Transporte">Transporte</option>
+                                    <option value="Saúde">Saúde</option>
+                                    <option value="Entretenimento">Entretenimento</option>
+                                </ng-container>
+                                <ng-container *ngIf="itemType == 'receita'">
+                                    <option value="Salário">Salário</option>
+                                    <option value="Investimentos">Investimentos</option>
+                                    <option value="Freelance">Freelance</option>
+                                    <option value="Outros">Outros</option>
+                                </ng-container>
+                            </select>
+                            
+                            <div>
+                                <ng-container *ngIf="itemType == 'despesa'">
+                                    <label for="newData" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Data de vencimento</label>
+                                    <input type="date" id="newData" [(ngModel)]="newItem.data" name="data" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 " />
+                                </ng-container>
+                                <ng-container *ngIf="itemType == 'receita'">
+                                    <label for="newData" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Data</label>
+                                    <input type="date" id="newData" [(ngModel)]="newItem.data" name="data" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 " />
+                                </ng-container>
+                            </div>
+                            <div>
+                                <ng-container *ngIf="itemType == 'despesa'">
+                                    <label for="newStatus" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Status</label>
+                                    <select [(ngModel)]="newItem.status" name="status" id="newStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        <option value="Pago">Pago</option>
+                                        <option value="Não Pago">Não Pago</option>
+                                    </select>
+                                </ng-container>
+                            </div>
+                            <div>
+                                <label for="newValor" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Valor</label>
+                                <input type="number" id="newValor" [(ngModel)]="newItem.valor" name="valor" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 " />
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="flex items-center w-auto text-gray-700 m-2 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.75v14.5m7.25-7.25H4.75" />
+                                    </svg>
+                                    Adicionar
+                                </button>
+                                <button type="button" class="flex items-center w-auto text-gray-700 m-2 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" (click)="closeAddModal()">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+       <!-- View item modal -->
+        <div class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center h-full " tabindex="-1" *ngIf="showModal">
+            <div class="absolute inset-0 bg-black bg-opacity-30 backdrop-blur-sm"></div>
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h5 class="text-xl font-semibold text-gray-900 ">{{selectedItem.descricao}}</h5>
+                        <button type="button" class="close" aria-label="Fechar" (click)="closeModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="p-4 md:p-5">
+                        <form class="space-y-4" (ngSubmit)="saveChanges()">
+                        
+                            <div>
+                                <label for="categoria" class="block mb-2 text-text-xl font-medium text-gray-500 ">Categoria</label>
+                                <label for="categoria" class="block mb-2 text-sm font-medium text-gray-900 ">{{selectedItem.categoria}}</label>
+
+                            </div>
+                            <div>
+                                <label for="data" class="block mb-2 text-text-xl font-medium text-gray-500">Data</label>
+                                <label type="data" class="block mb-2 text-sm font-medium text-gray-900 "> {{selectedItem.data}}</label>
+                            </div>
+                            <div>
+                                <label for="valor" class="block mb-2 text-text-xl font-medium text-gray-500 ">Valor</label>
+                                <label type="valor" class="block mb-2 text-sm font-medium text-gray-900  "> {{selectedItem.valor}} </label>
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="flex items-center w-auto text-gray-700 m-2  hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center " (click)="openEditModal()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                                    </svg>
+                                    Editar
+                                </button>
+
+                                
+                                
+                                <button type="submit" class="flex items-center w-auto text-gray-700 m-2  hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" (click)="deleteItem()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                    </svg>
+                                    Apagar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+      
+      <!-- Edit item Modal -->
+        <div class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center h-full" tabindex="-1" *ngIf="showEditModal">
+            <div class="absolute inset-0 bg-black bg-opacity-30 backdrop-blur-sm"></div>
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h5 class="text-xl font-semibold text-gray-900 dark:text-white">Editar Item</h5>
+                        <button type="button" class="close" aria-label="Fechar" (click)="closeEditModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="p-4 md:p-5">
+                        <form class="space-y-4" (ngSubmit)="updateItem()">
+                            <div>
+                                <label for="descricao" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Descrição</label>
+                                <input type="text" id="descricao" [(ngModel)]="editItem.descricao" name="descricao" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" />
+                            </div>
+                            <div>
+                                <label for="categoria" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Categoria</label>
+                                <input type="text" id="categoria" [(ngModel)]="editItem.categoria" name="categoria" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" />
+                            </div>
+                            <div>
+                                <label for="data" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Data</label>
+                                <input type="date" id="data" [(ngModel)]="editItem.data" name="data" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" />
+                            </div>
+                            <div>
+                                <label for="valor" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Valor</label>
+                                <input type="number" id="valor" [(ngModel)]="editItem.valor" name="valor" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" />
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="flex items-center w-auto text-gray-700 m-2 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                                    </svg>
+                                    Salvar
+                                </button>
+                                <button type="button" class="flex items-center w-auto text-gray-700 m-2 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" (click)="closeEditModal()">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+             
+    
+        </div>
+    </div>
+
+    
+</section> 
