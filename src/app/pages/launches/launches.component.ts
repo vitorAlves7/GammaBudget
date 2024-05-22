@@ -3,6 +3,9 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ItemFilterPipe } from './item-filter.pipe';
+import { OptionFilterPipe } from './option-filter.pipe';
+
 
 interface Item {
   id?: number;
@@ -18,7 +21,9 @@ interface Item {
   standalone: true,
   templateUrl: './launches.component.html',
   styleUrl: './launches.component.scss',
-  imports: [NavbarComponent, CommonModule, FormsModule, RouterModule],
+  imports: [NavbarComponent, CommonModule, FormsModule, RouterModule,ItemFilterPipe, OptionFilterPipe],
+
+
 })
 export class LaunchesComponent {
   showModal = false;
@@ -42,6 +47,10 @@ export class LaunchesComponent {
     // { descricao: 'Item 2', categoria: 'Categoria 2', data: '2024-05-20', valor: 200 },
     // // Outros itens...
   ];
+
+  filterText: string = '';
+  selectedFilterOption: string= '';
+
 
   openModal(item: any) {
     this.selectedItem = item;
