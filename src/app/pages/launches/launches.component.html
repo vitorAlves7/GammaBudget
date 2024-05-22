@@ -261,8 +261,22 @@
                                 <input type="text" id="descricao" [(ngModel)]="editItem.descricao" name="descricao" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" />
                             </div>
                             <div>
-                                <label for="categoria" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Categoria</label>
-                                <input type="text" id="categoria" [(ngModel)]="editItem.categoria" name="categoria" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" />
+                                <label for="newCategoria" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Categoria</label>
+                                <select [(ngModel)]="editItem.categoria" name="category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <option value="" disabled selected></option>
+                                    <ng-container *ngIf="editItem.valor < 0 ">  
+                                        <option value="Alimentação">Alimentação</option>
+                                        <option value="Transporte">Transporte</option>
+                                        <option value="Saúde">Saúde</option>
+                                        <option value="Entretenimento">Entretenimento</option>
+                                    </ng-container>
+                                    <ng-container *ngIf="editItem.valor > 0 ">
+                                        <option value="Salário">Salário</option>
+                                        <option value="Investimentos">Investimentos</option>
+                                        <option value="Freelance">Freelance</option>
+                                        <option value="Outros">Outros</option>
+                                    </ng-container>
+                                </select>                            
                             </div>
                             <div>
                                 <label for="data" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Data</label>
