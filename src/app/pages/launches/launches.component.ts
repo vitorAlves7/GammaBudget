@@ -66,6 +66,11 @@ export class LaunchesComponent {
   }
 
   updateItem() {
+    
+    if(this.selectedItem.valor< 0){
+      this.editItem.valor = -Math.abs(this.editItem.valor);   
+    }
+
     Object.assign(this.selectedItem, this.editItem);
     this.calculateSaldoPrevisto();
     this.closeEditModal();
