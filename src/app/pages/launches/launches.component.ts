@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ItemFilterPipe } from './item-filter.pipe';
 import { OptionFilterPipe } from './option-filter.pipe';
+import { MonthSelectorComponent } from '../../components/month-selector/month-selector.component';
+import { MonthYearFilterPipe } from "../../components/month-selector/month-year-filter/month-year-filter.pipe";
+
 
 
 interface Item {
@@ -17,13 +20,21 @@ interface Item {
 }
 
 @Component({
-  selector: 'app-launches',
-  standalone: true,
-  templateUrl: './launches.component.html',
-  styleUrl: './launches.component.scss',
-  imports: [NavbarComponent, CommonModule, FormsModule, RouterModule,ItemFilterPipe, OptionFilterPipe],
-
-
+    selector: 'app-launches',
+    standalone: true,
+    templateUrl: './launches.component.html',
+    styleUrl: './launches.component.scss',
+    imports: 
+     [
+       NavbarComponent,
+       CommonModule, 
+       FormsModule, 
+       RouterModule, 
+       ItemFilterPipe, 
+       OptionFilterPipe, 
+       MonthSelectorComponent, 
+       MonthYearFilterPipe
+      ]
 })
 export class LaunchesComponent {
   showModal = false;
@@ -50,6 +61,9 @@ export class LaunchesComponent {
 
   filterText: string = '';
   selectedFilterOption: string= '';
+
+  selectedMonth: number = new Date().getMonth();
+  selectedYear: number = new Date().getFullYear(); 
 
 
   openModal(item: any) {
@@ -118,10 +132,10 @@ export class LaunchesComponent {
     if (this.itemType === 'despesa') {
       this.newItem.valor = -Math.abs(this.newItem.valor);
     }
-
     this.items.push({ ...this.newItem });
     this.calculateSaldoPrevisto();
     this.closeAddModal();
+   
   }
   private calculateSaldoPrevisto() {
     const mesAtual = new Date().getMonth() + 1;
@@ -143,4 +157,31 @@ export class LaunchesComponent {
   ngOnInit(): void {
     this.calculateSaldoPrevisto();
   }
+  constructor() {
+
+
+  
+    this.selectedMonth = new Date().getMonth();
+    this.selectedYear = new Date().getFullYear();
+
+    console.log(this.selectedMonth)
+    console.log(this.selectedYear)
+    console.log("----------------")
+
+  }
+
+
+  onMonthYearChanged(event: { month: number, year: number }) {
+    this.selectedMonth = event.month;
+    this.selectedYear = event.year;
+
+    console.log("--------MUDOU--------")
+    console.log(this.selectedMonth)
+    console.log(this.selectedYear)
+    
+
+    
+  }
+
+  
 }
