@@ -73,7 +73,7 @@ export class HomeChartComponent implements OnInit {
         height: "500px",
         fontFamily: "Roboto, Open-Sans",
         toolbar: {
-          show: false,
+          show: true,
         },
       },
       plotOptions: {
@@ -90,6 +90,12 @@ export class HomeChartComponent implements OnInit {
         style: {
           fontFamily: "Roboto, Open-Sans",
         },
+        y: {
+            formatter: function (val: number) {
+              return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            }
+          }
+        
       },
       states: {
         hover: {
@@ -125,9 +131,10 @@ export class HomeChartComponent implements OnInit {
         labels: {
           show: true,
           style: {
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Roboto, Open-Sans",
             cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400',
           },
+         
         },
         axisBorder: {
           show: false,
@@ -142,6 +149,7 @@ export class HomeChartComponent implements OnInit {
       fill: {
         opacity: 1,
       },
+      
     };
   }
 

@@ -71,6 +71,11 @@ export class TopExpensesComponent implements OnInit {
       tooltip: {
         shared: true,
         intersect: false,
+        y: {
+          formatter: function (val: number) {
+            return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          }
+        }
       },
       xaxis: {
         labels: {
@@ -79,16 +84,13 @@ export class TopExpensesComponent implements OnInit {
             fontFamily: "Roboto, Open-sans",
             cssClass: 'text-xs font-normal fill-gray-500'
           },
-          formatter: function(value: any) {
-            return value;
-          }
         },
         categories: ["Agua", "Luz", "Comida", "Ração"],
         axisTicks: {
-          show: false,
+          show: true,
         },
         axisBorder: {
-          show: false,
+          show: true,
         },
       },
       yaxis: {
