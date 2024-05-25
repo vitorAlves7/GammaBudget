@@ -42,9 +42,9 @@ export class TopExpensesComponent implements OnInit {
       chart: {
         type: "bar",
         width: "100%",
-        height: 400,
+        height: 500,
         toolbar: {
-          show: false,
+          show: true,
         }
       },
       fill: {
