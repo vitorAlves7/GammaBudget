@@ -9,8 +9,10 @@ module.exports = {
       primaryGreen: '#00A897',
       darkGreen: '#007E71',
       grayText: '#626161',
+      launchesScreenRed: '#F05252',
+      launchesScreenGreen: '#007E71',
       
-      // Configure your color palette here
+      
     },
     extend: {},
   },
