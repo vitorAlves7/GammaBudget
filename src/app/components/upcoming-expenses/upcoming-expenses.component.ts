@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { UpcomingExpensesService } from '../../services/upcoming-expenses/upcoming-expenses.service';
+import { ExpensesService } from '../../services/expenses/expenses.service';
 import { Expense } from '../../types/expense-type';
 
 @Component({
@@ -24,11 +24,11 @@ export class UpcomingExpensesComponent {
   expenses: Expense[] = [];
   noExpenses: boolean = false;
 
-  constructor(private upcomingExpensesService: UpcomingExpensesService) {}
+  constructor(private expensesService: ExpensesService) {}
 
   
   ngOnInit(): void {
-    this.upcomingExpensesService.getExpenses().subscribe(
+    this.expensesService.getExpenses().subscribe(
       (data: Expense[]) => {
         this.expenses = this.filterExpenses(data);
         this.noExpenses = this.expenses.length === 0;

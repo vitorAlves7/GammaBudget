@@ -7,7 +7,7 @@ import { Expense } from '../../types/expense-type';
 @Injectable({
   providedIn: 'root'
 })
-export class UpcomingExpensesService {
+export class ExpensesService {
 
   private apiUrl: string = `${environment.apiBaseUrl}/expenses`; 
 
