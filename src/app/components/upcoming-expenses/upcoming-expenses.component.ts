@@ -1,13 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
-export interface Expense {
-  date: string;
-  description: string;
-  value: number;
-}
-
-
+import { UpcomingExpensesService } from '../../services/upcoming-expenses/upcoming-expenses.service';
+import { Expense } from '../../types/expense-type';
 
 @Component({
   selector: 'app-upcoming-expenses',
@@ -18,12 +12,37 @@ export interface Expense {
 })
 export class UpcomingExpensesComponent {
 
-  expenses: Expense[] = [
-    { date: '27/04/2024', description: 'iPhone 14 Pro',   value: 44.5467 },
-    { date: '27/04/2024', description: 'Apple iMac 27"',  value: 25.6982 },
-    { date: '27/04/2024', description: 'Apple Watch SE',  value: 20.1869 },
-    { date: '27/04/2024', description: 'Apple iPad Air',  value: 10.3967 },
-    { date: '27/04/2024', description: 'Apple iMac 24"',  value: 98.543 },
-    { date: '27/04/2024', description: 'Apple Iphone 13"',  value: 1500.543 },
-  ];
+  //  expenses: Expense[] = [
+  //   { id: 1, name: "iPhone 14 Pro", description: "Apple smartphone", amount: 44.5467, expiration_date: "27/04/2024", paid: false, payment_date: "", category: "Electronics" },
+  //   { id: 2, name: "Apple iMac 27", description: "Apple desktop computer", amount: 25.6982, expiration_date: "27/04/2024", paid: false, payment_date: "", category: "Electronics" },
+  //   { id: 3, name: "Apple Watch SE", description: "Apple smartwatch", amount: 20.1869, expiration_date: "27/04/2024", paid: false, payment_date: "", category: "Electronics" },
+  //   { id: 4, name: "Apple iPad Air", description: "Apple tablet", amount: 10.3967, expiration_date: "27/04/2024", paid: false, payment_date: "", category: "Electronics" },
+  //   { id: 5, name: "Apple iMac 24", description: "Apple desktop computer", amount: 98.543, expiration_date: "27/04/2024", paid: false, payment_date: "", category: "Electronics" },
+  //   { id: 6, name: "Apple iPhone 13", description: "Apple smartphone", amount: 1500.543, expiration_date: "27/04/2024", paid: false, payment_date: "", category: "Electronics" }
+  // ];
+
+  expenses: Expense[] = [];
+  noExpenses: boolean = false;
+
+  constructor(private upcomingExpensesService: UpcomingExpensesService) {}
+
+  
+  ngOnInit(): void {
+    this.upcomingExpensesService.getExpenses().subscribe(
+      (data: Expense[]) => {
+        this.expenses = this.filterExpenses(data);
+        this.noExpenses = this.expenses.length === 0;
+      }
+    );
+  }
+
+  filterExpenses(expenses: Expense[]): Expense[] {
+    let today = new Date();
+    return expenses.filter(expense => {
+      let expirationDate = new Date(expense.expiration_date);      
+      return !expense.paid && expirationDate > today;
+    });
+  }
+  
+
 }
