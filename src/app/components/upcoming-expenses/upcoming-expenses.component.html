@@ -44,7 +44,7 @@
               </div>
             </div>
             <div class="inline-flex items-center text-base font-semibold text-gray-700 dark:text-white">
-              {{ expense.amount | currency: 'BRL' : 'symbol':'1.2-2' }}
+              {{ getAbsoluteValue(expense.amount) | currency: 'BRL' : 'symbol':'1.2-2' }}
             </div>
           </div>
         </li>

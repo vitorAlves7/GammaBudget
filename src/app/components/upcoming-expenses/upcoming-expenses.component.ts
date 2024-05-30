@@ -43,6 +43,14 @@ export class UpcomingExpensesComponent {
       return !expense.paid && expirationDate > today;
     });
   }
+
+  getAbsoluteValue(value: number): number {
+    return Math.abs(value);
+  }
+  
+  
+
+
   
 
 }
