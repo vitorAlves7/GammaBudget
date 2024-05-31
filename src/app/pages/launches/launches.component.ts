@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 
+
 interface Incoming {
   id?: number;
   name: string;
@@ -52,7 +53,8 @@ interface Expense {
       OptionFilterPipe,
       MonthSelectorComponent,
       MonthYearFilterPipe,
-      HttpClientModule
+      HttpClientModule,
+      
     ]
 })
 export class LaunchesComponent {
@@ -96,7 +98,7 @@ export class LaunchesComponent {
   selectedMonth: number = new Date().getMonth();
   selectedYear: number = new Date().getFullYear();
 
-
+ 
   openModal(item: any) {
 
     this.selectedItem = item;
@@ -229,7 +231,7 @@ export class LaunchesComponent {
   private calculateSaldoPrevisto() {
     this.saldoPrevisto = 0;
   
-    // Filtrar receitas (Incoming) do mês e ano selecionados
+
     const filteredIncomings = this.items.filter(item => {
       if ('launch_date' in item) {
         const itemDate = new Date(item.launch_date);
@@ -248,7 +250,7 @@ export class LaunchesComponent {
     const saldoPrevistoReceitas = filteredIncomings.reduce((saldo, incoming) => saldo + incoming.amount, 0);
   
     const filteredExpenses = this.items.filter(item => {
-      if ('expiration_date' in item && !item.paid) {
+      if ('expiration_date' in item && item.paid) {
         const itemDate = new Date(item.expiration_date + 'T00:00:00');
         const isSameYear = itemDate.getFullYear() === this.selectedYear ;
         const isSameMonth = itemDate.getMonth()  === this.selectedMonth;
@@ -274,7 +276,7 @@ export class LaunchesComponent {
   constructor(private apiService: ApiService) {}
   
   getData() {
-    this.apiService.getData('incomingList')
+    this.apiService.getData('incomings')
       .subscribe(response => {
         this.incomingList = response;
         this.combineLists();
@@ -294,20 +296,23 @@ export class LaunchesComponent {
     }
   }
   
+  
   addItemToIncomingList(item: any): void {
-    this.apiService.postData('incomingList', item).subscribe(() => {
+    this.apiService.postData('incomings', item).subscribe(response => {
+      console.log('API response:', response);  // Logando a resposta da API
       this.getData(); 
     });
   }
+  
 
   updateIncomingListItem(id: number, item: any): void {
-    this.apiService.updateData('incomingList', id, item).subscribe(() => {
+    this.apiService.updateData('incomings', id, item).subscribe(() => {
       this.getData(); 
     });
   }
 
   deleteIncomingListItem(id: number): void {
-    this.apiService.deleteData('incomingList', id).subscribe(() => {
+    this.apiService.deleteData('incomings', id).subscribe(() => {
       this.getData();
     });
   }

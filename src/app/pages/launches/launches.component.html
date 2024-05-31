@@ -127,36 +127,44 @@
                                             <img  src="../../../assets/pages/launches/categories-icons/drink.png" alt="Bares e Restaurantes" class="inline-block w-6 h-6 mr-2">
                                         } 
                                           @case ("Casa") {
-                                            <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Casa" class="inline-block w-6 h-6 mr-2">
+                                            <img  src="../../../assets/pages/launches/categories-icons/house.png" alt="Casa" class="inline-block w-6 h-6 mr-2">
                                         } 
                                           @case ("Compras") {
-                                            <img src="../../../assets/pages/launches/categories-icons/food.png" alt="Compras" class="inline-block w-6 h-6 mr-2">
+                                            <img src="../../../assets/pages/launches/categories-icons/purchase.png" alt="Compras" class="inline-block w-6 h-6 mr-2">
                                         } 
                                           @case ("Cuidados pessoais") {
-                                            <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Cuidados Pessoais" class="inline-block w-6 h-6 mr-2">
+                                            <img  src="../../../assets/pages/launches/categories-icons/selfcare.png" alt="Cuidados Pessoais" class="inline-block w-6 h-6 mr-2">
                                         } 
                                           @case ("Dívidas e empréstimos") {
-                                            <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Dívidas e Empréstimos" class="inline-block w-6 h-6 mr-2">
+                                            <img  src="../../../assets/pages/launches/categories-icons/loan.png" alt="Dívidas e Empréstimos" class="inline-block w-6 h-6 mr-2">
                                         } 
+                                        @case ("Empréstimos") {
+                                            <img  src="../../../assets/pages/launches/categories-icons/loan.png" alt="Empréstimos" class="inline-block w-6 h-6 mr-2">
+                                        }
                                           @case ("Educação") {
-                                            <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Educação" class="inline-block w-6 h-6 mr-2">
+                                            <img  src="../../../assets/pages/launches/categories-icons/education.png" alt="Educação" class="inline-block w-6 h-6 mr-2">
                                         } 
                                         @case ("Família") {
-                                            <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Família" class="inline-block w-6 h-6 mr-2">
+                                            <img  src="../../../assets/pages/launches/categories-icons/family.png" alt="Família" class="inline-block w-6 h-6 mr-2">
                                         } 
                                         @case ("Impostos") {
-                                            <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Impostos" class="inline-block w-6 h-6 mr-2">
+                                            <img  src="../../../assets/pages/launches/categories-icons/tax.png" alt="Impostos" class="inline-block w-6 h-6 mr-2">
                                         } 
                                         @case ("Investimentos") {
-                                            <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Investimentos" class="inline-block w-6 h-6 mr-2">
+                                            <img  src="../../../assets/pages/launches/categories-icons/investiment.png" alt="Investimentos" class="inline-block w-6 h-6 mr-2">
                                         } 
                                         @case ("Lazer") {
-                                            <img *ngSwitchCase="'Lazer'" src="../../../assets/pages/launches/categories-icons/food.png" alt="Lazer" class="inline-block w-6 h-6 mr-2">
+                                            <img  src="../../../assets/pages/launches/categories-icons/entertainment.png" alt="Lazer" class="inline-block w-6 h-6 mr-2">
                                         } 
                                         @case ("Mercado") {
-                                            <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Mercado" class="inline-block w-6 h-6 mr-2">
+                                            <img  src="../../../assets/pages/launches/categories-icons/market.png" alt="Mercado" class="inline-block w-6 h-6 mr-2">
                                         } 
-                                          
+                                        @case ("Salário") {
+                                            <img  src="../../../assets/pages/launches/categories-icons/salary.png" alt="Salário" class="inline-block w-6 h-6 mr-2">
+                                        }
+                                        @case ("Outras receitas") {
+                                            <img  src="../../../assets/pages/launches/categories-icons/another.png" alt="Outras receitas" class="inline-block w-6 h-6 mr-2">
+                                        }
                                            
                                         } 
                                     </ng-container>
@@ -182,15 +190,14 @@
                                   Não Pago
                                 </span>
                               </td>
+                              <td *ngIf="item.amount >0" class="relative group">
+                               
+                              </td>
                               
 
 
 
-                            <!-- <td class="px-4 py-5">
-                                <ng-container *ngIf="item.amount <= 0">
-                                    {{ item.status }}
-                                </ng-container>
-                           </td> -->
+                       
                             
                         </tr>
                         
@@ -362,7 +369,7 @@
                                 </div>
                                 <div>
                                     <label for="newIncomingAmount" class="block mb-2 text-text-xl font-medium text-gray-700 ">Valor</label>
-                                    <label for="newIncomingAmount" class="block mb-2 text-text-xl font-medium text-gray-500 ">{{ selectedItem.amount  | currency:'BRL' : 'symbol':'1.2-2'}}</label>
+                                    <label for="newIncomingAmount" class="block mb-2 text-text-xl font-medium text-gray-500 ">{{ selectedItem.amount | currency:'BRL' : 'symbol':'1.2-2'}}</label>
                                 </div>
                                 <div>
                                     <label for="incomingData" class="block mb-2 text-text-xl font-medium text-gray-700">Data</label>
@@ -521,7 +528,7 @@
                                     <option value="" disabled selected></option>
                                     <option value="Alimentação">Alimentação</option>
                                     <option value="Assinaturas e serviços">Assinaturas e serviços</option>
-                                    <option value="Bares e restaurantes">Bares e restaurantes</option>
+                                    <option value="Bares e Restaurantes">Bares e restaurantes</option>
                                     <option value="Casa">Casa</option>
                                     <option value="Compras">Compras</option>
                                     <option value="Cuidados pessoais">Cuidados pessoais</option>
