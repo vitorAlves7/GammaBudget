@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { TopExpensesComponent } from '../../components/top-expenses/top-expenses.component';
-import { TotalExpensesComponent } from '../../components/total-expenses/total-expenses.component';
 import { HomeChartComponent } from '../../components/home-chart/home-chart.component';
 import { UpcomingExpensesComponent } from '../../components/upcoming-expenses/upcoming-expenses.component';
 import { GeneralInformationComponent } from '../../components/general-information/general-information.component';
+import { ExpensesByCategoryComponent } from '../../components/expenses-by-category/expenses-by-category.component';
 
 
 
@@ -15,7 +15,7 @@ import { GeneralInformationComponent } from '../../components/general-informatio
     [
       NavbarComponent,
       TopExpensesComponent,
-      TotalExpensesComponent,
+      ExpensesByCategoryComponent,
       HomeChartComponent,
       UpcomingExpensesComponent,
       GeneralInformationComponent

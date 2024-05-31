@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TotalExpensesComponent } from './total-expenses.component';
+import { ExpensesByCategoryComponent } from './expenses-by-category.component';
 
 describe('TotalExpensesComponent', () => {
-  let component: TotalExpensesComponent;
-  let fixture: ComponentFixture<TotalExpensesComponent>;
+  let component: ExpensesByCategoryComponent;
+  let fixture: ComponentFixture<ExpensesByCategoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TotalExpensesComponent]
+      imports: [ExpensesByCategoryComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TotalExpensesComponent);
+    fixture = TestBed.createComponent(ExpensesByCategoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
