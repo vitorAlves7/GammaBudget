@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent, NgApexchartsModule } from 'ng-apexcharts';
+import { Expense } from '../../types/expense-type';
+import { IncomingsService } from '../../services/incomings/incomings.service';
+import { Incoming } from '../../types/incoming-type';
+import { ExpensesService } from '../../services/expenses/expenses.service';
+
 
 export type ChartOptions = {
   series: any;
@@ -25,133 +30,185 @@ export type ChartOptions = {
   styleUrls: ['./home-chart.component.scss']
 })
 export class HomeChartComponent implements OnInit {
-  @ViewChild("chart") chart: ChartComponent | undefined;
+
+  @ViewChild("chart") chart: ChartComponent | any;
   public chartOptions: Partial<ChartOptions> = {};
 
-  constructor() {
-    this.chartOptions = {
-      series: [
-        {
-          name: "Receitas",
-          color: '#007E71',
-          data: [
-            { x: "Jan", y: 3000.30 },
-            { x: "Fev", y: 3000 },
-            { x: "Mar", y: 3000 },
-            { x: "Abr", y: 0 },
-            { x: "Mai", y: 0 },
-            { x: "Jun", y: 3000 },
-            { x: "Jul", y: 3000 },
-            { x: "Ago", y: 3000 },
-            { x: "Set", y: 0 },
-            { x: "Out", y: 3000 },
-            { x: "Nov", y: 3000 },
-            { x: "Dez", y: 3000 },
-          ],
+  expenses: Expense[] = []
+  incomings: Incoming[] = []
+  sumIncomingsMonth: number[] = []
+  sumExpensesMonth: number[] = []
+
+
+  constructor(private incomingsService: IncomingsService, private expensesService: ExpensesService) {
+
+  }
+
+
+
+  ngOnInit(): void {
+    this.loadChartData();
+  }
+
+  loadChartData(): void {
+    this.incomingsService.getIncomings().subscribe(
+      (incomings: Incoming[]) => {
+        this.incomings = incomings;
+        this.sumIncomingsMonth = this.calculateMonthlyIncomings(this.incomings);
+        this.updateChart();
+      }
+    );
+
+    this.expensesService.getExpenses().subscribe(
+      (expenses: Expense[]) => {
+        this.expenses = expenses;
+        this.sumExpensesMonth = this.calculateMonthlyExpenses(this.expenses);
+        this.updateChart();
+      }
+    );
+  }
+
+  updateChart(): void {
+    if (this.sumIncomingsMonth.length > 0 && this.sumExpensesMonth.length > 0) {
+      const months = this.getMonths();
+      this.chartOptions = {
+        series: [
+          {
+            name: "Receitas",
+            color: '#007E71',
+            data: this.sumIncomingsMonth.map((value, index) => ({
+              x: months[index],
+              y: value
+            })),
+          },
+          {
+            name: "Despesas",
+            color: "#F05252",
+            data: this.sumExpensesMonth.map((value, index) => ({
+              x: months[index],
+              y: value
+            })),
+          },
+        ],
+        chart: {
+          type: "bar",
+          height: "500px",
+          toolbar: {
+            show: true,
+          },
         },
-        {
-          name: "Despesas",
-          color: "#F05252",
-          data: [
-            { x: "Jan", y: 231 },
-            { x: "Fev", y: 122 },
-            { x: "Mar", y: 63 },
-            { x: "Abr", y: 150 },
-            { x: "Mai", y: 122 },
-            { x: "Jun", y: 323 },
-            { x: "Jul", y: 0 },
-            { x: "Ago", y: 111 },
-            { x: "Set", y: 111 },
-            { x: "Out", y: 0 },
-            { x: "Nov", y: 111 },
-            { x: "Dez", y: 0 },
-          ],
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: "70%",
+            borderRadiusApplication: "end",
+            borderRadius: 8,
+          },
         },
-      ],
-      chart: {
-        type: "bar",
-        height: "500px",
-        fontFamily: "Roboto, Open-Sans",
-        toolbar: {
-          show: true,
-        },
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          columnWidth: "70%",
-          borderRadiusApplication: "end",
-          borderRadius: 8,
-        },
-      },
-      tooltip: {
-        shared: true,
-        intersect: false,
-        style: {
-          fontFamily: "Roboto, Open-Sans",
-        },
-        y: {
+        tooltip: {
+          shared: true,
+          intersect: false,
+          y: {
             formatter: function (val: number) {
               return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
             }
           }
-        
-      },
-      states: {
-        hover: {
-          filter: {
-            type: "darken",
-            value: 1,
+        },
+        states: {
+          hover: {
+            filter: {
+              type: "darken",
+              value: 1,
+            },
           },
         },
-      },
-      stroke: {
-        show: true,
-        width: 0,
-        colors: ["transparent"],
-      },
-      grid: {
-        show: false,
-        strokeDashArray: 4,
-        padding: {
-          left: 2,
-          right: 2,
-          top: -14,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      legend: {
-        show: true,
-        position: 'top'
-      },
-      xaxis: {
-        floating: false,
-        labels: {
+        stroke: {
           show: true,
-          style: {
-            fontFamily: "Roboto, Open-Sans",
-            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400',
+          width: 0,
+          colors: ["transparent"],
+        },
+        grid: {
+          show: false,
+          strokeDashArray: 4,
+          padding: {
+            left: 2,
+            right: 2,
+            top: -14,
           },
-         
         },
-        axisBorder: {
+        dataLabels: {
+          enabled: false,
+        },
+        legend: {
+          show: true,
+          position: 'top'
+        },
+        xaxis: {
+          floating: false,
+          labels: {
+            show: true,
+            style: {
+              cssClass: 'text-xs font-normal fill-gray-500',
+            },
+          },
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
+        },
+        yaxis: {
           show: false,
         },
-        axisTicks: {
-          show: false,
+        fill: {
+          opacity: 1,
         },
-      },
-      yaxis: {
-        show: false,
-      },
-      fill: {
-        opacity: 1,
-      },
-      
-    };
+      };
+    }
   }
 
-  ngOnInit(): void {}
+
+  calculateMonthlyExpenses(expenses: Expense[]): number[] {
+
+    const monthlyExpenses: number[] = new Array(12).fill(0);
+    const currentYear: number = new Date().getFullYear();
+
+    expenses.forEach(expense => {
+
+      const expenseDate = new Date(expense.expiration_date);
+      const monthIndex = expenseDate.getMonth();
+      if (expenseDate.getFullYear() == currentYear) {
+        monthlyExpenses[monthIndex] += Math.abs(expense.amount);
+      }
+
+
+    });
+    return monthlyExpenses;
+  }
+
+  calculateMonthlyIncomings(incomings: Incoming[]): number[] {
+    const monthlyIncomings: number[] = new Array(12).fill(0);
+    const currentYear: number = new Date().getFullYear();
+    
+    incomings.forEach(incoming => {
+      const incomingDate = new Date(incoming.launch_date);
+      const monthIndex = incomingDate.getMonth();
+
+      if (incomingDate.getFullYear() == currentYear) {
+        monthlyIncomings[monthIndex] += incoming.amount;
+      }
+    });
+
+    return monthlyIncomings;
+  }
+
+  getMonths(): string[] {
+    return [
+      "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+  }
+
+
 }
