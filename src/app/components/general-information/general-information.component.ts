@@ -13,36 +13,56 @@ import { ExpensesService } from '../../services/expenses/expenses.service';
   styleUrl: './general-information.component.scss'
 })
 export class GeneralInformationComponent {
-
+  incomings: Incoming[] = [];
+  expenses: Expense[] = [];
   totalMonthIncome: number = 0;
   totalMonthExpense: number = 0;
   dayPeriod: string | undefined;
+  balance: number = 0;
   
   constructor(private incomingsService: IncomingsService, private expensesService: ExpensesService) {}
-
+  
   ngOnInit(): void {
     this.dayPeriod = this.verifyDayPeriod();
     this.loadMonthSummary();
   }
-
-
-
+  
+  calculateBalance(incomings: Incoming[], expenses: Expense[]): number {
+    let totalIncomings = incomings.reduce((total, incoming) => total + incoming.amount, 0);
+  
+    let totalExpenses = expenses
+      .filter(expense => expense.paid) 
+      .reduce((total, expense) => total + Math.abs(expense.amount), 0);
+  
+    return totalIncomings - totalExpenses;
+  }
+  
   loadMonthSummary() {
-    
     this.incomingsService.getIncomings().subscribe(
       (incomings: Incoming[]) => {
+        this.incomings = incomings; 
         this.totalMonthIncome = this.calculateCurrentMonthIncome(incomings);
+        this.updateBalance();
       }
-      
     );
-
-    
+  
     this.expensesService.getExpenses().subscribe(
       (expenses: Expense[]) => {
+        this.expenses = expenses; 
         this.totalMonthExpense = this.calculateCurrentMonthExpense(expenses);
+        this.updateBalance(); 
       }
     );
   }
+  
+  updateBalance() {
+    if (this.incomings.length > 0 && this.expenses.length > 0) {
+      this.balance = this.calculateBalance(this.incomings, this.expenses);
+      console.log(this.incomings);
+      console.log(this.expenses);
+    }
+  }
+  
   
   calculateCurrentMonthIncome(incomings: Incoming[]): number {
     const currentDate = new Date();
