@@ -45,87 +45,85 @@ export class TopExpensesComponent implements OnInit{
         this.expenses = this.filterTopExpenses(response);
     
       
-      this.chartOptions = {
-        series: [
-          {
-            name: "Despesas",
-            data: this.expenses.map(expense => expense.amount),
-            color: "#F05252"
-          }
-        ],
-        chart: {
-          type: "bar",
-          width: "100%",
-          height: 500,
-          toolbar: {
-            show: true,
-          }
-        },
-        fill: {
-          opacity: 1,
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            columnWidth: "100%",
-            borderRadiusApplication: "end",
-            borderRadius: 6,
-            dataLabels: {
-              position: "top",
+        this.chartOptions = {
+          series: [
+            {
+              name: "Despesas",
+              data: this.expenses.map(expense => expense.amount),
+              color: "#F05252"
+            }
+          ],
+          chart: {
+            type: "bar",
+            width: "100%",
+            height: "650px",
+            toolbar: {
+              show: true,
+            }
+          },
+          fill: {
+            opacity: 1,
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              columnWidth: "100%",
+              borderRadius: 6,
+              dataLabels: {
+                position: "top",
+              },
             },
           },
-        },
-        legend: {
-          show: true,
-          position: "bottom",
-        },
-        dataLabels: {
-          enabled: false,
-        },
-        tooltip: {
-          shared: true,
-          intersect: false,
-          y: {
-            formatter: function (val: number) {
-              return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            }
-          }
-        },
-        xaxis: {
-          labels: {
+          legend: {
             show: true,
-            style: {
-              
-              cssClass: 'text-xs font-normal fill-gray-500'
+            position: "bottom",
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          tooltip: {
+            shared: true,
+            intersect: false,
+            y: {
+              formatter: function (val: number) {
+                return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+              }
+            }
+          },
+          xaxis: {
+            labels: {
+              show: true,
+              style: {
+                cssClass: 'text-sm font-semibold fill-gray-600'
+              }
+            },
+            categories: this.expenses.map(expense => expense.name),
+            axisTicks: {
+              show: true,
+            },
+            axisBorder: {
+              show: true,
             },
           },
-          categories: this.expenses.map(expense => expense.name),
-          axisTicks: {
-            show: true,
-          },
-          axisBorder: {
-            show: true,
-          },
-        },
-        yaxis: {
-          labels: {
-            show: true,
-            style: {
-              
-              cssClass: 'text-xs font-normal fill-gray-500'
+          yaxis: {
+            labels: {
+              show: true,
+              style: {
+                cssClass: 'text-sm font-semibold fill-gray-500',
+              }
             }
-          }
-        },
-        grid: {
-          show: false,
-          strokeDashArray: 4,
-          padding: {
-            left: 10,
-            right: 2,
-            top: -20
           },
-        },
-      };
+          grid: {
+            show: false,
+            strokeDashArray: 4,
+            padding: {
+              left: 50,
+              right: 2,
+              top: -20
+            },
+          },
+        };
+        
     },
     );
 

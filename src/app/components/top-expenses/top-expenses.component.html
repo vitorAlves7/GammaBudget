@@ -1,11 +1,11 @@
-<div class="w-full h-full bg-white rounded-lg ">
-  <!-- Seção para a imagem e texto -->
+<div class="w-full h-full bg-white rounded-lg  p-4">
+ 
   <div class="flex items-center mb-4">
     <img src="../../../assets/svg/top-expenses-icon.png" alt="Ícone de despesas" class="w-12 h-12 mr-2">
-    <h3 class="text-base font-bold text-gray-500 text-xl">Maiores despesas do mês</h3>
+    <h3 class="text-lg font-bold text-gray-600">Maiores despesas do mês</h3>
   </div>
 
-  <div>
+  <div class="h-96">
     <apx-chart
       [series]="chartOptions.series"
       [chart]="chartOptions.chart"
