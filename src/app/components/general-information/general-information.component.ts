@@ -28,14 +28,23 @@ export class GeneralInformationComponent {
   }
   
   calculateBalance(incomings: Incoming[], expenses: Expense[]): number {
-    let totalIncomings = incomings.reduce((total, incoming) => total + incoming.amount, 0);
+   
+    const currentDate = new Date(); 
   
+
+    let totalIncomings = incomings
+      .filter(incoming => new Date(incoming.launch_date) <= currentDate) 
+      .reduce((total, incoming) => total + incoming.amount, 0);
+  
+    
     let totalExpenses = expenses
       .filter(expense => expense.paid) 
       .reduce((total, expense) => total + Math.abs(expense.amount), 0);
   
+  
     return totalIncomings - totalExpenses;
   }
+  
   
   loadMonthSummary() {
     this.incomingsService.getIncomings().subscribe(
