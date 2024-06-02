@@ -1,11 +1,13 @@
+
+
 <section class="navbar-section">
     <app-navbar></app-navbar>
 </section>
     
 
-<section class=" p-3 sm:p-5">
+<section class=" p-3 sm:p-5 ">
     <div class="mx-auto max-w-screen-2xl px-4 lg:px-12">
-        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden p-2">
             
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
         
@@ -54,15 +56,15 @@
                         <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
                             <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                 <li class="flex items-center">
-                                    <input id="todos" type="radio" name="all" value="all" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" [(ngModel)]="selectedFilterOption">
+                                    <input id="todos" type="radio" name="all" value="all" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-green-500" [(ngModel)]="selectedFilterOption">
                                     <label for="todos" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Todos</label>
                                 </li>
                                 <li class="flex items-center">
-                                    <input id="despesa" type="radio" name="tipo" value="expense" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" [(ngModel)]="selectedFilterOption">
+                                    <input id="despesa" type="radio" name="tipo" value="expense" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-green-500" [(ngModel)]="selectedFilterOption">
                                     <label for="despesa" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Despesa</label>
                                 </li>
                                 <li class="flex items-center">
-                                    <input id="receita" type="radio" name="tipo" value="incoming" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" [(ngModel)]="selectedFilterOption">
+                                    <input id="receita" type="radio" name="tipo" value="incoming" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-green-500" [(ngModel)]="selectedFilterOption">
                                     <label for="receita" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Receita</label>
                                 </li>
                                 
@@ -485,7 +487,7 @@
                             </div>
                             <div>
                                 <label for="newIncomingAmount" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Valor</label>
-                                <input type="number" id="newIncomingAmount" [(ngModel)]="editItem.amount" name="amount" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen " placeholder="R$"/>
+                                <input type="number"  id="newIncomingAmount" [(ngModel)]="editItem.amount"  name="amount" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen " placeholder="R$"/>
                             </div>
                             <div>
                                 <label for="incomingData" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Data</label>
