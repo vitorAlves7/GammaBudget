@@ -31,7 +31,7 @@ export interface Expense {
   description: string;
   amount: number;
   expiration_date: string;
-  paid: boolean | string;
+  paid: boolean;
   payment_date: string;
   category: string;
 }
@@ -120,7 +120,18 @@ export class LaunchesComponent {
     this.showModal = false;
   }
 
+ 
+
+
   openEditModal() {
+    console.log('ITEM SELECIONADO')
+
+    console.log(this.selectedItem)
+
+    if(this.selectedItem.amount<0){
+      this.selectedItem.amount= Math.abs(this.selectedItem.amount);
+    }
+
     this.editItem = { ...this.selectedItem };
     this.showEditModal = true;
     this.showModal = false;
@@ -135,25 +146,45 @@ export class LaunchesComponent {
   }
 
   updateItem() {
+    
     console.log(this.selectedItem.id)
-    if (this.selectedItem.amount < 0) {
-      
+    console.log(this.itemType)
+    if (this.itemType == 'expense') {
+
       Object.assign(this.selectedItem, this.editItem);
       
       console.log(this.selectedItem)
+
+      this.selectedItem = this.selectedItem as Expense;
+      console.log(this.selectedItem)
+      console.log(typeof(this.selectedItem))
+
       // this.updateExpenseItem(this.selectedItem.id, this.selectedItem);
 
-      this.selectedItem.category= '54065527-5cc3-4f61-b40b-133bd401b924';
-      this.selectedItem.paid = this.selectedItem.paid.toString();
-      this.updateExpenseItem('b85e15fc-62b2-4388-862c-1269225ad132', JSON.stringify(this.selectedItem));
  
-     
+
+      const expenseWithStringValue = {
+
+        
+        name: this.selectedItem.name,
+        description:  this.selectedItem.description,
+        amount:  this.selectedItem.amount,
+        expiration_date:  this.selectedItem.expiration_date,
+        paid:   this.selectedItem.paid.toString(),
+        payment_date: this.selectedItem.expiration_date,
+        category: this.selectedItem.category = '54065527-5cc3-4f61-b40b-133bd401b924'
+
+      }
+
+      this.updateExpenseItem('f93e3aad-b884-45e0-a8a3-a7750b4ccba8', expenseWithStringValue);
+ 
+      console.log('vai pro back',expenseWithStringValue)
 
     } else {
       console.log(this.selectedItem);
       Object.assign(this.selectedItem, this.editItem);
       this.selectedItem.category= 'd7f613d1-aaf0-43ea-802a-bd0da411453b';
-      this.updateIncomingListItem('05b4dbc7-c4ca-4893-8e5e-1ebb65b9e0ab', JSON.stringify(this.selectedItem));
+      this.updateIncomingListItem('05b4dbc7-c4ca-4893-8e5e-1ebb65b9e0ab', this.selectedItem);
     
       
     }
@@ -227,8 +258,7 @@ export class LaunchesComponent {
 
 
   addItem() {
-    console.log(this.itemType)
-    console.log('aqui')
+
     console.log(this.expense.expiration_date)
     if (this.itemType === 'expense') {
     
@@ -236,10 +266,26 @@ export class LaunchesComponent {
       this.items.push({ ...this.expense });
 
      
-      this.expense.category = '34777ffc-2613-4f82-a78d-abfbdc6398fb';
-      this.expense.paid = this.expense.paid.toString();
-      this.addItemToExpenses(this.expense)
-      console.log(this.expense)
+
+
+      const expenseWithStringValue = {
+
+        
+        name: this.expense.name,
+        description:  this.expense.description,
+        amount:  this.expense.amount,
+        expiration_date:  this.expense.expiration_date,
+        paid:   this.expense.paid.toString(),
+        payment_date: this.expense.expiration_date,
+        category: this.expense.category = '34777ffc-2613-4f82-a78d-abfbdc6398fb'
+
+      }
+
+
+
+
+      this.addItemToExpenses(expenseWithStringValue)
+      console.log('vai pro back no add',expenseWithStringValue)
     }
     else {
       this.items.push({ ...this.incoming });
@@ -342,7 +388,9 @@ export class LaunchesComponent {
 
         this.expenses.forEach(item => {
           item.expiration_date = item.expiration_date.slice(0, 10); 
-           console.log((item.expiration_date))
+          // item.payment_date = item.payment_date.slice(0, 10); 
+          //  console.log('expiration date', item.expiration_date);
+          //  console.log('payment date', item.payment_date);
         });
         this.combineLists();
       });
