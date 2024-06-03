@@ -1,3 +1,5 @@
+import { ExpenseCategory } from "./expense-category";
+
 export interface Expense {
     id?: number;
     name: string;
@@ -6,5 +8,6 @@ export interface Expense {
     expiration_date: string;
     paid: boolean;
     payment_date: string;
-    category: string;
-}
+    category: ExpenseCategory;
+  }
+  
