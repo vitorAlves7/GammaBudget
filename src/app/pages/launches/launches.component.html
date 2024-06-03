@@ -109,7 +109,7 @@
 
                             <td class="px-4 py-5">
                                 <ng-container >
-                                    @switch (item.category) { 
+                                    @switch (item.category.name) { 
                                         @case ("Alimentação") {
                                             <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Alimentação" class="inline-block w-6 h-6 mr-2">
                                           } 
@@ -178,7 +178,7 @@
                                         } 
                                     </ng-container>
                                 
-                                <span class="inline-block">{{ item.category }}</span>
+                                <span class="inline-block">{{ item.category.name }}</span>
                               </td>
                               
                               
@@ -268,12 +268,9 @@
                                 </div>
                                 <div>
                                     <label for="incomingCategory" class="block mb-2 text-text-xl font-medium text-gray-500 ">Categoria</label>
-                                    <select id="category" [(ngModel)]="incoming.category" name="category" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen block w-full p-2.5">
-                                        <option value="" disabled selected></option>
-                                        <option value="Empréstimos">Empréstimos</option>
-                                        <option value="Salário">Salário</option>
-                                        <option value="Investimento">Investimento</option>
-                                        <option value="Outros">Outros</option>
+                                    <select id="category" [(ngModel)]="incoming.category.id" name="category" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen block w-full p-2.5">
+                                        <option value="" disabled selected>Selecione uma categoria</option>
+                                        <option *ngFor="let category of categoriesIncoming" [value]="category.id">{{ category.name }}</option>
                                     </select>
                                 </div>
                         
@@ -312,33 +309,12 @@
                                 </div>
                                 <div>
                                     <label for="expenseCategory" class="block mb-2 text-text-xl font-medium text-gray-500 ">Categoria</label>
-                                    <select id="expense" [(ngModel)]="expense.category" name="category" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen">
-                                        <option value="" disabled selected></option>
-                                        <option value="Alimentação">Alimentação</option>
-                                        <option value="Assinaturas e serviços">Assinaturas e serviços</option>
-                                        <option value="Casa">Casa</option>
-                                        <option value="Compras">Compras</option>
-                                        <option value="Cuidados pessoais">Cuidados pessoais</option>
-                                        <option value="Dívidas e empréstimos">Dívidas e empréstimos</option>
-                                        <option value="Educação">Educação</option>
-                                        <option value="Família">Família</option>
-                                        <option value="Impostos">Impostos</option>
-                                        <option value="Investimento">Investimento</option>
-                                        <option value="Lazer">Lazer</option>
-                                        <option value="Mercado">Mercado</option>
-                                        <option value="Pets">Pets</option>
-                                        <option value="Presentes">Presentes</option>
-                                        <option value="Restaurantes">Restaurantes</option>
-                                        <option value="Saúde">Saúde</option>
-                                        <option value="Transporte">Transporte</option>
-                                        <option value="Viagem">Viagem</option>
-                                        <option value="Outros">Outros</option>
-                                        
-    
-                                    </select>
+                                <select id="expense" [(ngModel)]="expense.category.id" name="category" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen">
+                                    <option value="" disabled selected>Selecione uma categoria</option>
+                                    <option *ngFor="let category of categoriesExpense" [value]="category.id">{{ category.name }}</option>
+                                  </select>
+                                  
                                 </div>
-                        
-                         
                                 <div class="sm:col-span-2">
                                     <label for="newIncomingDescription" class="block mb-2 text-text-xl font-medium text-gray-500 ">Descrição</label>
                                     <textarea id="description" [(ngModel)]="expense.description" name="description"rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen "></textarea>                    
@@ -393,7 +369,7 @@
                                 </div>
                                 <div>
                                     <label for="incomingCategory" class="block mb-2 text-text-xl font-medium text-gray-700 ">Categoria</label>
-                                    <label for="incomingCategory" class="block mb-2 text-text-xl font-medium text-gray-500 ">{{selectedItem.category}}</label>
+                                    <label for="incomingCategory" class="block mb-2 text-text-xl font-medium text-gray-500 ">{{selectedItem.category.name}}</label>
                                 </div>
                         
                          
@@ -427,7 +403,7 @@
                                 </div>
                                 <div>
                                     <label for="expenseCategory" class="block mb-2 text-text-xl font-medium text-gray-700 ">Categoria</label>
-                                    <label for="expenseCategory" class="block mb-2 text-text-xl font-medium text-gray-500 ">{{selectedItem.category}}</label>
+                                    <label for="expenseCategory" class="block mb-2 text-text-xl font-medium text-gray-500 ">{{selectedItem.category.name}}</label>
                                 </div>
                         
                          
@@ -491,16 +467,13 @@
                             </div>
                             <div>
                                 <label for="incomingData" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Data</label>
-                                <input type="date" id="incomingData" [(ngModel)]="editItem.launch_date"  name="launch_date" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen" />
+                                <input type="date" id="incomingData" [(ngModel)]="editItem.launch_date"  name="launch_date" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen" disabled=""/>
                             </div>
                             <div>
                                 <label for="incomingCategory" class="block mb-2 text-text-xl font-medium text-gray-500 ">Categoria</label>
-                                <select id="category" [(ngModel)]="editItem.category" name="category" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen block w-full p-2.5">
-                                    <option value="" disabled selected></option>
-                                    <option value="Empréstimos">Empréstimos</option>
-                                    <option value="Salário">Salário</option>
-                                    <option value="Investimento">Investimento</option>
-                                    <option value="Outros">Outros</option>
+                                <select id="category" [(ngModel)]="editItem.category.id" name="category" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen block w-full p-2.5">
+                                    <option value="" disabled selected>Selecione uma categoria</option>
+                                    <option *ngFor="let category of categoriesIncoming" [value]="category.id">{{ category.name }}</option>
                                 </select>
                             </div>
                     
@@ -540,27 +513,9 @@
                             </div>
                             <div>
                                 <label for="expenseCategory" class="block mb-2 text-text-xl font-medium text-gray-500 ">Categoria</label>
-                                <select id="expense" [(ngModel)]="editItem.category" name="category" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen block w-full p-2.5">
-                                    <option value="" disabled selected></option>
-                                    <option value="Alimentação">Alimentação</option>
-                                    <option value="Assinaturas e serviços">Assinaturas e serviços</option>
-                                    <option value="Casa">Casa</option>
-                                    <option value="Compras">Compras</option>
-                                    <option value="Cuidados pessoais">Cuidados pessoais</option>
-                                    <option value="Dívidas e empréstimos">Dívidas e empréstimos</option>
-                                    <option value="Educação">Educação</option>
-                                    <option value="Família">Família</option>
-                                    <option value="Impostos">Impostos</option>
-                                    <option value="Investimento">Investimento</option>
-                                    <option value="Lazer">Lazer</option>
-                                    <option value="Mercado">Mercado</option>
-                                    <option value="Pets">Pets</option>
-                                    <option value="Presentes">Presentes</option>
-                                    <option value="Restaurantes">Restaurantes</option>
-                                    <option value="Saúde">Saúde</option>
-                                    <option value="Transporte">Transporte</option>
-                                    <option value="Viagem">Viagem</option>
-                                    <option value="Outros">Outros</option>
+                                <select id="expense" [(ngModel)]="editItem.category.id" name="category" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen block w-full p-2.5">
+                                    <option value="" disabled selected>Selecione uma categoria</option>
+                                    <option *ngFor="let category of categoriesExpense" [value]="category.id">{{ category.name }}</option>
                                 </select>
                             </div>
                     

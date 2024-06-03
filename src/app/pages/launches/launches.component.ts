@@ -13,16 +13,25 @@ import { ExpenseService } from '../../services/expense.service';
 
 
 
+export interface IncomingCategory {
+  id: string;
+  name: string;
+}
 
+export interface ExpenseCategory {
+  id: string;
+  name: string;
+}
 
 
 export interface Incoming {
-  id?: number;
+  id: string;
+  user_id: string;
   name: string;
   description: string;
   amount: number;
-  launch_date: string;
-  category: string;
+  launch_date: string; 
+  category: IncomingCategory;
 }
 
 export interface Expense {
@@ -33,8 +42,9 @@ export interface Expense {
   expiration_date: string;
   paid: boolean;
   payment_date: string;
-  category: string;
+  category: ExpenseCategory;
 }
+
 
 
 
@@ -58,6 +68,37 @@ export interface Expense {
     ]
 })
 export class LaunchesComponent {
+
+    categoriesExpense = [
+    { id: '3e24dc14-31dc-418d-89f2-e95bc3540dc0', name: 'Alimentação', description: 'Categoria de despesa de Alimentação' },
+    { id: '9f65323e-ee7a-4e30-b52e-9ac2a1dcff09', name: 'Assinaturas e serviços', description: 'Categoria de despesa de Assinaturas e serviços' },
+    { id: '05c09266-f80e-43ee-9a61-11ebdff72f52', name: 'Casa', description: 'Categoria de despesa de Casa' },
+    { id: '0660dca7-62a4-4e35-acf7-215e529ca47d', name: 'Compras', description: 'Categoria de despesa de Compras' },
+    { id: '7831c434-e431-477c-b74d-82410bb151a4', name: 'Cuidados pessoais', description: 'Categoria de despesa de Cuidados pessoais' },
+    { id: '8849fd7e-3e89-4f0c-8c10-f4e9d9bebbf2', name: 'Dívidas e empréstimos', description: 'Categoria de despesa de Dívidas e empréstimos' },
+    { id: 'f16bd087-74b4-40cb-af82-f3dcd93160a8', name: 'Educação', description: 'Categoria de despesa de Educação' },
+    { id: 'd9368a6b-b366-417b-b4b2-1e39fde16a5c', name: 'Família', description: 'Categoria de despesa de Família' },
+    { id: 'e8f5165a-c6f6-4ba3-828e-721427936175', name: 'Impostos', description: 'Categoria de despesa de Impostos' },
+    { id: '15adcd43-7ee3-4b1f-ac8d-97c238263fc6', name: 'Investimentos', description: 'Categoria de despesa de Investimentos' },
+    { id: '6b13a47e-01d3-470d-8bbc-cd3706a144ba', name: 'Lazer', description: 'Categoria de despesa de Lazer' },
+    { id: '8468ca25-73c9-4855-bb55-e43847928a27', name: 'Mercado', description: 'Categoria de despesa de Mercado' },
+    { id: '2bf57692-a8a9-487d-bdf3-254445b37ab8', name: 'Outros', description: 'Categoria de despesa de Outros' },
+    { id: '499eb89e-5d2e-415e-8e23-ec94bf81c00d', name: 'Pets', description: 'Categoria de despesa de Pets' },
+    { id: 'ec4d7d22-43f7-43cd-b9f9-1a39c7a910ac', name: 'Presentes', description: 'Categoria de despesa de Presentes' },
+    { id: '14730cd0-e93b-44a3-b879-fc70cce1d055', name: 'Restaurantes', description: 'Categoria de despesa de Restaurantes' },
+    { id: '1a7e756d-099a-4059-b58b-30037a2fff3f', name: 'Saúde', description: 'Categoria de despesa de Saúde' },
+    { id: 'f36e53f0-8aa4-417b-94ee-69f68af76f65', name: 'Transporte', description: 'Categoria de despesa de Transporte' },
+    { id: '51bbad1b-edec-419e-88f6-0cfe5f4afcef', name: 'Viagem', description: 'Categoria de despesa de Viagem' }
+  ];
+  
+    categoriesIncoming = [
+    { id: 'f59b169f-b11c-4c30-8d42-1adcd2454cfe', name: 'Investimento', description: 'Receita referente a investimentos' },
+    { id: '425afa01-d592-4d41-b78f-dfb4240af448', name: 'Outros', description: 'Outros tipos de receita' },
+    { id: 'a2839acb-6b26-4b64-9af3-031474a24178', name: 'Salário', description: 'Receita referente ao salário' }
+  ];
+  
+
+
   showModal = false;
   showEditModal = false;
   showAddModal = false;
@@ -71,11 +112,16 @@ export class LaunchesComponent {
   expenses: Expense[] = [];
 
   incoming: Incoming = {
+    id: '',
+    user_id: '',
     name: '',
     description: '',
     amount: 0,
-    launch_date: '',
-    category: ''
+    launch_date: '', 
+    category: {
+      id: '',
+      name: '',
+    }
   };
 
   expense: Expense = {
@@ -85,7 +131,10 @@ export class LaunchesComponent {
     expiration_date: '',
     paid: false,
     payment_date: '',
-    category: ''
+    category: {
+      id: '',
+      name: '',
+    }
   }
 
 
@@ -99,20 +148,23 @@ export class LaunchesComponent {
   selectedYear: number = new Date().getFullYear();
 
   actualIncomingDate = new Date().toISOString().split('T')[0];
+
  
+
 
 
 
   openModal(item: any) {
 
     this.selectedItem = item;
-    console.log(this.selectedItem)
+    console.log('selecionei', this.selectedItem)
 
     if (this.selectedItem.amount > 0) {
       this.itemType = 'incoming'
     } else {
       this.itemType = 'expense'
     }
+    
     this.showModal = true;
   }
 
@@ -145,6 +197,11 @@ export class LaunchesComponent {
     this.closeModal();
   }
 
+ 
+  
+  
+  
+
   updateItem() {
     
     console.log(this.selectedItem.id)
@@ -171,20 +228,28 @@ export class LaunchesComponent {
         amount:  this.selectedItem.amount,
         expiration_date:  this.selectedItem.expiration_date,
         paid:   this.selectedItem.paid.toString(),
-        payment_date: this.selectedItem.expiration_date,
-        category: this.selectedItem.category = '54065527-5cc3-4f61-b40b-133bd401b924'
-
+        payment_date: this.selectedItem.payment_date,
+        category: this.selectedItem.category.id
       }
 
-      this.updateExpenseItem('f93e3aad-b884-45e0-a8a3-a7750b4ccba8', expenseWithStringValue);
+      this.updateExpenseItem(this.selectedItem.id, expenseWithStringValue);
  
       console.log('vai pro back',expenseWithStringValue)
 
     } else {
       console.log(this.selectedItem);
+
+
       Object.assign(this.selectedItem, this.editItem);
-      this.selectedItem.category= 'd7f613d1-aaf0-43ea-802a-bd0da411453b';
-      this.updateIncomingListItem('05b4dbc7-c4ca-4893-8e5e-1ebb65b9e0ab', this.selectedItem);
+
+      const incomingFormatted = {
+        name: this.selectedItem.name,
+        description:  this.selectedItem.description,
+        amount:  this.selectedItem.amount,
+        category: this.selectedItem.category.id
+      }
+      
+      this.updateIncomingListItem(this.selectedItem.id, incomingFormatted);
     
       
     }
@@ -204,11 +269,11 @@ export class LaunchesComponent {
     console.log('Estou no delete');
     console.log(this.selectedItem.id);
     if (this.selectedItem.amount > 0) {
-      // this.deleteIncomingListItem(this.selectedItem.id);
-      this.deleteIncomingListItem('91726b75-f1a9-43ef-aa59-10d2926ede3e');
+      this.deleteIncomingListItem(this.selectedItem.id);
+     
     } else {
-      // this.deleteExpenseItem(this.selectedItem.id);
-      this.deleteExpenseItem('cae9a596-794a-40dc-bbb4-5acf0bf4df59');
+       this.deleteExpenseItem(this.selectedItem.id);
+    
       
     }
 
@@ -230,11 +295,16 @@ export class LaunchesComponent {
   resetInputs(type: string) {
     {
       this.incoming = {
+        id: '',
+        user_id: '',
         name: '',
         description: '',
         amount: 0,
-        launch_date: '',
-        category: '',
+        launch_date: '', 
+        category: {
+          id: '',
+          name: '',
+        }
       };
 
       this.expense = {
@@ -243,8 +313,11 @@ export class LaunchesComponent {
         expiration_date: '',
         paid: false,
         payment_date: '',
-        category: '',
         description: '',
+        category: {
+          id: '',
+          name: '',
+        }
       }
     }
   }
@@ -266,7 +339,7 @@ export class LaunchesComponent {
       this.items.push({ ...this.expense });
 
      
-
+      
 
       const expenseWithStringValue = {
 
@@ -276,8 +349,9 @@ export class LaunchesComponent {
         amount:  this.expense.amount,
         expiration_date:  this.expense.expiration_date,
         paid:   this.expense.paid.toString(),
-        payment_date: this.expense.expiration_date,
-        category: this.expense.category = '34777ffc-2613-4f82-a78d-abfbdc6398fb'
+        payment_date: this.expense.payment_date,
+        category: this.expense.category.id,
+       
 
       }
 
@@ -289,12 +363,12 @@ export class LaunchesComponent {
     }
     else {
       this.items.push({ ...this.incoming });
-
+   
       const incomingWithoutDate = {
         name: this.incoming.name,
         description: this.incoming.name,
         amount: this.incoming.amount,
-        category: '076ad57c-f848-438c-9940-2524cc390a5d'
+        category: this.incoming.category.id
       };
 
       console.log(incomingWithoutDate)
@@ -360,7 +434,7 @@ export class LaunchesComponent {
   getData(): void {
     this.incomingService.getIncomingList()
       .subscribe(response => {
-        console.log(response);
+        console.log('minha lista de receitas',response);
         this.incomingList = response;
 
         this.incomingList .forEach(item => {
