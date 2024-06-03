@@ -10,6 +10,8 @@ import { MonthYearFilterPipe } from "../../components/month-selector/month-year-
 import { IncomingService } from '../../services/incoming-service';
 import { HttpClientModule } from '@angular/common/http';
 import { ExpenseService } from '../../services/expense.service';
+import { IncomingCategoryService } from '../../services/incoming-category.service';
+import { ExpenseCategoryService } from '../../services/expense-category.service';
 
 
 
@@ -30,7 +32,7 @@ export interface Incoming {
   name: string;
   description: string;
   amount: number;
-  launch_date: string; 
+  launch_date: string;
   category: IncomingCategory;
 }
 
@@ -69,7 +71,7 @@ export interface Expense {
 })
 export class LaunchesComponent {
 
-    categoriesExpense = [
+  categoriesExpense = [
     { id: '3e24dc14-31dc-418d-89f2-e95bc3540dc0', name: 'Alimentação', description: 'Categoria de despesa de Alimentação' },
     { id: '9f65323e-ee7a-4e30-b52e-9ac2a1dcff09', name: 'Assinaturas e serviços', description: 'Categoria de despesa de Assinaturas e serviços' },
     { id: '05c09266-f80e-43ee-9a61-11ebdff72f52', name: 'Casa', description: 'Categoria de despesa de Casa' },
@@ -90,13 +92,13 @@ export class LaunchesComponent {
     { id: 'f36e53f0-8aa4-417b-94ee-69f68af76f65', name: 'Transporte', description: 'Categoria de despesa de Transporte' },
     { id: '51bbad1b-edec-419e-88f6-0cfe5f4afcef', name: 'Viagem', description: 'Categoria de despesa de Viagem' }
   ];
-  
-    categoriesIncoming = [
+
+  categoriesIncoming = [
     { id: 'f59b169f-b11c-4c30-8d42-1adcd2454cfe', name: 'Investimento', description: 'Receita referente a investimentos' },
     { id: '425afa01-d592-4d41-b78f-dfb4240af448', name: 'Outros', description: 'Outros tipos de receita' },
     { id: 'a2839acb-6b26-4b64-9af3-031474a24178', name: 'Salário', description: 'Receita referente ao salário' }
   ];
-  
+
 
 
   showModal = false;
@@ -117,7 +119,7 @@ export class LaunchesComponent {
     name: '',
     description: '',
     amount: 0,
-    launch_date: '', 
+    launch_date: '',
     category: {
       id: '',
       name: '',
@@ -149,7 +151,7 @@ export class LaunchesComponent {
 
   actualIncomingDate = new Date().toISOString().split('T')[0];
 
- 
+
 
 
 
@@ -164,7 +166,7 @@ export class LaunchesComponent {
     } else {
       this.itemType = 'expense'
     }
-    
+
     this.showModal = true;
   }
 
@@ -172,7 +174,7 @@ export class LaunchesComponent {
     this.showModal = false;
   }
 
- 
+
 
 
   openEditModal() {
@@ -180,8 +182,8 @@ export class LaunchesComponent {
 
     console.log(this.selectedItem)
 
-    if(this.selectedItem.amount<0){
-      this.selectedItem.amount= Math.abs(this.selectedItem.amount);
+    if (this.selectedItem.amount < 0) {
+      this.selectedItem.amount = Math.abs(this.selectedItem.amount);
     }
 
     this.editItem = { ...this.selectedItem };
@@ -197,44 +199,44 @@ export class LaunchesComponent {
     this.closeModal();
   }
 
- 
-  
-  
-  
+
+
+
+
 
   updateItem() {
-    
+
     console.log(this.selectedItem.id)
     console.log(this.itemType)
     if (this.itemType == 'expense') {
 
       Object.assign(this.selectedItem, this.editItem);
-      
+
       console.log(this.selectedItem)
 
       this.selectedItem = this.selectedItem as Expense;
       console.log(this.selectedItem)
-      console.log(typeof(this.selectedItem))
+      console.log(typeof (this.selectedItem))
 
       // this.updateExpenseItem(this.selectedItem.id, this.selectedItem);
 
- 
+
 
       const expenseWithStringValue = {
 
-        
+
         name: this.selectedItem.name,
-        description:  this.selectedItem.description,
-        amount:  this.selectedItem.amount,
-        expiration_date:  this.selectedItem.expiration_date,
-        paid:   this.selectedItem.paid.toString(),
+        description: this.selectedItem.description,
+        amount: this.selectedItem.amount,
+        expiration_date: this.selectedItem.expiration_date,
+        paid: this.selectedItem.paid.toString(),
         payment_date: this.selectedItem.payment_date,
         category: this.selectedItem.category.id
       }
 
       this.updateExpenseItem(this.selectedItem.id, expenseWithStringValue);
- 
-      console.log('vai pro back',expenseWithStringValue)
+
+      console.log('vai pro back', expenseWithStringValue)
 
     } else {
       console.log(this.selectedItem);
@@ -244,14 +246,14 @@ export class LaunchesComponent {
 
       const incomingFormatted = {
         name: this.selectedItem.name,
-        description:  this.selectedItem.description,
-        amount:  this.selectedItem.amount,
+        description: this.selectedItem.description,
+        amount: this.selectedItem.amount,
         category: this.selectedItem.category.id
       }
-      
+
       this.updateIncomingListItem(this.selectedItem.id, incomingFormatted);
-    
-      
+
+
     }
 
     Object.assign(this.selectedItem, this.editItem);
@@ -270,11 +272,11 @@ export class LaunchesComponent {
     console.log(this.selectedItem.id);
     if (this.selectedItem.amount > 0) {
       this.deleteIncomingListItem(this.selectedItem.id);
-     
+
     } else {
-       this.deleteExpenseItem(this.selectedItem.id);
-    
-      
+      this.deleteExpenseItem(this.selectedItem.id);
+
+
     }
 
     this.calculateBalance();
@@ -300,7 +302,7 @@ export class LaunchesComponent {
         name: '',
         description: '',
         amount: 0,
-        launch_date: '', 
+        launch_date: '',
         category: {
           id: '',
           name: '',
@@ -334,24 +336,24 @@ export class LaunchesComponent {
 
     console.log(this.expense.expiration_date)
     if (this.itemType === 'expense') {
-    
+
       console.log()
       this.items.push({ ...this.expense });
 
-     
-      
+
+
 
       const expenseWithStringValue = {
 
-        
+
         name: this.expense.name,
-        description:  this.expense.description,
-        amount:  this.expense.amount,
-        expiration_date:  this.expense.expiration_date,
-        paid:   this.expense.paid.toString(),
+        description: this.expense.description,
+        amount: this.expense.amount,
+        expiration_date: this.expense.expiration_date,
+        paid: this.expense.paid.toString(),
         payment_date: this.expense.payment_date,
         category: this.expense.category.id,
-       
+
 
       }
 
@@ -359,11 +361,11 @@ export class LaunchesComponent {
 
 
       this.addItemToExpenses(expenseWithStringValue)
-      console.log('vai pro back no add',expenseWithStringValue)
+      console.log('vai pro back no add', expenseWithStringValue)
     }
     else {
       this.items.push({ ...this.incoming });
-   
+
       const incomingWithoutDate = {
         name: this.incoming.name,
         description: this.incoming.name,
@@ -429,25 +431,47 @@ export class LaunchesComponent {
     this.getData();
   }
 
-  constructor(private incomingService: IncomingService, private expenseService: ExpenseService) { }
+  constructor(private incomingService: IncomingService, private expenseService: ExpenseService,
+    private incomingCategoryService: IncomingCategoryService, private expenseCategoryService: ExpenseCategoryService
+  ) { }
 
   getData(): void {
+
+    this.incomingCategoryService.getList()
+      .subscribe(response => {
+
+        this.categoriesIncoming = response;
+        console.log(this.categoriesIncoming);
+
+      });
+
+    this.expenseCategoryService.getList()
+      .subscribe(response => {
+
+        this.categoriesExpense = response;
+        console.log(this.categoriesExpense);
+
+      });
+
+
+
+
     this.incomingService.getIncomingList()
       .subscribe(response => {
-        console.log('minha lista de receitas',response);
+        console.log('minha lista de receitas', response);
         this.incomingList = response;
 
-        this.incomingList .forEach(item => {
-           console.log((item.launch_date))
-          
+        this.incomingList.forEach(item => {
+          console.log((item.launch_date))
+
         });
 
         this.incomingList.forEach(item => {
-          item.launch_date = item.launch_date.slice(0, 10); 
-           console.log((item.launch_date))
+          item.launch_date = item.launch_date.slice(0, 10);
+          console.log((item.launch_date))
         });
 
-        
+
 
         this.combineLists();
       });
@@ -461,7 +485,7 @@ export class LaunchesComponent {
         });
 
         this.expenses.forEach(item => {
-          item.expiration_date = item.expiration_date.slice(0, 10); 
+          item.expiration_date = item.expiration_date.slice(0, 10);
           // item.payment_date = item.payment_date.slice(0, 10); 
           //  console.log('expiration date', item.expiration_date);
           //  console.log('payment date', item.payment_date);
@@ -470,7 +494,7 @@ export class LaunchesComponent {
       });
   }
 
-  
+
 
   combineLists(): void {
     if (this.incomingList && this.expenses) {
@@ -508,7 +532,7 @@ export class LaunchesComponent {
   }
 
   updateExpenseItem(id: string, item: any): void {
-    this.expenseService.updateExpenseItem( id, item)
+    this.expenseService.updateExpenseItem(id, item)
       .subscribe(() => {
         this.getData();
       });
