@@ -51,7 +51,7 @@ export class HomeChartComponent implements OnInit {
   }
 
   loadChartData(): void {
-    this.incomingsService.getIncomings().subscribe(
+    this.incomingsService.getIncomingList().subscribe(
       (incomings: Incoming[]) => {
         this.incomings = incomings;
         this.sumIncomingsMonth = this.calculateMonthlyIncomings(this.incomings);
@@ -59,7 +59,7 @@ export class HomeChartComponent implements OnInit {
       }
     );
 
-    this.expensesService.getExpenses().subscribe(
+    this.expensesService.getExpensesList().subscribe(
       (expenses: Expense[]) => {
         this.expenses = expenses;
         this.sumExpensesMonth = this.calculateMonthlyExpenses(this.expenses);

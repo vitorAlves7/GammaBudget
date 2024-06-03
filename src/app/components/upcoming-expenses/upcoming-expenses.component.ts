@@ -28,7 +28,7 @@ export class UpcomingExpensesComponent {
 
   
   ngOnInit(): void {
-    this.expensesService.getExpenses().subscribe(
+    this.expensesService.getExpensesList().subscribe(
       (data: Expense[]) => {
         this.expenses = this.filterExpenses(data);
         this.noExpenses = this.expenses.length === 0;

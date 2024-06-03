@@ -40,7 +40,7 @@ export class TopExpensesComponent implements OnInit{
   constructor(private expenseService: ExpensesService) {
 
 
-    this.expenseService.getExpenses().subscribe(
+    this.expenseService.getExpensesList().subscribe(
       (response: Expense[]) => {
         this.expenses = this.filterTopExpenses(response);
     
@@ -56,7 +56,7 @@ export class TopExpensesComponent implements OnInit{
           chart: {
             type: "bar",
             width: "100%",
-            height: "650px",
+            height: "400",
             toolbar: {
               show: true,
             }

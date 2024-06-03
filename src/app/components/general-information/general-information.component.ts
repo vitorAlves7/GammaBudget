@@ -47,7 +47,7 @@ export class GeneralInformationComponent {
   
   
   loadMonthSummary() {
-    this.incomingsService.getIncomings().subscribe(
+    this.incomingsService.getIncomingList().subscribe(
       (incomings: Incoming[]) => {
         this.incomings = incomings; 
         this.totalMonthIncome = this.calculateCurrentMonthIncome(incomings);
@@ -55,7 +55,7 @@ export class GeneralInformationComponent {
       }
     );
   
-    this.expensesService.getExpenses().subscribe(
+    this.expensesService.getExpensesList().subscribe(
       (expenses: Expense[]) => {
         this.expenses = expenses; 
         this.totalMonthExpense = this.calculateCurrentMonthExpense(expenses);
