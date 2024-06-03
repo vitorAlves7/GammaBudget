@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false
+    production: false,
+    apiUrl: 'http://localhost:8000/',
+    clientId: 'Pg5GQfWFaOFb8jxmZgCsCXbscCLHHly218RJyLTi',
+    clientSecret: 'XiKGo5wrwGqxLfkwQf9d1O2oppBrbad6fZVRbBraUqwhLTtVZgkKNfLftOUhcHbN5KfMDDUrwAzTr63n9o4QFHyO7pNMXCYGM8BWDAgb7HwXnXXC29uPeZQRAJNkXJyu',
+    grantType: 'password'
   };
   
   /*
