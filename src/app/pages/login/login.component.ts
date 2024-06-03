@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +22,7 @@ import { AuthService } from '../../services/auth/auth.service'
 })
 export class LoginComponent {
 
-  constructor( private authService: AuthService) {
+  constructor( private authService: AuthService, private router: Router) {
 
   }
 
@@ -32,6 +32,9 @@ export class LoginComponent {
     console.log(response);
     console.log('user = ', localStorage.getItem('user'))
     console.log('token = ', localStorage.getItem('token'))
+    if(localStorage.getItem('token')) {
+      this.router.navigate(['/']);
+    }
   }
 
 }
