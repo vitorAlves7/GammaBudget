@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth/auth.service'
+import { AuthService } from '../../services/auth/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -22,16 +23,21 @@ import { AuthService } from '../../services/auth/auth.service'
 })
 export class LoginComponent {
 
-  constructor( private authService: AuthService) {
+  constructor( private authService: AuthService, private router: Router) {
 
   }
 
+ 
   onSubmit(userLoginData: NgForm){
     // const auth = new AuthService();
     const response = this.authService.auth(userLoginData.value)
     console.log(response);
-    console.log('user = ', localStorage.getItem('user'))
+    let user = localStorage.getItem('user');
+    console.log('user = ', user);
     console.log('token = ', localStorage.getItem('token'))
+    if(localStorage.getItem('token')) {
+      this.router.navigate(['/home']);
+    }
   }
 
 }

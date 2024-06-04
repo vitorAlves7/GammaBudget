@@ -1,0 +1,71 @@
+      
+     <div class="p-4 bg-white w-full h-full border border-white rounded-lg shadow-sm">
+      <div class="flex items-center mb-4">
+        <img src="../../../assets/svg/upcoming-expenses-icon.png" alt="Ícone de despesas" class="w-11 h-11 mr-2">
+
+        <h4 class="leading-none text-2xl font-bold text-gray-600 ">Próximas contas a vencer
+          <button data-popover-target="popover-description" data-popover-placement="bottom-end" type="button">
+            <svg class="w-4 h-4 ml-2 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Show information</span>
+          </button>
+        </h4>
+      </div>
+    
+      <div data-popover id="popover-description" role="tooltip" class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+        <div class="p-3 space-y-2">
+          <h3 class="font-semibold text-gray-700 ">Próximas contas </h3>
+          <p>As próximas contas são as aquelas registradas com data posterior à data atual e definidas como não pagas</p>
+          <a href="#" class="flex items-center font-medium text-primary-600  hover:text-primary-700">
+            Ver todas 
+            <svg class="w-4 h-4 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          </a>
+        </div>
+        <div data-popper-arrow></div>
+      </div>
+     <!-- upcoming-expenses.component.html -->
+      <!-- upcoming-expenses.component.html -->
+    <div class="border-t border-gray-200">
+      <div *ngIf="noExpenses; else expensesList">
+        <p class="text-center text-gray-500 py-6">Sem contas a serem pagas</p>
+      </div>
+
+      <ng-template #expensesList>
+        <ul class="divide-y divide-gray-200">
+          <li class="py-5 sm:py-6 hover:bg-gray-100 px-4 sm:px-6" *ngFor="let expense of expenses">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center min-w-0 space-x-4">
+                <p class="font-medium text-gray-600 truncate mb-1">{{ expense.expiration_date | date:'dd/MM/yyyy' }}</p>
+                <div class="ml-10">
+                  <p class="font-medium text-gray-600 truncate mb-1">{{ expense.name }}</p>
+                </div>
+              </div>
+              <div class="inline-flex items-center text-base font-semibold text-gray-700 dark:text-white">
+                {{ getAbsoluteValue(expense.amount) | currency: 'BRL' : 'symbol':'1.2-2' }}
+              </div>
+            </div>
+          </li>
+        </ul>
+      </ng-template>
+      
+      
+  </div>
+
+
+    
+    
+      
+         
+
+      
+        <!-- Card Footer -->
+        <div class="flex items-center justify-between   border-t border-gray-200 sm:pt-6 dark:border-gray-700">
+          
+          <div class="flex-shrink-0">
+           
+          </div>
+        </div>
+  </div>

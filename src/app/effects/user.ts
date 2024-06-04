@@ -1,13 +1,13 @@
 import { AuthService } from "./../services/auth/auth.service";
-import { UserActionTypes } from "./../actions/user";
+import { UserActionTypes } from "../action/user";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { catchError, switchMap, take, withLatestFrom } from "rxjs/operators";
 import { Action, Store as NGRXStore } from "@ngrx/store";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import * as fromRoot from "../reducers";
-import { User } from "../models/user.interface";
-import * as userActions from "../actions/user";
+import * as fromRoot from "../reducers/user";
+import { User } from "../types/user-type";
+import * as userActions from "../action/user";
 
 @Injectable()
 export class UserEffects {

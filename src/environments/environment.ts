@@ -7,7 +7,24 @@ export const environment = {
     apiUrl: 'http://localhost:8000/',
     clientId: 'Pg5GQfWFaOFb8jxmZgCsCXbscCLHHly218RJyLTi',
     clientSecret: 'XiKGo5wrwGqxLfkwQf9d1O2oppBrbad6fZVRbBraUqwhLTtVZgkKNfLftOUhcHbN5KfMDDUrwAzTr63n9o4QFHyO7pNMXCYGM8BWDAgb7HwXnXXC29uPeZQRAJNkXJyu',
-    grantType: 'password'
+    grantType: 'password',
+    apiBaseUrl: 'http://localhost:8000',
+    apiEndpoints: {
+      incomingList: 'budget/v1/incoming/list',
+      incomingDetail: 'budget/v1/incoming/detail',
+      addItemToIncomings: 'budget/v1/incoming/create',
+      updateIncomingItem: 'budget/v1/incoming/update',
+      deleteIncomingItem: 'budget/v1/incoming/delete',
+      expensesList: 'budget/v1/revenue/list',
+      expenseDetail: 'budget/v1/revenue/detail',
+      addItemToExpenses: 'budget/v1/revenue/create',
+      updateExpenseItem: 'budget/v1/revenue/update',
+      deleteExpenseItem: 'budget/v1/revenue/delete',
+      listCategoriesExpense: 'budget/v1/revenue/list-categories',
+      listCategoriesIncoming: 'budget/v1/incoming/list-categories'
+
+    },
+    userId: '0'
   };
   
   /*
