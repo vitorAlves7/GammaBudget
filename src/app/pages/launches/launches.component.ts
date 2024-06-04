@@ -7,11 +7,11 @@ import { ItemFilterPipe } from './item-filter.pipe';
 import { OptionFilterPipe } from './option-filter.pipe';
 import { MonthSelectorComponent } from '../../components/month-selector/month-selector.component';
 import { MonthYearFilterPipe } from "../../components/month-selector/month-year-filter/month-year-filter.pipe";
-import { IncomingService } from '../../services/incoming-service';
+import { IncomingsService } from '../../services/incomings/incomings.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ExpenseService } from '../../services/expense.service';
-import { IncomingCategoryService } from '../../services/incoming-category.service';
-import { ExpenseCategoryService } from '../../services/expense-category.service';
+import { ExpensesService } from '../../services/expenses/expenses.service';
+import { IncomingCategoryService } from '../../services/category/incoming-category.service';
+import { ExpenseCategoryService } from '../../services/category/expense-category.service';
 
 
 
@@ -72,31 +72,10 @@ export interface Expense {
 export class LaunchesComponent {
 
   categoriesExpense = [
-    { id: '3e24dc14-31dc-418d-89f2-e95bc3540dc0', name: 'Alimentação', description: 'Categoria de despesa de Alimentação' },
-    { id: '9f65323e-ee7a-4e30-b52e-9ac2a1dcff09', name: 'Assinaturas e serviços', description: 'Categoria de despesa de Assinaturas e serviços' },
-    { id: '05c09266-f80e-43ee-9a61-11ebdff72f52', name: 'Casa', description: 'Categoria de despesa de Casa' },
-    { id: '0660dca7-62a4-4e35-acf7-215e529ca47d', name: 'Compras', description: 'Categoria de despesa de Compras' },
-    { id: '7831c434-e431-477c-b74d-82410bb151a4', name: 'Cuidados pessoais', description: 'Categoria de despesa de Cuidados pessoais' },
-    { id: '8849fd7e-3e89-4f0c-8c10-f4e9d9bebbf2', name: 'Dívidas e empréstimos', description: 'Categoria de despesa de Dívidas e empréstimos' },
-    { id: 'f16bd087-74b4-40cb-af82-f3dcd93160a8', name: 'Educação', description: 'Categoria de despesa de Educação' },
-    { id: 'd9368a6b-b366-417b-b4b2-1e39fde16a5c', name: 'Família', description: 'Categoria de despesa de Família' },
-    { id: 'e8f5165a-c6f6-4ba3-828e-721427936175', name: 'Impostos', description: 'Categoria de despesa de Impostos' },
-    { id: '15adcd43-7ee3-4b1f-ac8d-97c238263fc6', name: 'Investimentos', description: 'Categoria de despesa de Investimentos' },
-    { id: '6b13a47e-01d3-470d-8bbc-cd3706a144ba', name: 'Lazer', description: 'Categoria de despesa de Lazer' },
-    { id: '8468ca25-73c9-4855-bb55-e43847928a27', name: 'Mercado', description: 'Categoria de despesa de Mercado' },
-    { id: '2bf57692-a8a9-487d-bdf3-254445b37ab8', name: 'Outros', description: 'Categoria de despesa de Outros' },
-    { id: '499eb89e-5d2e-415e-8e23-ec94bf81c00d', name: 'Pets', description: 'Categoria de despesa de Pets' },
-    { id: 'ec4d7d22-43f7-43cd-b9f9-1a39c7a910ac', name: 'Presentes', description: 'Categoria de despesa de Presentes' },
-    { id: '14730cd0-e93b-44a3-b879-fc70cce1d055', name: 'Restaurantes', description: 'Categoria de despesa de Restaurantes' },
-    { id: '1a7e756d-099a-4059-b58b-30037a2fff3f', name: 'Saúde', description: 'Categoria de despesa de Saúde' },
-    { id: 'f36e53f0-8aa4-417b-94ee-69f68af76f65', name: 'Transporte', description: 'Categoria de despesa de Transporte' },
-    { id: '51bbad1b-edec-419e-88f6-0cfe5f4afcef', name: 'Viagem', description: 'Categoria de despesa de Viagem' }
   ];
 
   categoriesIncoming = [
-    { id: 'f59b169f-b11c-4c30-8d42-1adcd2454cfe', name: 'Investimento', description: 'Receita referente a investimentos' },
-    { id: '425afa01-d592-4d41-b78f-dfb4240af448', name: 'Outros', description: 'Outros tipos de receita' },
-    { id: 'a2839acb-6b26-4b64-9af3-031474a24178', name: 'Salário', description: 'Receita referente ao salário' }
+
   ];
 
 
@@ -431,7 +410,7 @@ export class LaunchesComponent {
     this.getData();
   }
 
-  constructor(private incomingService: IncomingService, private expenseService: ExpenseService,
+  constructor(private incomingService: IncomingsService, private expenseService: ExpensesService,
     private incomingCategoryService: IncomingCategoryService, private expenseCategoryService: ExpenseCategoryService
   ) { }
 
