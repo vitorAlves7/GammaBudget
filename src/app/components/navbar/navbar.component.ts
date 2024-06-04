@@ -26,4 +26,13 @@ export class NavbarComponent {
     this.router.navigate([route]);
   }
 
+  redirectTo(route: string): void {
+    if(route === '/login'){
+      localStorage.clear();
+      this.navigateTo(route)
+    } else {
+      this.navigateTo(route)
+    }
+  }
+
 }

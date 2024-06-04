@@ -7,7 +7,7 @@ import { ChartComponent, NgApexchartsModule} from 'ng-apexcharts';
 
 
 export type ChartOptions = {
-  series: any;
+  series?: any;
   chart: any;
   xaxis: any;
   title?: any;

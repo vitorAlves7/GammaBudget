@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { TopExpensesComponent } from '../../components/top-expenses/top-expenses.component';
 import { HomeChartComponent } from '../../components/home-chart/home-chart.component';
@@ -23,6 +23,12 @@ import { ExpensesByCategoryComponent } from '../../components/expenses-by-catego
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  ngOnInit() {
+    if (!localStorage.getItem('user')) { 
+      location.reload() 
+    }
+  }
 
 }

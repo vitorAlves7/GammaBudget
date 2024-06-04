@@ -22,10 +22,10 @@ export class AuthService {
                 this.createToken(user.email, user.password)
                 .subscribe({
                     next: (dataToken: any) => {
+                        console.log('kayro = ', response);
                         localStorage.setItem('user', JSON.stringify(response));
                         localStorage.setItem('token', dataToken.access_token);
                         user.token = dataToken.access_token;
-                        console.log('user = ', user)
                     }, 
                     error: (error: any) => {
                         console.log('There was an error in retrieving data from the server', error);
