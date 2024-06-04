@@ -19,7 +19,7 @@
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meus Alertas</a>
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sair</a>
+              <a (click)="redirectTo('/login')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sair</a>
             </li>
           </ul>
         </div>
@@ -33,22 +33,29 @@
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
       <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:bg-primaryGreen">
           <li>
-              <a href="#" class="block py-2 px-3 text-white hover:text-gray-200 ">Visão Geral</a>
+              <a (click)="navigateTo('/home')" class="block py-2 px-3 text-white hover:text-gray-200 hover:cursor-pointer">Visão Geral</a>
+              <div class="h-1 bg-white" *ngIf="currentRoute === '/home'" ></div>
+             
           </li>
           <li>
-              <a href="#" class="block py-2 px-3 text-white hover:text-gray-200 ">Lançamentos</a>
+              <a (click)="navigateTo('/launches')" class="block py-2 px-3 text-white hover:text-gray-200 hover:cursor-pointer" >Lançamentos</a>
+              <div class="h-1 bg-white" *ngIf="currentRoute === '/launches'"></div>
           </li>
           <li>
-              <a href="#" class="block py-2 px-3 text-white hover:text-gray-200 ">Relatórios</a>
+              <a class="block py-2 px-3 text-white hover:text-gray-200 hover:cursor-pointer">Relatórios</a>
+              <div class="h-1 bg-white" *ngIf="currentRoute === '/report'"></div>
           </li>
           <li>
-              <a href="#" class="block py-2 px-3 text-white hover:text-gray-200  ">Limite de gastos</a>
+              <a class="block py-2 px-3 text-white hover:text-gray-200 hover:cursor-pointer">Limite de gastos</a>
+              <div class="h-1 bg-white" *ngIf="currentRoute === '/limit'"></div>
           </li>
           <li>
-              <a href="#" class="block py-2 px-3 text-white "></a>
+              <a href="#" class="block py-2 px-3 text-white"></a>
           </li>
       </ul>
-  </div>
+    </div>
+    
+    
   
   
     </div>

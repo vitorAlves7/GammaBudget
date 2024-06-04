@@ -2,24 +2,24 @@
     <div class="title-section">
         <h2>Criar uma conta</h2>
     </div>
-    <form>
-        <div class="mb-6">
+    <form #userSignUpData="ngForm" (ngSubmit)="onSubmit(userSignUpData)">
+        <!-- <div class="mb-6">
             <label for="name" class="block mb-2 text-sm font-normal text-grayText dark:text-white">Seu Nome</label>
             <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-        </div> 
+        </div>  -->
         <div class="mb-6">
             <label for="email" class="block mb-2 text-sm font-normal text-grayText dark:text-white">Seu email</label>
-            <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+            <input type="email" name="email" ngModel id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
         </div> 
         <div class="mb-6">
             <label for="password" class="block mb-2 text-sm font-normal text-grayText dark:text-white">Senha</label>
-            <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
+            <input type="password" name="password" ngModel id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
         </div>
         <div class="mb-6">
             <label for="password" class="block mb-2 text-sm font-normal text-grayText dark:text-white">Repetir senha</label>
-            <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
+            <input type="password" name="password2" ngModel id="password2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
         </div> 
-        <button type="button" class="text-white bg-primaryGreen hover:bg-darkGreen focus:border-transparent focus:outline-none  dark:focus:ring-darkGreen-800 font-medium rounded-lg text-sm w-full px-5 py-4 text-center me-2 mb-2">Criar conta</button>
+        <button type="submit" class="text-white bg-primaryGreen hover:bg-darkGreen focus:border-transparent focus:outline-none  dark:focus:ring-darkGreen-800 font-medium rounded-lg text-sm w-full px-5 py-4 text-center me-2 mb-2">Criar conta</button>
         <div class="flex justify-center items-end mb-6">
             <label for="remember" class="ms-2 mt-8 text-xs font-bold text-grayText dark:text-gray-300">Já possui uma conta? <a routerLink="/login" routerLinkActive="active" class="text-primaryGreen hover:underline dark:text-primaryGreen">Fazer login</a></label>
         </div>
