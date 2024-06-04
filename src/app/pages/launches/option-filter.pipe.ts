@@ -11,14 +11,14 @@ export class OptionFilterPipe  implements PipeTransform {
     }
 
       
-    if (selectedOption === 'todos') {
+    if (selectedOption === 'all') {
         return items;
     }
 
-    if (selectedOption === 'despesa') {
-      return items.filter(item => item.valor < 0);
+    if (selectedOption === 'expense') {
+      return items.filter(item => item.amount < 0);
     } else  {
-      return items.filter(item => item.valor > 0);
+      return items.filter(item => item.amount > 0);
     } 
   }
   }

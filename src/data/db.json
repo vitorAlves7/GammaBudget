@@ -1,0 +1,74 @@
+{
+  "incomingList": [
+    {
+      "id": "1",
+      "name": "Item 1 editei o item 1",
+      "description": "Description for item 1",
+      "amount": 25000,
+      "launch_date": "2024-05-25",
+      "category": "Empréstimos"
+    },
+    {
+      "id": "2",
+      "name": "Item 2",
+      "description": "Description for item 2",
+      "amount": 200.44,
+      "launch_date": "2024-06-04",
+      "category": "Category3"
+    },
+    {
+      "id": "5",
+      "name": "Item 58520",
+      "description": "Description for item 5",
+      "amount": 30000,
+      "launch_date": "2024-04-20",
+      "category": "Investimentos"
+    },
+    {
+      "id": "486f",
+      "name": "sdsd888",
+      "description": "84184",
+      "amount": 850,
+      "launch_date": "2024-05-09",
+      "category": "Freelance"
+    },
+    {
+      "id": "9d75",
+      "name": "tesste",
+      "description": "",
+      "amount": 85,
+      "launch_date": "2024-05-17",
+      "category": "Outros"
+    },
+    {
+      "id": "966e",
+      "name": "dsds",
+      "description": "",
+      "amount": 4,
+      "launch_date": "2024-05-25",
+      "category": "Outras receitas"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "cb0f",
+      "name": "dsds",
+      "amount": -3,
+      "expiration_date": "2024-05-29",
+      "paid": "Pago",
+      "payment_date": "2024-06-08",
+      "category": "Assinaturas e serviços",
+      "description": ""
+    },
+    {
+      "id": "a9b4",
+      "name": "sdsd",
+      "amount": -85,
+      "expiration_date": "2024-05-15",
+      "paid": "Pago",
+      "payment_date": "2024-05-31",
+      "category": "Assinaturas e serviços",
+      "description": ""
+    }
+  ]
+}

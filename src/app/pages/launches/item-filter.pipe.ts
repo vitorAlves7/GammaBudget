@@ -10,6 +10,6 @@ export class ItemFilterPipe implements PipeTransform {
       return items;
     }
     filterText = filterText.toLowerCase();
-    return items.filter(item => item.descricao.toLowerCase().includes(filterText));
+    return items.filter(item => item.name.toLowerCase().includes(filterText));
   }
 }
