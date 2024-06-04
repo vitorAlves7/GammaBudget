@@ -71,12 +71,9 @@ export interface Expense {
 })
 export class LaunchesComponent {
 
-  categoriesExpense = [
-  ];
+  categoriesExpense : Expense[] =[];
 
-  categoriesIncoming = [
-
-  ];
+  categoriesIncoming : Incoming[ ] =[];
 
 
 
