@@ -23,7 +23,146 @@
                 </div>
             </div>
 
+            <ng-container *ngIf="filtedExpenses.length >0">
 
+          
+                <div class="overflow-x-auto md:overflow-hidden">
+                    <app-month-selector (monthYearChanged)="onMonthYearChanged($event)"  [selectedMonth]="selectedMonth"
+                    [selectedYear]="selectedYear"></app-month-selector>
+                    
+                    <table class="w-full text-sm text-left text-gray-500 ">
+                        
+                        <thead class="text-xs text-center  uppercase bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-2 py-3">Nome</th>
+                                <th scope="col" class="px-2 py-3">Categoria</th>
+                                <th scope="col" class="px-2 py-3">Data de vencimento</th>
+                                <th scope="col" class="px-2 py-3">Valor</th>
+                                <th scope="col" class="px-2 py-3">Data do alerta</th>
+                                <th scope="col" class="px-2 py-3"></th>
+                                
+                              
+            
+            
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+    
+                            <tr *ngFor="let item of filtedExpenses | monthYearFilter:selectedMonth:selectedYear;  let i = index" class="border-b cursor-pointer hover:bg-gray-100 text-center"
+                                [attr.data-row-id]="i" >
+    
+                                
+                                <td class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap ">{{ item.name }}</td>
+                                
+    
+                                <td class="">
+                                    <ng-container >
+                                        @switch (item.category.name) { 
+                                            @case ("Alimentação") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Alimentação" class="inline-block w-6 h-6 mr-2">
+                                              } 
+                                              @case ("Assinaturas e serviços") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/service.png" alt="Assinaturas e Serviços" class="inline-block w-6 h-6 mr-2">
+                                              } 
+                                             
+                                              @case ("Casa") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/house.png" alt="Casa" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                              @case ("Compras") {
+                                                <img src="../../../assets/pages/launches/categories-icons/purchase.png" alt="Compras" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                              @case ("Cuidados pessoais") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/selfcare.png" alt="Cuidados Pessoais" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                              @case ("Dívidas e empréstimos") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/loan.png" alt="Dívidas e Empréstimos" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                            @case ("Empréstimos") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/loan.png" alt="Empréstimos" class="inline-block w-6 h-6 mr-2">
+                                            }
+                                              @case ("Educação") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/education.png" alt="Educação" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                            @case ("Família") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/family.png" alt="Família" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                            @case ("Impostos") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/tax.png" alt="Impostos" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                            @case ("Investimento") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/investiment.png" alt="Investimentos" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                            @case ("Lazer") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/entertainment.png" alt="Lazer" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                            @case ("Mercado") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/market.png" alt="Mercado" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                            @case ("Pets") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/pet.png" alt="Pet" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                            @case ("Presentes") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/presente.png" alt="Presentes" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                            @case ("Restaurantes") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/restaurante.png" alt="Restaurantes" class="inline-block w-6 h-6 mr-2">
+                                            } 
+                                            @case ("Saúde") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/saude.png" alt="Saúde" class="inline-block w-6 h-6 mr-2">
+                                            }
+                                            @case ("Transporte") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/transporte.png" alt="Transporte" class="inline-block w-6 h-6 mr-2">
+                                            }
+                                            @case ("Viagem") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/viagem.png" alt="Viagem" class="inline-block w-6 h-6 mr-2">
+                                                
+                                            }
+                                            @case ("Salário") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/salary.png" alt="Salário" class="inline-block w-6 h-6 mr-2">
+                                            }
+                                            @case ("Outros") {
+                                                <img  src="../../../assets/pages/launches/categories-icons/another.png" alt="Outras" class="inline-block w-6 h-6 mr-2">
+                                            }
+                                               
+                                            } 
+                                        </ng-container>
+                                    
+                                    <span class="inline-block">{{ item.category.name }}</span>
+                                  </td>
+                                  <td class="px-4 py-5" *ngIf="item.amount"> {{ item.expiration_date | date:'dd/MM/yyyy' }}  </td>
+                                  <td class="px-4 py-5"  [ngClass]="{'text-launchesScreenRed': item.amount < 0, 'text-launchesScreenGreen': item.amount > 0}">{{  item.amount  | currency:'BRL' : 'symbol':'1.2-2'  }}</td>
+                                  <td class="px-4 py-5" *ngIf="item.amount"> {{ item.alert_date | date:'dd/MM/yyyy' }}  </td>
+    
+                              
+                                  
+                                  
+                                    <td *ngIf="item.amount >0" class="relative group">
+                                     
+                                    </td>
+                                  
+                                
+                              
+                                  
+    
+    
+    
+                           
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+    
+                    <div class="text-xl text-center mt-4">
+    
+                        
+                      
+                        </div>
+                      
+                      
+                </div>
+               </ng-container>
 
 
         
