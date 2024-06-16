@@ -107,6 +107,21 @@ export class AlertsComponent {
     }, 3000);
   }
 
+  deleteAlert(item: any) {
+    console.log(item);
+
+    const index = this.filtedExpenses.indexOf(item);
+    if (index > -1) {
+      this.filtedExpenses.splice(index, 1);
+    }
+    console.log('deletou ', item);
+    
+   
+
+    
+  }
+
+
 
  
 
