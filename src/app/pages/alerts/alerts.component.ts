@@ -42,6 +42,7 @@ export class AlertsComponent {
   selectedExpense: any;
   selectedRadio: any;
   customAlertDate: any;
+  showAlert: any;
   filtedExpenses: Expense2[] = [];
   expenses: Expense2[] = [
     {
@@ -87,7 +88,7 @@ export class AlertsComponent {
     console.log(this.selectedExpense);
     console.log('Data do alerta:', alertDate);
     this.closeModal();
-    
+    this.showSucessAlert();
   }
 
   onRadioChange(event: Event) {
@@ -95,6 +96,16 @@ export class AlertsComponent {
     this.selectedRadio = inputElement.value;
   }
 
+
+  showSucessAlert() {
+    console.log('Entrando em showSucessAlert...');
+    this.showAlert = true;
+    console.log('Mostrar alerta de sucesso:', this.showAlert);
+    setTimeout(() => {
+      this.showAlert = false;
+      console.log('Ocultar alerta de sucesso:', this.showAlert);
+    }, 3000);
+  }
 
 
  
