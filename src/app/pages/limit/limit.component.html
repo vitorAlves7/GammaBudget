@@ -1,0 +1,121 @@
+
+
+<section class="navbar-section">
+    <app-navbar></app-navbar>
+</section>
+    
+
+<section class=" p-4 sm:p-5 ">
+    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden p-6">
+            
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+
+                <div class="relative w-full md:w-1/2">
+                    <h1  class="px-2 py-4 text-2xl text-gray-700 whitespace-nowrap ">Limite de gastos</h1>
+                </div>
+               
+            </div>
+
+            <ng-container >
+
+                <app-month-selector (monthYearChanged)="onMonthYearChanged($event)"  [selectedMonth]="selectedMonth"
+                [selectedYear]="selectedYear"></app-month-selector>
+                
+                <div class="overflow-x-auto md:overflow-hidden">
+
+                  <div *ngFor="let category of categoriesLimited">
+                    <app-expense-limit-bar [label]="category.label" [value]="category.value" [max]="category.max">
+
+                    </app-expense-limit-bar>
+                 
+                  </div>
+
+                  
+
+                 
+                  
+                    <table class="w-full text-sm text-left text-gray-500 ">
+                        
+                        <thead class="text-xs text-center  uppercase bg-gray-50">
+                            <tr>
+                                <!-- <th scope="col" class="px-2 py-3">Nome</th>
+                                <th scope="col" class="px-2 py-3">Categoria</th>
+                                <th scope="col" class="px-2 py-3">Data de vencimento</th>
+                                <th scope="col" class="px-2 py-3">Valor</th>
+                                <th scope="col" class="px-2 py-3">Data do alerta</th>
+                                <th scope="col" class="px-2 py-3"></th> -->
+                                
+                        
+            
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+    
+                            <tr *ngFor="let item of items | monthYearFilter:selectedMonth:selectedYear;  let i = index" class="border-b cursor-pointer hover:bg-gray-100 text-center"
+                                [attr.data-row-id]="i" >
+    
+                                
+
+    
+    
+                           
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+    
+                    <div class="text-xl text-center mt-4">
+    
+                        
+                      
+                        </div>
+                      
+                      
+                </div>
+
+    
+
+               </ng-container>
+
+
+        
+               <!-- <ng-container *ngIf="MonthlyLimitList.length ==0">
+                  <h1 class="px-4 py-4 font-medium text-xl text-gray-600 whitespace-nowrap text-center ">
+                    Nenhum limite de gasto definido
+                  </h1>
+               </ng-container> -->
+
+           
+
+
+   
+    </div>
+        
+
+
+        
+             
+    
+        
+    </div>
+
+    
+</section> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
