@@ -14,6 +14,13 @@
                 <div class="relative w-full md:w-1/2">
                     <h1  class="px-2 py-4 text-2xl text-gray-700 whitespace-nowrap ">Limite de gastos</h1>
                 </div>
+                <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                    <button type="button" (click)="addLimit()" class="flex items-center justify-center text-gray-700 bg-primary-700  focus:ring-4 focus:ring-gray-200 font-medium border hover:bg-gray-100  border-gray-200 rounded-lg text-sm px-8 py-2">
+                        <img src="../../../assets/pages/launches/despesa.png" alt="Despesa" width="35" height="35" style="margin-right: 8px">
+                        Limite 
+                    </button>
+                </div>
+
                
             </div>
 
@@ -23,87 +30,74 @@
                 [selectedYear]="selectedYear"></app-month-selector>
                 
                 <div class="overflow-x-auto md:overflow-hidden">
-
-                  <div *ngFor="let category of categoriesLimited">
-                    <app-expense-limit-bar [label]="category.label" [value]="category.value" [max]="category.max">
-
-                    </app-expense-limit-bar>
-                 
-                  </div>
-
+                    <div *ngFor="let category of categoriesLimited| monthYearFilter:selectedMonth:selectedYear; ">
+                        <app-expense-limit-bar
+                          [label]="category.label"
+                          [value]="category.value"
+                          [max]="category.max"
+                          [year]="category.year"
+                          [month]="category.month">
+                        </app-expense-limit-bar>
+                    </div>
+                      
                   
-
-                 
+              
                   
-                    <table class="w-full text-sm text-left text-gray-500 ">
-                        
-                        <thead class="text-xs text-center  uppercase bg-gray-50">
-                            <tr>
-                                <!-- <th scope="col" class="px-2 py-3">Nome</th>
-                                <th scope="col" class="px-2 py-3">Categoria</th>
-                                <th scope="col" class="px-2 py-3">Data de vencimento</th>
-                                <th scope="col" class="px-2 py-3">Valor</th>
-                                <th scope="col" class="px-2 py-3">Data do alerta</th>
-                                <th scope="col" class="px-2 py-3"></th> -->
-                                
-                        
-            
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-    
-                            <tr *ngFor="let item of items | monthYearFilter:selectedMonth:selectedYear;  let i = index" class="border-b cursor-pointer hover:bg-gray-100 text-center"
-                                [attr.data-row-id]="i" >
-    
-                                
-
-    
-    
-                           
-                                
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-    
-                    <div class="text-xl text-center mt-4">
-    
-                        
-                      
-                        </div>
-                      
-                      
                 </div>
 
-    
-
                </ng-container>
-
-
-        
-               <!-- <ng-container *ngIf="MonthlyLimitList.length ==0">
-                  <h1 class="px-4 py-4 font-medium text-xl text-gray-600 whitespace-nowrap text-center ">
-                    Nenhum limite de gasto definido
-                  </h1>
-               </ng-container> -->
-
-           
-
-
    
     </div>
         
 
-
-        
-             
-    
-        
     </div>
 
     
 </section> 
+
+
+<div class="fixed top-0 right-0 bottom-0 left-0 z-50 flex justify-center items-center" tabindex="-1" *ngIf="showModal">
+    <div class="absolute inset-0 bg-black bg-opacity-10 backdrop-blur-sm"></div>
+    <div class="relative p-4 w-full max-w-4xl h-full overflow-auto">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h5 class="text-xl font-semibold text-gray-700">
+            Definir limite
+          </h5>
+          <button type="button" (click)="closeModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <div class="p-4 md:p-5">
+          <form class="space-y-4">
+            <div class="mb-4">
+              <div class="py-2"></div>
+              <h3 class="block text-xl font-normal text-gray-500 mb-2">Definir limite para qual categoria?</h3>
+              <select id="category" [(ngModel)]="selectedCategoryLimit" name="category" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen block w-full p-2.5">
+                <option value="" disabled selected>Selecione uma categoria</option>
+                <option *ngFor="let category of expenseCategories" [value]="category.id">{{ category.name }}</option>
+            </select>
+              <div class="py-2"></div>
+              <div>
+                <label for="expenseAmount" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Valor</label>
+                <input type="number" id="limitAmount" [(ngModel)]="limitAmount"  name="limitAmount" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg  focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen" placeholder="R$"/>
+            </div>
+
+            </div>
+            <div class="flex justify-end space-x-4">
+              <button type="button" (click)="closeModal()" class="text-gray-600 inline-flex items-center bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                Cancelar
+              </button>
+              <button type="button" (click)="confirm()" class="text-gray-600 inline-flex items-center bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                Confirmar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
