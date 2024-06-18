@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MonthYearFilterPipe } from '../../components/month-selector/month-year-filter/month-year-filter.pipe';
 import { ExpenseLimitBarComponent } from '../../components/expense-limit-bar/expense-limit-bar.component';
+import { Expense } from '../../types/expense-type';
 
 export interface Expense2 {
   id?: number;
@@ -20,11 +21,12 @@ export interface Expense2 {
   category: ExpenseCategory;
 }
 
-export interface Limit {
-  year: string;
-  month: string;
-  limit: any[];
-  expenses: Expense2[];
+interface CategoryLimited {
+  label: string;
+  value: number;
+  max: number;
+  year: number;
+  month: number;
 }
 
 @Component({
@@ -42,35 +44,31 @@ export interface Limit {
   ],
 })
 export class LimitComponent {
+  expenseCategories: ExpenseCategory[] = [
+    {
+      id: '1',
+      name: 'Moradia',
+    },
+    {
+      id: '2',
+      name: 'Alimentação',
+    },
+    {
+      id: '3',
+      name: 'Transporte',
+    },
+  ];
+
+  expenses: Expense2[] = [];
   selectedCategoryLimit: any;
-  items: any;
+
   selectedMonth: number = new Date().getMonth();
   selectedYear: number = new Date().getFullYear();
-  
+
   showModal: any;
 
-  categoriesLimited = [
-    { label: 'Alimentação', value: 0, max: 0 },
-    { label: 'Assinaturas e serviços', value: 0, max: 0 },
-    { label: 'Casa', value: 0, max: 0 },
-    { label: 'Compras', value: 0, max: 0 },
-    { label: 'Cuidados pessoais', value: 0, max: 0 },
-    { label: 'Dívidas e empréstimos', value: 0, max: 0 },
-    { label: 'Educação', value: 0, max: 0 },
-    { label: 'Família', value: 0, max: 0 },
-    { label: 'Impostos', value: 0, max: 0 },
-    { label: 'Investimentos', value: 0, max: 0 },
-    { label: 'Lazer', value: 0, max: 0 },
-    { label: 'Mercado', value: 0, max: 0 },
-    { label: 'Pets', value: 0, max: 0 },
-    { label: 'Presentes', value: 0, max: 0 },
-    { label: 'Restaurantes', value: 0, max: 0 },
-    { label: 'Saúde', value: 0, max: 0 },
-    { label: 'Transporte', value: 0, max: 0 },
-    { label: 'Viagem', value: 0, max: 0 },
-    { label: 'Outros', value: 0, max: 0 },
-  ];
-  limit: any;
+  limitAmount: any;
+  categoriesLimited: CategoryLimited[] = [];
 
   onMonthYearChanged(event: { month: number; year: number }) {
     this.selectedMonth = event.month;
@@ -86,11 +84,156 @@ export class LimitComponent {
   }
 
   confirm() {
-    console.log('Data do alerta:', this.selectedCategoryLimit);
+    console.log(this.selectedCategoryLimit);
+    console.log(this.limitAmount);
     this.closeModal();
+    this.createLimitCategoryBar(
+      this.getNameCategoryById(this.selectedCategoryLimit),
+      this.limitAmount,
+      this.selectedMonth,
+      this.selectedYear
+    );
+  }
+
+  createLimitCategoryBar(
+    selectedCategoryLimit: any,
+    limitAmount: any,
+    selectedMonth: number,
+    selectedYear: number
+  ) {
+    const categorieLimited = {
+      label: selectedCategoryLimit,
+      value: this.calculateValueCategory(this.getNameCategoryById(this.selectedCategoryLimit)),
+      max: limitAmount,
+      year: selectedYear,
+      month: selectedMonth,
+    };
+    this.categoriesLimited.push(categorieLimited);
+    console.log(this.categoriesLimited);
+    
+  }
+
+  calculateValueCategory(category: string) {
+    const filteredExpenses = this.expenses.filter((item) => {
+
+      
+      const [year, month] = item.expiration_date.split('-');
+
+      console.log(year)
+      console.log(month)
+
+      
+      const isSameYear =  Number (year) === this.selectedYear;
+      const isSameMonth = Number (month)-1 === this.selectedMonth;
+      const isSameCategory = category == item.category.name;
+      return isSameYear && isSameMonth && isSameCategory;
+      
+    });
+
+    console.log(filteredExpenses);
+
+    const totalExpenseCategory = filteredExpenses.reduce((total, expense) => total + expense.amount, 0);
+    console.log(totalExpenseCategory);
+    return totalExpenseCategory;
+  }
+
+  getNameCategoryById(id: string) {
+    const category = this.expenseCategories.find(
+      (category) => category.id === id
+    );
+    return category ? category.name : '';
+  }
+
+  loadCategoriesLimited(){
+
   }
 
   ngOnInit(): void {
     console.log(this.selectedMonth, this.selectedYear);
+
+
+
+
+    // this.categoriesLimited = [
+    //   { label: 'Moradia', value: 850, max: 1000, year: 2024, month: 5 },
+
+    //   { label: 'Moradia', value: 850, max: 1000, year: 2024, month: 6 },
+    // ];
+
+    this.expenses =[  {
+      id: 1,
+      name: "Aluguel",
+      description: "Pagamento do aluguel mensal",
+      amount: 1200.00,
+      expiration_date: "2024-07-01",
+      paid: false,
+      payment_date: "",
+      alert: true,
+      alert_date: "2004-06-25",
+      category: {
+        id: "1",
+        name: "Moradia"
+      }
+    },
+    {
+      id: 2,
+      name: "Supermercado",
+      description: "Compras do mês",
+      amount: 450.00,
+      expiration_date: "2024-07-05",
+      paid: false,
+      payment_date: "",
+      alert: true,
+      alert_date: "2024-06-30",
+      category: {
+        id: "2",
+        name: "Alimentação"
+      }
+    },
+    {
+      id: 3,
+      name: "Internet",
+      description: "Fatura da internet",
+      amount: 100.00,
+      expiration_date: "2024-06-10",
+      paid: false,
+      payment_date: "",
+      alert: true,
+      alert_date: "2024-07-05",
+      category: {
+        id: "3",
+        name: "Transporte"
+      }
+    },
+    {
+      id: 4,
+      name: "Academia",
+      description: "Mensalidade da academia",
+      amount: 800.00,
+      expiration_date: "2024-06-12",
+      paid: false,
+      payment_date: "",
+      alert: true,
+      alert_date: "2024-07-07",
+      category: {
+        id: "2",
+        name: "Alimentação"
+      }
+    },
+    {
+      id: 5,
+      name: "Conta de Luz",
+      description: "Fatura de energia elétrica",
+      amount: 150.00,
+      expiration_date: "2024-06-15",
+      paid: false,
+      payment_date: "",
+      alert: true,
+      alert_date: "2024-07-10",
+      category: {
+        id: "1",
+        name: "Moradia"
+      }
+    }]
   }
 }
