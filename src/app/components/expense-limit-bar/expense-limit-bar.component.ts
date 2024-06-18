@@ -15,8 +15,11 @@ export class ExpenseLimitBarComponent {
   @Input()value!: number;
   @Input()max!: number;
   @Input()icon!: string; 
+  @Input()year!: number;
+  @Input()month!: number;
 
   get percentage(): number {
+    console.log(this.label,this.value,this.max, this.year,this.month)
     return (this.value / this.max) * 100;
   }
    getIconPath(label: string): string {
