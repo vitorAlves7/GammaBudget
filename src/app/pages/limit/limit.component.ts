@@ -69,6 +69,9 @@ export class LimitComponent {
 
   limitAmount: any;
   categoriesLimited: CategoryLimited[] = [];
+  showSelectedCategoryLimitModal: boolean | undefined;
+
+  expensesCategoryLimited: any
 
   onMonthYearChanged(event: { month: number; year: number }) {
     this.selectedMonth = event.month;
@@ -82,6 +85,7 @@ export class LimitComponent {
   closeModal() {
     this.showModal = false;
   }
+
 
   confirm() {
     console.log(this.selectedCategoryLimit);
@@ -124,7 +128,7 @@ export class LimitComponent {
 
       
       const isSameYear =  Number (year) === this.selectedYear;
-      const isSameMonth = Number (month)-1 === this.selectedMonth;
+      const isSameMonth = Number (month) === this.selectedMonth+1;
       const isSameCategory = category == item.category.name;
       return isSameYear && isSameMonth && isSameCategory;
       
@@ -144,9 +148,37 @@ export class LimitComponent {
     return category ? category.name : '';
   }
 
-  loadCategoriesLimited(){
+  openCategoryLimitModal(category: any){
+
+    console.log('selecionei a categoria limitada', category )
+    this.showSelectedCategoryLimitModal= true;
+    this.expensesCategoryLimited=this.getListClickedCategoryLimited(category);
+    
 
   }
+  getListClickedCategoryLimited(category: any) {
+    const filteredExpenses = this.expenses.filter((item) => {
+
+      
+      const [year, month] = item.expiration_date.split('-');
+
+      console.log(year)
+      console.log(month)
+
+      
+      const isSameYear =  Number (year) === this.selectedYear;
+      const isSameMonth = Number (month) === this.selectedMonth+1;
+      const isSameCategory = category.label == item.category.name;
+      return isSameYear && isSameMonth && isSameCategory;
+      
+    });
+
+    console.log('filtrei as categorias do ano ' ,this.selectedYear, 'e do mes ' , this.selectedMonth,':\n', filteredExpenses);
+    return filteredExpenses;
+  
+  }
+
+
 
   ngOnInit(): void {
     console.log(this.selectedMonth, this.selectedYear);
@@ -165,7 +197,7 @@ export class LimitComponent {
       name: "Aluguel",
       description: "Pagamento do aluguel mensal",
       amount: 1200.00,
-      expiration_date: "2024-07-01",
+      expiration_date: "2024-07-02",
       paid: false,
       payment_date: "",
       alert: true,
@@ -180,7 +212,7 @@ export class LimitComponent {
       name: "Supermercado",
       description: "Compras do mês",
       amount: 450.00,
-      expiration_date: "2024-07-05",
+      expiration_date: "2024-06-05",
       paid: false,
       payment_date: "",
       alert: true,
@@ -217,7 +249,7 @@ export class LimitComponent {
       alert_date: "2024-07-07",
       category: {
         id: "2",
-        name: "Alimentação"
+        name: "Saude"
       }
     },
     {
