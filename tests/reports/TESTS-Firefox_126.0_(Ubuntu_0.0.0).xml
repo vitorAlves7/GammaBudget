@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<testsuite name="Firefox 126.0 (Ubuntu 0.0.0)" package="" timestamp="2024-06-20T02:33:02" id="0" hostname="kim-jael" tests="0" errors="0" failures="0" time="0">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0"/>
+  </properties>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
