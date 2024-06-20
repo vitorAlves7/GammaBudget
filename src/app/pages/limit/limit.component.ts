@@ -72,6 +72,7 @@ export class LimitComponent {
   showSelectedCategoryLimitModal: boolean | undefined;
 
   expensesCategoryLimited: any
+  categorySelected: any;
 
   onMonthYearChanged(event: { month: number; year: number }) {
     this.selectedMonth = event.month;
@@ -147,9 +148,12 @@ export class LimitComponent {
     );
     return category ? category.name : '';
   }
+  closeCategoryLimitModal(){
+    this.showSelectedCategoryLimitModal= false;
+  }
 
   openCategoryLimitModal(category: any){
-
+    this.categorySelected= category;
     console.log('selecionei a categoria limitada', category )
     this.showSelectedCategoryLimitModal= true;
     this.expensesCategoryLimited=this.getListClickedCategoryLimited(category);
@@ -186,25 +190,25 @@ export class LimitComponent {
 
 
 
-    // this.categoriesLimited = [
-    //   { label: 'Moradia', value: 850, max: 1000, year: 2024, month: 5 },
+    this.categoriesLimited = [
+      { label: 'Alimentação', value: 1200, max: 1000, year: 2024, month: 5 },
 
-    //   { label: 'Moradia', value: 850, max: 1000, year: 2024, month: 6 },
-    // ];
+      { label: 'Alimentação', value: 450, max: 1000, year: 2024, month: 6 },
+    ];
 
     this.expenses =[  {
       id: 1,
-      name: "Aluguel",
+      name: "Fruta",
       description: "Pagamento do aluguel mensal",
       amount: 1200.00,
-      expiration_date: "2024-07-02",
+      expiration_date: "2024-06-02",
       paid: false,
       payment_date: "",
       alert: true,
       alert_date: "2004-06-25",
       category: {
         id: "1",
-        name: "Moradia"
+        name: "Alimentação"
       }
     },
     {
@@ -212,7 +216,7 @@ export class LimitComponent {
       name: "Supermercado",
       description: "Compras do mês",
       amount: 450.00,
-      expiration_date: "2024-06-05",
+      expiration_date: "2024-07-05",
       paid: false,
       payment_date: "",
       alert: true,
@@ -252,20 +256,6 @@ export class LimitComponent {
         name: "Saude"
       }
     },
-    {
-      id: 5,
-      name: "Conta de Luz",
-      description: "Fatura de energia elétrica",
-      amount: 150.00,
-      expiration_date: "2024-06-15",
-      paid: false,
-      payment_date: "",
-      alert: true,
-      alert_date: "2024-07-10",
-      category: {
-        id: "1",
-        name: "Moradia"
-      }
-    }]
+  ]
   }
 }
