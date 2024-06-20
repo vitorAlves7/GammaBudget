@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExpensesService } from '../../services/expenses/expenses.service';
 import { Expense } from '../../types/expense-type';
 
@@ -10,7 +10,7 @@ import { Expense } from '../../types/expense-type';
   templateUrl: './upcoming-expenses.component.html',
   styleUrl: './upcoming-expenses.component.scss'
 })
-export class UpcomingExpensesComponent {
+export class UpcomingExpensesComponent implements OnInit {
 
   //  expenses: Expense[] = [
   //   { id: 1, name: "iPhone 14 Pro", description: "Apple smartphone", amount: 44.5467, expiration_date: "27/04/2024", paid: false, payment_date: "", category: "Electronics" },
@@ -37,9 +37,9 @@ export class UpcomingExpensesComponent {
   }
 
   filterExpenses(expenses: Expense[]): Expense[] {
-    let today = new Date();
+    const today = new Date();
     return expenses.filter(expense => {
-      let expirationDate = new Date(expense.expiration_date);      
+      const expirationDate = new Date(expense.expiration_date);      
       return !expense.paid && expirationDate > today;
     });
   }

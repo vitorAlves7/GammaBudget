@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExpenseCategory } from '../../types/expense-category';
 import { MonthSelectorComponent } from '../../components/month-selector/month-selector.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MonthYearFilterPipe } from '../../components/month-selector/month-year-filter/month-year-filter.pipe';
 import { ExpenseLimitBarComponent } from '../../components/expense-limit-bar/expense-limit-bar.component';
-import { Expense } from '../../types/expense-type';
 
 export interface Expense2 {
   id?: number;
@@ -43,7 +42,7 @@ interface CategoryLimited {
     ExpenseLimitBarComponent,
   ],
 })
-export class LimitComponent {
+export class LimitComponent implements OnInit {
   expenseCategories: ExpenseCategory[] = [
     {
       id: '1',

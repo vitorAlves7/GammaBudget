@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExpensesService } from '../../services/expenses/expenses.service';
 import { Expense } from '../../types/expense-type';
-import { ChartComponent, NgApexchartsModule} from 'ng-apexcharts';
+import { NgApexchartsModule} from 'ng-apexcharts';
 
 
 
@@ -130,6 +130,7 @@ export class TopExpensesComponent implements OnInit{
 
    
   }
+
   ngOnInit(): void {
     
   }

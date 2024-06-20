@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { routes } from '../../app.routes';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 

@@ -8,7 +8,7 @@
 
     
     <div class="progress-bar-background">
-      <div *ngIf="max!=0"  class="progress-bar-fill"
+      <div *ngIf="max!==0"  class="progress-bar-fill"
            [style.width.%]="percentage"
            [ngClass]="{ 'exceeded': value >= max  }">
       </div>

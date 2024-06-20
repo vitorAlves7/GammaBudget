@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Expense } from '../../types/expense-type';
 import { ExpensesService } from '../../services/expenses/expenses.service';
 import {  NgApexchartsModule } from 'ng-apexcharts';
@@ -35,7 +35,7 @@ export type ChartOptions = {
   templateUrl: './expenses-by-category.component.html',
   styleUrl: './expenses-by-category.component.scss'
 })
-export class ExpensesByCategoryComponent {
+export class ExpensesByCategoryComponent implements OnInit {
 
   
 
@@ -99,11 +99,11 @@ export class ExpensesByCategoryComponent {
     this.expensesService.getExpensesList().subscribe(
       (expenses: Expense[]) => {
         this.expenses = expenses;
-        let groupedData = this.calculateExpenseStats(this.expenses);
-        let totalCategories = this.expenses.length;
+        const groupedData = this.calculateExpenseStats(this.expenses);
+        const totalCategories = this.expenses.length;
   
-        let categories = groupedData.map(group => group.category.name);
-        let seriesData = groupedData.map(group => (group.count / totalCategories) * 100);
+        const categories = groupedData.map(group => group.category.name);
+        const seriesData = groupedData.map(group => (group.count / totalCategories) * 100);
         
         this.chartOptions.series = seriesData;
         this.chartOptions.labels = categories;
