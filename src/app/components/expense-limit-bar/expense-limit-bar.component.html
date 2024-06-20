@@ -1,6 +1,6 @@
 <div class="progress-container">
   <img [src]="getIconPath(label)" [alt]="label" class="category-icon">
-  <div class="progress-details">
+  <div class="cursor-pointer progress-details ">
     <div class="progress-header">
       <span class="progress-label">{{ label }}</span>
       <span class="progress-value">{{ value | currency:'BRL':'symbol':'1.2-2' }} de {{ max | currency:'BRL':'symbol':'1.2-2' }}</span>

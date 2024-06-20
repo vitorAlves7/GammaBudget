@@ -196,6 +196,13 @@ export class LimitComponent {
      console.log(this.categoriesLimited)
      this.editLimit= false;
   } 
+  deleteCategoryLimited(){
+    this.categoriesLimited=this.categoriesLimited.filter(item => item.id !== this.categorySelected.id);
+    console.log(this.categoriesLimited)
+    this.showSelectedCategoryLimitModal= false;
+
+  }
+
 
 
   ngOnInit(): void {
