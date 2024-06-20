@@ -22,6 +22,7 @@ export interface Expense2 {
 }
 
 interface CategoryLimited {
+  id?: string;
   label: string;
   value: number;
   max: number;
@@ -44,6 +45,7 @@ interface CategoryLimited {
   ],
 })
 export class LimitComponent {
+
   expenseCategories: ExpenseCategory[] = [
     {
       id: '1',
@@ -73,6 +75,8 @@ export class LimitComponent {
 
   expensesCategoryLimited: any
   categorySelected: any;
+  newLimit: any;
+  editLimit: boolean = false;
 
   onMonthYearChanged(event: { month: number; year: number }) {
     this.selectedMonth = event.month;
@@ -182,6 +186,16 @@ export class LimitComponent {
   
   }
 
+  editMaxlimit(){
+    this.editLimit= true;
+    this.newLimit= this.categorySelected.max;
+  }
+  saveNewLimit() {
+     this.categorySelected.max= this.newLimit;
+     this.categoriesLimited.map((item) => (item.id === this.categorySelected.id ? { ...item, ... {max: this.categorySelected.max} } : item))
+     console.log(this.categoriesLimited)
+     this.editLimit= false;
+  } 
 
 
   ngOnInit(): void {
@@ -191,9 +205,11 @@ export class LimitComponent {
 
 
     this.categoriesLimited = [
-      { label: 'Alimentação', value: 1200, max: 1000, year: 2024, month: 5 },
+      { id: '1', label: 'Alimentação', value: 1200, max: 1000, year: 2024, month: 5 },
 
-      { label: 'Alimentação', value: 450, max: 1000, year: 2024, month: 6 },
+      { id: '2', label: 'Alimentação', value: 450, max: 1000, year: 2024, month: 6 },
+
+      { id: '3', label: 'Saúde', value: 450, max: 2000, year: 2024, month: 5 },
     ];
 
     this.expenses =[  {
