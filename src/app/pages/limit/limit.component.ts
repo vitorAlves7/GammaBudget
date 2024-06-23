@@ -2,7 +2,14 @@ import { Component } from '@angular/core';
 import { ExpenseCategory } from '../../types/expense-category';
 import { MonthSelectorComponent } from '../../components/month-selector/month-selector.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  NgForm,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MonthYearFilterPipe } from '../../components/month-selector/month-year-filter/month-year-filter.pipe';
 import { ExpenseLimitBarComponent } from '../../components/expense-limit-bar/expense-limit-bar.component';
@@ -42,10 +49,10 @@ interface CategoryLimited {
     CommonModule,
     MonthYearFilterPipe,
     ExpenseLimitBarComponent,
+    ReactiveFormsModule,
   ],
 })
 export class LimitComponent {
-
   expenseCategories: ExpenseCategory[] = [
     {
       id: '1',
@@ -73,10 +80,12 @@ export class LimitComponent {
   categoriesLimited: CategoryLimited[] = [];
   showSelectedCategoryLimitModal: boolean | undefined;
 
-  expensesCategoryLimited: any
+  expensesCategoryLimited: any;
   categorySelected: any;
   newLimit: any;
   editLimit: boolean = false;
+  limitForm: FormGroup;
+
 
   onMonthYearChanged(event: { month: number; year: number }) {
     this.selectedMonth = event.month;
@@ -91,6 +100,29 @@ export class LimitComponent {
     this.showModal = false;
   }
 
+  constructor(private fb: FormBuilder) {
+    this.limitForm = this.fb.group({
+      category: [null, Validators.required],
+      limitAmount: [null, [Validators.required, Validators.min(0.01)]],
+    });
+
+    // Sync the form values with the component variables
+    this.limitForm.get('category')?.valueChanges.subscribe((value) => {
+      this.selectedCategoryLimit = value;
+    });
+
+    this.limitForm.get('limitAmount')?.valueChanges.subscribe((value) => {
+      this.limitAmount = value;
+    });
+  }
+
+  validateAndSubmit() {
+    if (this.limitForm.valid) {
+      this.confirm();
+    } else {
+      this.limitForm.markAllAsTouched();
+    }
+  }
 
   confirm() {
     console.log(this.selectedCategoryLimit);
@@ -112,36 +144,36 @@ export class LimitComponent {
   ) {
     const categorieLimited = {
       label: selectedCategoryLimit,
-      value: this.calculateValueCategory(this.getNameCategoryById(this.selectedCategoryLimit)),
+      value: this.calculateValueCategory(
+        this.getNameCategoryById(this.selectedCategoryLimit)
+      ),
       max: limitAmount,
       year: selectedYear,
       month: selectedMonth,
     };
     this.categoriesLimited.push(categorieLimited);
     console.log(this.categoriesLimited);
-    
   }
 
   calculateValueCategory(category: string) {
     const filteredExpenses = this.expenses.filter((item) => {
-
-      
       const [year, month] = item.expiration_date.split('-');
 
-      console.log(year)
-      console.log(month)
+      console.log(year);
+      console.log(month);
 
-      
-      const isSameYear =  Number (year) === this.selectedYear;
-      const isSameMonth = Number (month) === this.selectedMonth+1;
+      const isSameYear = Number(year) === this.selectedYear;
+      const isSameMonth = Number(month) === this.selectedMonth + 1;
       const isSameCategory = category == item.category.name;
       return isSameYear && isSameMonth && isSameCategory;
-      
     });
 
     console.log(filteredExpenses);
 
-    const totalExpenseCategory = filteredExpenses.reduce((total, expense) => total + expense.amount, 0);
+    const totalExpenseCategory = filteredExpenses.reduce(
+      (total, expense) => total + expense.amount,
+      0
+    );
     console.log(totalExpenseCategory);
     return totalExpenseCategory;
   }
@@ -152,133 +184,148 @@ export class LimitComponent {
     );
     return category ? category.name : '';
   }
-  closeCategoryLimitModal(){
-    this.showSelectedCategoryLimitModal= false;
+  closeCategoryLimitModal() {
+    this.showSelectedCategoryLimitModal = false;
   }
 
-  openCategoryLimitModal(category: any){
-    this.categorySelected= category;
-    console.log('selecionei a categoria limitada', category )
-    this.showSelectedCategoryLimitModal= true;
-    this.expensesCategoryLimited=this.getListClickedCategoryLimited(category);
-    
-
+  openCategoryLimitModal(category: any) {
+    this.categorySelected = category;
+    console.log('selecionei a categoria limitada', category);
+    this.showSelectedCategoryLimitModal = true;
+    this.expensesCategoryLimited = this.getListClickedCategoryLimited(category);
   }
   getListClickedCategoryLimited(category: any) {
     const filteredExpenses = this.expenses.filter((item) => {
-
-      
       const [year, month] = item.expiration_date.split('-');
 
-      console.log(year)
-      console.log(month)
+      console.log(year);
+      console.log(month);
 
-      
-      const isSameYear =  Number (year) === this.selectedYear;
-      const isSameMonth = Number (month) === this.selectedMonth+1;
+      const isSameYear = Number(year) === this.selectedYear;
+      const isSameMonth = Number(month) === this.selectedMonth + 1;
       const isSameCategory = category.label == item.category.name;
       return isSameYear && isSameMonth && isSameCategory;
-      
     });
 
-    console.log('filtrei as categorias do ano ' ,this.selectedYear, 'e do mes ' , this.selectedMonth,':\n', filteredExpenses);
+    console.log(
+      'filtrei as categorias do ano ',
+      this.selectedYear,
+      'e do mes ',
+      this.selectedMonth,
+      ':\n',
+      filteredExpenses
+    );
     return filteredExpenses;
-  
   }
 
-  editMaxlimit(){
-    this.editLimit= true;
-    this.newLimit= this.categorySelected.max;
+  editMaxlimit() {
+    this.editLimit = true;
+    this.newLimit = this.categorySelected.max;
   }
   saveNewLimit() {
-     this.categorySelected.max= this.newLimit;
-     this.categoriesLimited.map((item) => (item.id === this.categorySelected.id ? { ...item, ... {max: this.categorySelected.max} } : item))
-     console.log(this.categoriesLimited)
-     this.editLimit= false;
-  } 
-  deleteCategoryLimited(){
-    this.categoriesLimited=this.categoriesLimited.filter(item => item.id !== this.categorySelected.id);
-    console.log(this.categoriesLimited)
-    this.showSelectedCategoryLimitModal= false;
-
+    this.categorySelected.max = this.newLimit;
+    this.categoriesLimited.map((item) =>
+      item.id === this.categorySelected.id
+        ? { ...item, ...{ max: this.categorySelected.max } }
+        : item
+    );
+    console.log(this.categoriesLimited);
+    this.editLimit = false;
   }
-
-
+  deleteCategoryLimited() {
+    this.categoriesLimited = this.categoriesLimited.filter(
+      (item) => item.id !== this.categorySelected.id
+    );
+    console.log(this.categoriesLimited);
+    this.showSelectedCategoryLimitModal = false;
+  }
 
   ngOnInit(): void {
     console.log(this.selectedMonth, this.selectedYear);
 
-
-
-
     this.categoriesLimited = [
-      { id: '1', label: 'Alimentação', value: 1200, max: 1000, year: 2024, month: 5 },
+      {
+        id: '1',
+        label: 'Alimentação',
+        value: 1200,
+        max: 1000,
+        year: 2024,
+        month: 5,
+      },
 
-      { id: '2', label: 'Alimentação', value: 450, max: 1000, year: 2024, month: 6 },
+      {
+        id: '2',
+        label: 'Alimentação',
+        value: 450,
+        max: 1000,
+        year: 2024,
+        month: 6,
+      },
 
       { id: '3', label: 'Saúde', value: 450, max: 2000, year: 2024, month: 5 },
     ];
 
-    this.expenses =[  {
-      id: 1,
-      name: "Fruta",
-      description: "Pagamento do aluguel mensal",
-      amount: 1200.00,
-      expiration_date: "2024-06-02",
-      paid: false,
-      payment_date: "",
-      alert: true,
-      alert_date: "2004-06-25",
-      category: {
-        id: "1",
-        name: "Alimentação"
-      }
-    },
-    {
-      id: 2,
-      name: "Supermercado",
-      description: "Compras do mês",
-      amount: 450.00,
-      expiration_date: "2024-07-05",
-      paid: false,
-      payment_date: "",
-      alert: true,
-      alert_date: "2024-06-30",
-      category: {
-        id: "2",
-        name: "Alimentação"
-      }
-    },
-    {
-      id: 3,
-      name: "Internet",
-      description: "Fatura da internet",
-      amount: 100.00,
-      expiration_date: "2024-06-10",
-      paid: false,
-      payment_date: "",
-      alert: true,
-      alert_date: "2024-07-05",
-      category: {
-        id: "3",
-        name: "Transporte"
-      }
-    },
-    {
-      id: 4,
-      name: "Academia",
-      description: "Mensalidade da academia",
-      amount: 800.00,
-      expiration_date: "2024-06-12",
-      paid: false,
-      payment_date: "",
-      alert: true,
-      alert_date: "2024-07-07",
-      category: {
-        id: "2",
-        name: "Saude"
-      }
-    },
-  ]
+    this.expenses = [
+      {
+        id: 1,
+        name: 'Fruta',
+        description: 'Pagamento do aluguel mensal',
+        amount: 1200.0,
+        expiration_date: '2024-06-02',
+        paid: false,
+        payment_date: '',
+        alert: true,
+        alert_date: '2004-06-25',
+        category: {
+          id: '1',
+          name: 'Alimentação',
+        },
+      },
+      {
+        id: 2,
+        name: 'Supermercado',
+        description: 'Compras do mês',
+        amount: 450.0,
+        expiration_date: '2024-07-05',
+        paid: false,
+        payment_date: '',
+        alert: true,
+        alert_date: '2024-06-30',
+        category: {
+          id: '2',
+          name: 'Alimentação',
+        },
+      },
+      {
+        id: 3,
+        name: 'Internet',
+        description: 'Fatura da internet',
+        amount: 100.0,
+        expiration_date: '2024-06-10',
+        paid: false,
+        payment_date: '',
+        alert: true,
+        alert_date: '2024-07-05',
+        category: {
+          id: '3',
+          name: 'Transporte',
+        },
+      },
+      {
+        id: 4,
+        name: 'Academia',
+        description: 'Mensalidade da academia',
+        amount: 800.0,
+        expiration_date: '2024-06-12',
+        paid: false,
+        payment_date: '',
+        alert: true,
+        alert_date: '2024-07-07',
+        category: {
+          id: '2',
+          name: 'Saude',
+        },
+      },
+    ];
   }
 }
