@@ -128,12 +128,23 @@ export class LimitComponent {
     console.log(this.selectedCategoryLimit);
     console.log(this.limitAmount);
     this.closeModal();
-    this.createLimitCategoryBar(
-      this.getNameCategoryById(this.selectedCategoryLimit),
-      this.limitAmount,
-      this.selectedMonth,
-      this.selectedYear
-    );
+
+    if (
+      !this.categoriesLimited.find(
+        (category) =>
+          category.label === this.getNameCategoryById(this.selectedCategoryLimit) &&
+          category.month === this.selectedMonth &&
+          category.year === this.selectedYear
+      )
+    ) {
+      this.createLimitCategoryBar(
+        this.getNameCategoryById(this.selectedCategoryLimit),
+        this.limitAmount,
+        this.selectedMonth,
+        this.selectedYear
+      );
+     
+    } 
   }
 
   createLimitCategoryBar(
