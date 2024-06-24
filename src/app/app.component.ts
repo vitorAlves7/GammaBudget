@@ -11,7 +11,7 @@ import { initFlowbite } from 'flowbite';
 })
 
 export class AppComponent implements OnInit {
-  title = 'GammaBudget';
+
 
   ngOnInit(): void {
     initFlowbite();
