@@ -21,24 +21,25 @@ import { Router } from '@angular/router';
   styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent {
-  constructor( private singUpService: SingUpService, private router: Router) {
+
+  constructor(private singUpService: SingUpService, private router: Router) {
 
   }
 
-  
-  async onSubmit (userSignUpData: NgForm){
-    console.log('userSignUpData.value = ', userSignUpData.value);
-    if(userSignUpData.value.password === userSignUpData.value.password2) {
-      console.log('Faz request...');
-      this.singUpService.createUser(userSignUpData.value.email ,userSignUpData.value.password)
-      .subscribe( (response: any) => {
-              if(response.email === userSignUpData.value.email){
-                this.redirectLogin()
-              }
-            }, 
 
-      );
-     
+  async onSubmit(userSignUpData: NgForm) {
+    console.log('userSignUpData.value = ', userSignUpData.value);
+    if (userSignUpData.value.password === userSignUpData.value.password2) {
+      console.log('Faz request...');
+      this.singUpService.createUser(userSignUpData.value.email, userSignUpData.value.password)
+        .subscribe((response: any) => {
+          if (response.email === userSignUpData.value.email) {
+            this.redirectLogin()
+          }
+        },
+
+        );
+
     } else {
       console.log('Não faz request..');
     }
@@ -46,6 +47,9 @@ export class SignUpComponent {
 
   redirectLogin() {
     this.router.navigate(['/login']);
-}
+  }
+  downloadFile(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
 
 }

@@ -21,18 +21,18 @@
         </div> 
         <ul class="space-y-2 text-sm" >
             <li class="flex items-center ">
-                <input id="todos" type="checkbox" name="all" value="all" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-transparent	" >
-                <label for="todos" class="ml-2 text-sm font-normal text-grayText dark:text-gray-100">Eu aceito os Termos de Privacidade</label>
+                <input id="todos" type="checkbox" name="all" value="all" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-transparent	" required>
+                <label for="todos" class="ml-2 text-sm font-normal text-grayText dark:text-gray-100"> Eu aceito os <a class="underline" (click)="downloadFile('termos-de-privacidade.pdf')" href="#">Termos de Privacidade</a></label>
             </li>
             <li class="flex items-center mt-4">
-                <input id="despesa" type="checkbox" name="tipo" value="expense" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-transparent	" >
-                <label for="despesa" class="ml-2 text-sm font-normal text-grayText dark:text-gray-100">Eu aceito os Termos de uso </label>
+                <input id="despesa" type="checkbox" name="tipo" value="expense" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-transparent	" required >
+                <label for="despesa" class="ml-2 text-sm font-normal text-grayText dark:text-gray-100"> Eu aceito os <a class="underline" (click)="downloadFile('termos-de-uso.pdf')" href="#">Termos de Uso</a> </label>
             </li>
           
             
         </ul>
         
-        <button type="submit" class="text-white bg-primaryGreen hover:bg-darkGreen focus:border-transparent focus:outline-none  dark:focus:ring-darkGreen-800 font-medium rounded-lg text-sm w-full px-5 py-4 text-center me-2 mb-2 mt-6">Criar conta</button>
+        <button type="submit" class="text-white bg-primaryGreen hover:bg-darkGreen focus:border-transparent focus:outline-none  dark:focus:ring-darkGreen-800 font-medium rounded-lg text-sm w-full px-5 py-4 text-center me-2 mb-2 mt-10">Criar conta</button>
         <div class="flex justify-center items-end mb-6">
             <label for="remember" class="ms-2 mt-8 text-xs font-bold text-grayText dark:text-gray-300">Já possui uma conta? <a routerLink="/login" routerLinkActive="active" class="text-primaryGreen hover:underline dark:text-primaryGreen">Fazer login</a></label>
         </div>
