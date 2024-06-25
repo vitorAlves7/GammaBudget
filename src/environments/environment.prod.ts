@@ -20,5 +20,7 @@ export const environment = {
       listCategoriesIncoming: 'budget/v1/incoming/list-categories'
 
     },
+    apiUrlTerms: 'https://terms-qynk.onrender.com/term/generate',
+
     userId: '0'
   };

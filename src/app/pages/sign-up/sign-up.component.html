@@ -3,33 +3,23 @@
         <h2>Criar uma conta</h2>
     </div>
     <form #userSignUpData="ngForm" (ngSubmit)="onSubmit(userSignUpData)">
-        <!-- <div class="mb-6">
-            <label for="name" class="block mb-2 text-sm font-normal text-grayText dark:text-white">Seu Nome</label>
-            <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-        </div>  -->
         <div class="mb-6">
             <label for="email" class="block mb-2 text-sm font-normal text-grayText dark:text-white">Seu email</label>
             <input type="email" name="email" ngModel id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
         </div> 
         <div class="mb-6">
             <label for="password" class="block mb-2 text-sm font-normal text-grayText dark:text-white">Senha</label>
-            <input type="password" name="password" ngModel id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
+            <input type="password" name="password" ngModel id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
         </div>
         <div class="mb-6">
             <label for="password" class="block mb-2 text-sm font-normal text-grayText dark:text-white">Repetir senha</label>
-            <input type="password" name="password2" ngModel id="password2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
+            <input type="password" name="password2" ngModel id="password2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required />
         </div> 
         <ul class="space-y-2 text-sm" >
-            <li class="flex items-center ">
-                <input id="todos" type="checkbox" name="all" value="all" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-transparent	" required>
-                <label for="todos" class="ml-2 text-sm font-normal text-grayText dark:text-gray-100"> Eu aceito os <a class="underline" (click)="downloadFile('termos-de-privacidade.pdf')" href="#">Termos de Privacidade</a></label>
-            </li>
             <li class="flex items-center mt-4">
                 <input id="despesa" type="checkbox" name="tipo" value="expense" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-transparent	" required >
-                <label for="despesa" class="ml-2 text-sm font-normal text-grayText dark:text-gray-100"> Eu aceito os <a class="underline" (click)="downloadFile('termos-de-uso.pdf')" href="#">Termos de Uso</a> </label>
+                <label for="despesa" class="ml-2 text-sm font-normal text-grayText dark:text-gray-100"> Eu aceito os <a class="underline cursor-pointer" (click)="downloadFile('termos-de-uso.pdf')" >Termos de Uso</a> </label>
             </li>
-          
-            
         </ul>
         
         <button type="submit" class="text-white bg-primaryGreen hover:bg-darkGreen focus:border-transparent focus:outline-none  dark:focus:ring-darkGreen-800 font-medium rounded-lg text-sm w-full px-5 py-4 text-center me-2 mb-2 mt-10">Criar conta</button>
