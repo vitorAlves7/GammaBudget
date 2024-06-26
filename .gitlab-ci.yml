@@ -10,7 +10,7 @@ variables:
   GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
 
 # Use a Node.js image for Angular tasks
-image: node:14
+image: node:20
 
 before_script:
   - npm install -g @angular/cli  # Install Angular CLI globally
