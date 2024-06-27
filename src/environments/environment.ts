@@ -21,7 +21,12 @@ export const environment = {
       updateExpenseItem: 'budget/v1/revenue/update',
       deleteExpenseItem: 'budget/v1/revenue/delete',
       listCategoriesExpense: 'budget/v1/revenue/list-categories',
-      listCategoriesIncoming: 'budget/v1/incoming/list-categories'
+      listCategoriesIncoming: 'budget/v1/incoming/list-categories',
+      addLimit: 'budget/v1/limit/create',
+      listLimit: 'budget/v1/limit/list',
+      updateLimit: 'budget/v1/limit/update',
+      deleteLimit: 'budget/v1/limit/delete'
+      
 
     },
     userId: '0'
