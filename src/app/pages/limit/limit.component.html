@@ -30,13 +30,12 @@
                 [selectedYear]="selectedYear"></app-month-selector>
                 
                 <div class="overflow-x-auto md:overflow-hidden">
-                    <div *ngFor="let category of categoriesLimited| monthYearFilter:selectedMonth:selectedYear; ">
+                    <div *ngFor="let item of categoriesLimited| monthYearFilter:selectedMonth:selectedYear; ">
                         <app-expense-limit-bar  
-                          [label]="category.label"
-                          [value]="category.value"
-                          [max]="category.max"
-                          [year]="category.year"
-                          [month]="category.month" (click)="openCategoryLimitModal(category)">
+                          [label]="item.category"
+                          [value]="item.amount"
+                          [max]="item.limit"
+                          [limit_date]="item.limit_date"  (click)="openCategoryLimitModal(item)">
                         </app-expense-limit-bar>
                     </div>
                       
@@ -114,7 +113,7 @@
     <div class="relative bg-white rounded-lg shadow">
       <div class="flex flex-col items-center p-4 md:p-5">
         <h5 class="text-xl font-semibold text-gray-900 text-center mb-4">
-          Limite de gastos em {{categorySelected.label}}
+          Limite de gastos em {{categorySelected.category}}
         </h5>
         <div class="flex items-center justify-center mb-4 w-9/12">
           <ng-container  >
