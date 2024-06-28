@@ -46,8 +46,8 @@
               <div class="h-1 bg-white" *ngIf="currentRoute === '/report'"></div>
           </li>
           <li>
-              <a class="block py-2 px-3 text-white hover:text-gray-200 hover:cursor-pointer">Limite de gastos</a>
-              <div class="h-1 bg-white" *ngIf="currentRoute === '/limit'"></div>
+              <a (click)="navigateTo('/limits')"class="block py-2 px-3 text-white hover:text-gray-200 hover:cursor-pointer">Limite de gastos</a>
+              <div class="h-1 bg-white" *ngIf="currentRoute === '/limits'"></div>
           </li>
           <li>
               <a href="#" class="block py-2 px-3 text-white"></a>

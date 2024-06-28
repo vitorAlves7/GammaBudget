@@ -23,5 +23,7 @@ export const environment = {
       listAlerts: 'budget/v1/alert/list'
     },
     userId: '1',
-    email: 'kayro.cesar.kc@gmail.com'
+    email: 'kayro.cesar.kc@gmail.com',
+    apiUrlTerms: 'https://terms-qynk.onrender.com/term/generate',
+    apiURlPrivacyTerms: 'https://privacy-terms-ypsw.onrender.com/privacy/generate'
   };
