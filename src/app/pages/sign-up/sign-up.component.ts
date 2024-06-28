@@ -51,26 +51,50 @@ export class SignUpComponent {
     this.router.navigate(['/login']);
   }
   downloadFile(arg0: string) {
-    this.termsServiceService.generatePrivacyPolicy(project.name, project.email).subscribe(
-      response => {
-        const pdfBlob = new Blob([response], {
-          type: "application/pdf",
-        });
-        const temporaryUrl = window.URL.createObjectURL(pdfBlob);
 
-        const temporaryAnchor = document.createElement("a");
-        temporaryAnchor.href = temporaryUrl;
-
-
-        temporaryAnchor.download = `termos-de-uso.pdf`;
-
-
-        document.body.appendChild(temporaryAnchor);
-        temporaryAnchor.click();
-        temporaryAnchor.remove();
-      },
-      
-    );
+    if(arg0 == 'termos-de-uso.pdf'){
+      this.termsServiceService.generateUseTerm(project.name, project.email).subscribe(
+        response => {
+          const pdfBlob = new Blob([response], {
+            type: "application/pdf",
+          });
+          const temporaryUrl = window.URL.createObjectURL(pdfBlob);
+  
+          const temporaryAnchor = document.createElement("a");
+          temporaryAnchor.href = temporaryUrl;
+  
+  
+          temporaryAnchor.download = `termos-de-uso.pdf`;
+  
+  
+          document.body.appendChild(temporaryAnchor);
+          temporaryAnchor.click();
+          temporaryAnchor.remove();
+        },
+        
+      );
+    }
+     if(arg0 =='termos-de-privacidade.pdf')
+      this.termsServiceService.generatePrivacyTerm(project.name, project.email).subscribe(
+        response => {
+          const pdfBlob = new Blob([response], {
+            type: "application/pdf",
+          });
+          const temporaryUrl = window.URL.createObjectURL(pdfBlob);
+  
+          const temporaryAnchor = document.createElement("a");
+          temporaryAnchor.href = temporaryUrl;
+  
+  
+          temporaryAnchor.download = `termos-de-privacidade.pdf`;
+  
+  
+          document.body.appendChild(temporaryAnchor);
+          temporaryAnchor.click();
+          temporaryAnchor.remove();
+        },
+        
+      );
   }
 
 }

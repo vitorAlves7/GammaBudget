@@ -16,6 +16,11 @@
             <input type="password" name="password2" ngModel id="password2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-darkGreen focus:border-darkGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required />
         </div> 
         <ul class="space-y-2 text-sm" >
+            <li class="flex items-center ">
+                <input id="todos" type="checkbox" name="all" value="all" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-transparent	" required>
+                <label for="todos" class="ml-2 text-sm font-normal text-grayText dark:text-gray-100"> Eu aceito os <a class="underline cursor-pointer" (click)="downloadFile('termos-de-privacidade.pdf')" >Termos de Privacidade</a></label>
+            </li>
+
             <li class="flex items-center mt-4">
                 <input id="despesa" type="checkbox" name="tipo" value="expense" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-launchesScreenGreen focus:ring-transparent	" required >
                 <label for="despesa" class="ml-2 text-sm font-normal text-grayText dark:text-gray-100"> Eu aceito os <a class="underline cursor-pointer" (click)="downloadFile('termos-de-uso.pdf')" >Termos de Uso</a> </label>
