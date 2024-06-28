@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <ng-container *ngIf="filtedExpenses.length >0">
+            <ng-container *ngIf="alerts.length >0">
 
           
                 <div class="overflow-x-auto md:overflow-hidden">
@@ -49,16 +49,16 @@
                         <tbody>
                            
     
-                            <tr *ngFor="let item of filtedExpenses | monthYearFilter:selectedMonth:selectedYear;  let i = index" class="border-b cursor-pointer hover:bg-gray-100 text-center"
+                            <tr *ngFor="let item of alerts | monthYearFilter:selectedMonth:selectedYear;  let i = index" class="border-b cursor-pointer hover:bg-gray-100 text-center"
                                 [attr.data-row-id]="i" >
     
                                 
-                                <td class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap ">{{ item.name }}</td>
+                                <td class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap ">{{ getExpenseById(item.revenue_id)?.name}}</td>
                                 
     
                                 <td class="">
                                     <ng-container >
-                                        @switch (item.category.name) { 
+                                        @switch (getExpenseById(item.revenue_id)?.category.name) { 
                                             @case ("Alimentação") {
                                                 <img  src="../../../assets/pages/launches/categories-icons/food.png" alt="Alimentação" class="inline-block w-6 h-6 mr-2">
                                               } 
@@ -128,11 +128,11 @@
                                             } 
                                         </ng-container>
                                     
-                                    <span class="inline-block">{{ item.category.name }}</span>
+                                    <span class="inline-block">{{getExpenseById(item.revenue_id)?.category.name }}</span>
                                   </td>
-                                  <td class="px-4 py-5" *ngIf="item.amount"> {{ item.expiration_date | date:'dd/MM/yyyy' }}  </td>
-                                  <td class="px-4 py-5"  [ngClass]="{'text-launchesScreenRed': item.amount < 0, 'text-launchesScreenGreen': item.amount > 0}">{{  item.amount  | currency:'BRL' : 'symbol':'1.2-2'  }}</td>
-                                  <td class="px-4 py-5" *ngIf="item.amount"> {{ item.alert_date | date:'dd/MM/yyyy' }}  </td>
+                                  <td class="px-4 py-5" > {{ getExpenseById(item.revenue_id)?.expiration_date| date:'dd/MM/yyyy' }}  </td>
+                                  <td class="px-4 py-5"  [ngClass]="'text-launchesScreenRed'">{{  getExpenseById(item.revenue_id)?.amount  | currency:'BRL' : 'symbol':'1.2-2'  }}</td>
+                                  <td class="px-4 py-5" > {{ item.alert_date | date:'dd/MM/yyyy' }}  </td>
     
                                   <td class="relative group">
                                     <div px-4 py-5></div>
@@ -171,7 +171,7 @@
 
 
         
-               <ng-container *ngIf="filtedExpenses.length ==0">
+               <ng-container *ngIf="alerts.length ==0">
                 <h1  class="px-4 py-4 font-medium text-xl text-gray-600 whitespace-nowrap text-center ">Sem alertas configurados</h1>
                </ng-container>
 
