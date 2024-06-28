@@ -12,9 +12,8 @@ module.exports = {
       grayBg: 'F5F5F5',
       launchesScreenRed: '#F05252',
       launchesScreenGreen: '#007E71',
+      alertGreen: '#d6f3f0',
       customGray: '#f1f2f3'
-      
-      
     },
     extend: {},
   },

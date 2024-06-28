@@ -17,11 +17,13 @@ export const environment = {
       updateExpenseItem: 'budget/v1/revenue/update',
       deleteExpenseItem: 'budget/v1/revenue/delete',
       listCategoriesExpense: 'budget/v1/revenue/list-categories',
-      listCategoriesIncoming: 'budget/v1/incoming/list-categories'
-
+      listCategoriesIncoming: 'budget/v1/incoming/list-categories',
+      createAlert: 'budget/v1/alert/create',
+      deleteAlert: 'budget/v1/alert/delete',
+      listAlerts: 'budget/v1/alert/list'
     },
+    userId: '1',
+    email: 'kayro.cesar.kc@gmail.com',
     apiUrlTerms: 'https://terms-qynk.onrender.com/term/generate',
-    apiURlPrivacyTerms: 'https://privacy-terms-ypsw.onrender.com/privacy/generate',
-
-    userId: '0'
+    apiURlPrivacyTerms: 'https://privacy-terms-ypsw.onrender.com/privacy/generate'
   };
