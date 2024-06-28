@@ -21,6 +21,7 @@ export class LimitService {
   }
 
   addLimit( item: any): Observable<any> {
+    item.user_id= this.getUserId();
     return this.http.post<any>(`${this.apiUrl}/${environment.apiEndpoints.addLimit}/${this.getUserId()}/`, item,this.getHttpOptions());
   }
 
@@ -45,6 +46,7 @@ export class LimitService {
 
       return userId.id;
     } else {
+      console.log('id fixo')
       return environment.userId;
     }
   }

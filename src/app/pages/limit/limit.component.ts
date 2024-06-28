@@ -15,6 +15,8 @@ import { MonthYearFilterPipe } from '../../components/month-selector/month-year-
 import { ExpenseLimitBarComponent } from '../../components/expense-limit-bar/expense-limit-bar.component';
 import { Expense } from '../../types/expense-type';
 import { LimitService } from '../../services/limits/limit.service';
+import { ExpenseCategoryService } from '../../services/category/expense-category.service';
+import { ExpensesService } from '../../services/expenses/expenses.service';
 
 export interface Expense2 {
   id?: number;
@@ -55,20 +57,7 @@ interface CategoryLimited {
   ],
 })
 export class LimitComponent {
-  expenseCategories: ExpenseCategory[] = [
-    {
-      id: '1',
-      name: 'Moradia',
-    },
-    {
-      id: '2',
-      name: 'Alimentação',
-    },
-    {
-      id: '3',
-      name: 'Transporte',
-    },
-  ];
+  expenseCategories: ExpenseCategory[] = [];
 
   expenses: Expense2[] = [];
   selectedCategoryLimit: any;
@@ -93,24 +82,27 @@ export class LimitComponent {
   onMonthYearChanged(event: { month: number; year: number }) {
     this.selectedMonth = event.month;
     this.selectedYear = event.year;
-    this.limit_date = `${this.selectedYear}-${this.selectedMonth.toString().padStart(2, '0')}-${'10'}`;
+    this.limit_date = `${this.selectedYear}-${(this.selectedMonth+1).toString().padStart(2, '0')}-${'10'}`;
   }
 
   addLimit() {
+    this.limit_date = `${this.selectedYear}-${(this.selectedMonth+1).toString().padStart(2, '0')}-${'10'}`;
+
     this.showModal = true;
+    console.log(this.limit_date)
+
   }
 
   closeModal() {
     this.showModal = false;
   }
 
-  constructor(private fb: FormBuilder, private limitService: LimitService) {
+  constructor(private fb: FormBuilder, private limitService: LimitService, private expenseCategoryService: ExpenseCategoryService, private expenseService: ExpensesService) {
     this.limitForm = this.fb.group({
       category: [null, Validators.required],
       limitAmount: [null, [Validators.required, Validators.min(0.01)]],
     });
 
-    // Sync the form values with the component variables
     this.limitForm.get('category')?.valueChanges.subscribe((value) => {
       this.selectedCategoryLimit = value;
     });
@@ -131,37 +123,61 @@ export class LimitComponent {
   confirm() {
     console.log(this.selectedCategoryLimit);
     console.log(this.limitAmount);
+    console.log(this.limit_date)
+    console.log('data atual AAAAAA ',this.limit_date)
     this.closeModal();
 
-    if (
-      !this.categoriesLimited.find(
-        (category) =>
-          category.category === this.getNameCategoryById(this.selectedCategoryLimit) &&
-          category.limit_date.substring(0, 4) === String(this.selectedYear) &&  
-          category.limit_date.substring(5, 7) === String(this.selectedMonth)     
-      )
-    ) {
+    const categoryName = this.getNameCategoryById(this.selectedCategoryLimit);
+    const selectedYearStr = String(this.selectedYear);
+    const selectedMonthStr = String(this.selectedMonth + 1).padStart(2, '0');
+
+    const existingCategoryLimit = this.categoriesLimited.find((item) => {
+        const itemYear = item.limit_date.substring(0, 4);
+        const itemMonth = item.limit_date.substring(5, 7);
+
+
+        return item.category === categoryName &&
+               itemYear === selectedYearStr &&
+               itemMonth === selectedMonthStr;
+    });
+
+    if (!existingCategoryLimit) {
       this.createLimitCategoryBar(
-        this.getNameCategoryById(this.selectedCategoryLimit),
+        categoryName,
         this.limitAmount,
         this.limit_date
       );
-
+    } else {
+      console.log('Categoria ja existe no mes e ano');
     }
-  }
+}
+
 
 
   createLimitCategoryBar(selectedCategoryLimit: any, limit: any, limit_date: string) {
 
-    const categorieLimited :  CategoryLimited= {
+    const categorieLimited :  CategoryLimited = {
       category: selectedCategoryLimit,
       amount: this.calculateValueCategory(this.getNameCategoryById(this.selectedCategoryLimit)),
       limit: limit,
       limit_date: limit_date
     };
-
+    
+   
     this.categoriesLimited.push(categorieLimited);
-    console.log(this.categoriesLimited);
+    console.log('vai pro label',this.categoriesLimited);
+
+    const categorieLimitedWithID  = {
+      category: this.selectedCategoryLimit,
+      amount: this.calculateValueCategory(this.getNameCategoryById(this.selectedCategoryLimit)),
+      limit: limit,
+      limit_date: limit_date
+    };
+
+    
+    this.createLimit(categorieLimitedWithID);
+    console.log('vai pro back o limite id', categorieLimitedWithID)
+
   }
 
 
@@ -208,11 +224,13 @@ export class LimitComponent {
     const filteredExpenses = this.expenses.filter((item) => {
       const [year, month] = item.expiration_date.split('-');
 
-      console.log(year);
-      console.log(month);
+      console.log('lista de despesas que filtradas',year);
+      console.log('lista de despesas que filtradas',month);
 
       const isSameYear = Number(year) === this.selectedYear;
       const isSameMonth = Number(month) === this.selectedMonth + 1;
+      console.log(category.category)
+      console.log(item.category.name)
       const isSameCategory = category.category == item.category.name;
       return isSameYear && isSameMonth && isSameCategory;
     });
@@ -230,19 +248,29 @@ export class LimitComponent {
 
   editMaxlimit() {
     this.editLimit = true;
-    this.newLimit = this.categorySelected.max;
+    this.newLimit = this.categorySelected.limit;
   }
   saveNewLimit() {
-    this.categorySelected.max = this.newLimit;
+    this.categorySelected.limit = this.newLimit;
     this.categoriesLimited.map((item) =>
       item.id === this.categorySelected.id
-        ? { ...item, ...{ max: this.categorySelected.max } }
+        ? { ...item, ...{ limit: this.categorySelected.limit } }
         : item
     );
+    console.log(this.categorySelected)
+   
+
+    this.updateLimitListItem(this.categorySelected.id, this.categorySelected);
+
+
     console.log(this.categoriesLimited);
     this.editLimit = false;
+    this.closeCategoryLimitModal();
   }
   deleteCategoryLimited() {
+    this.deleteLimitListItem(this.categorySelected.id);
+
+
     this.categoriesLimited = this.categoriesLimited.filter(
       (item) => item.id !== this.categorySelected.id
     );
@@ -260,107 +288,63 @@ export class LimitComponent {
 
     this.getData();
 
+    this.updateLimits(this.categoriesLimited);
 
-
-    // this.categoriesLimited = [
-    //   {
-    //     id: '1',
-    //     label: 'Alimentação',
-    //     value: 1200,
-    //     max: 1000,
-    //     year: 2024,
-    //     month: 5,
-    //   },
-
-    //   {
-    //     id: '2',
-    //     label: 'Alimentação',
-    //     value: 450,
-    //     max: 1000,
-    //     year: 2024,
-    //     month: 6,
-    //   },
-
-    //   { id: '3', label: 'Saúde', value: 450, max: 2000, year: 2024, month: 5 },
-    // ];
-
-
-    this.expenses = [
-      {
-        id: 1,
-        name: 'Fruta',
-        description: 'Pagamento do aluguel mensal',
-        amount: 1200.0,
-        expiration_date: '2024-06-02',
-        paid: false,
-        payment_date: '',
-        alert: true,
-        alert_date: '2004-06-25',
-        category: {
-          id: '1',
-          name: 'Alimentação',
-        },
-      },
-      {
-        id: 2,
-        name: 'Supermercado',
-        description: 'Compras do mês',
-        amount: 450.0,
-        expiration_date: '2024-07-05',
-        paid: false,
-        payment_date: '',
-        alert: true,
-        alert_date: '2024-06-30',
-        category: {
-          id: '2',
-          name: 'Alimentação',
-        },
-      },
-      {
-        id: 3,
-        name: 'Internet',
-        description: 'Fatura da internet',
-        amount: 100.0,
-        expiration_date: '2024-06-10',
-        paid: false,
-        payment_date: '',
-        alert: true,
-        alert_date: '2024-07-05',
-        category: {
-          id: '3',
-          name: 'Transporte',
-        },
-      },
-      {
-        id: 4,
-        name: 'hospital',
-        description: 'Mensalidade da academia',
-        amount: 800.0,
-        expiration_date: '2024-06-12',
-        paid: false,
-        payment_date: '',
-        alert: true,
-        alert_date: '2024-06-07',
-        category: {
-          id: '2',
-          name: 'Saúde',
-        },
-      },
-    ];
+    
   }
   getData() {
     this.limitService.getLimitList()
       .subscribe(response => {
-
-
         this.categoriesLimited = response;
-
-        console.log(this.categoriesLimited);
-
-
+        console.log('AAAAAAAAAAAAAAA', this.categoriesLimited);
       });
 
+      this.expenseCategoryService.getList()
+      .subscribe(response => {
+        this.expenseCategories = response;
+        console.log(this.expenseCategories);
+
+      });
+      
+      this.expenseService.getExpensesList()
+        .subscribe(response => {
+          console.log('minhas despesas', response);
+          this.expenses = response;
+       });
+
   }
+
+  // updateLimits(categoriesLimited: CategoryLimited[]){
+
+
+
+
+  
+
+
+  createLimit(item: any): void {
+    this.limitService.addLimit(item)
+      .subscribe(() => {
+        this.getData();
+      });
+  }
+  deleteLimitListItem(id: string): void {
+    this.limitService.deleteLimit(id)
+    .subscribe(() => {
+      this.getData();
+    });
+  }
+  updateLimitListItem(id: string, item: any): void {
+    this.limitService.updateLimit(id, item)
+      .subscribe(() => {
+        this.getData();
+      });
+  }
+
+ 
+
+  
+
   
 }
 

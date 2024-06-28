@@ -118,10 +118,10 @@
         <div class="flex items-center justify-center mb-4 w-9/12">
           <ng-container  >
             <label class="text-center m-0">
-              {{categorySelected.value | currency:'BRL':'symbol':'1.2-2'}} de 
+              {{categorySelected.amount | currency:'BRL':'symbol':'1.2-2'}} de 
             </label>
             <label *ngIf="!editLimit; else editMode" class="text-center ml-1">
-                {{categorySelected.max | currency:'BRL':'symbol':'1.2-2'}}
+                {{categorySelected.limit | currency:'BRL':'symbol':'1.2-2'}}
             </label>
           </ng-container>
           <ng-template #editMode>
@@ -157,10 +157,10 @@
 
       <div class="p-2 md:p-5 bg-gray-100 rounded-lg shadow-sm mb-3">
         <h6 class="text-lg font-semibold text-gray-800 mb-2 text-center">Disponível para gastar:</h6>
-        <p *ngIf="categorySelected.max - categorySelected.value >= 0" class="text-sm text-gray-600 text-center">
-          {{categorySelected.max - categorySelected.value | currency:'BRL':'symbol':'1.2-2'}}
+        <p *ngIf="categorySelected.limit - categorySelected.amount >= 0" class="text-sm text-gray-600 text-center">
+          {{categorySelected.limit - categorySelected.amount | currency:'BRL':'symbol':'1.2-2'}}
         </p>
-        <p *ngIf="categorySelected.max - categorySelected.value < 0" class="text-sm text-gray-600 text-center">
+        <p *ngIf="categorySelected.limit - categorySelected.amount < 0" class="text-sm text-gray-600 text-center">
           R$ 0.00
         </p>
       </div>
