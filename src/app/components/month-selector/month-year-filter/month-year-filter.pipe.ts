@@ -19,12 +19,17 @@ export class MonthYearFilterPipe implements PipeTransform {
         const itemDate = new Date(item.expiration_date);
         return itemDate.getMonth() === selectedMonth && itemDate.getFullYear() === selectedYear;
       }
+      else if (item.limit_date) {
+     
+        const itemDate = new Date(item.limit_date);
+        return itemDate.getMonth() === selectedMonth && itemDate.getFullYear() === selectedYear;
+        
+      }
       return false;
     });
   }
-    
-  }
 
-  
+}
+
 
 
