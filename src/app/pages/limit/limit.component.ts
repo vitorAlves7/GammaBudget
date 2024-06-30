@@ -288,7 +288,6 @@ export class LimitComponent {
 
     this.getData();
 
-    this.updateLimits(this.categoriesLimited);
 
     
   }
@@ -314,7 +313,6 @@ export class LimitComponent {
 
   }
 
-  // updateLimits(categoriesLimited: CategoryLimited[]){
 
 
 

@@ -20,10 +20,14 @@ export const environment = {
       listCategoriesIncoming: 'budget/v1/incoming/list-categories',
       createAlert: 'budget/v1/alert/create',
       deleteAlert: 'budget/v1/alert/delete',
-      listAlerts: 'budget/v1/alert/list'
+      listAlerts: 'budget/v1/alert/list',
+      addLimit: 'budget/v1/limit/create',
+      listLimit: 'budget/v1/limit/list',
+      updateLimit: 'budget/v1/limit/update',
+      deleteLimit: 'budget/v1/limit/delete'
     },
     userId: '1',
-    email: 'kayro.cesar.kc@gmail.com',
+    email: 'gammabudgetapp@gmail.com',
     apiUrlTerms: 'https://terms-qynk.onrender.com/term/generate',
     apiURlPrivacyTerms: 'https://privacy-terms-ypsw.onrender.com/privacy/generate'
   };

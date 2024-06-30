@@ -75,7 +75,7 @@ export class SignUpComponent {
       );
     }
      if(arg0 =='termos-de-privacidade.pdf')
-      this.termsServiceService.generatePrivacyTerm(project.name, project.email).subscribe(
+      this.termsServiceService.generatePrivacyPolicy(project.name, project.email).subscribe(
         response => {
           const pdfBlob = new Blob([response], {
             type: "application/pdf",

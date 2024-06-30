@@ -31,7 +31,7 @@ export const environment = {
       deleteLimit: 'budget/v1/limit/delete'
     },
     userId: '1',
-    email: 'kayro.cesar.kc@gmail.com',
+    email: 'gammabudgetapp@gmail.com',
     apiUrlTerms: 'https://terms-qynk.onrender.com/term/generate',
     apiURlPrivacyTerms: 'https://privacy-terms-ypsw.onrender.com/privacy/generate'
   };
