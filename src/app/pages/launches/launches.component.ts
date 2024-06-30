@@ -262,7 +262,7 @@ export class LaunchesComponent implements OnInit {
 
   openAddModal(type: string) {
 
-    this.resetInputs(type)
+    this.resetInputs()
 
     this.itemType = type;
     this.calculateBalance();
@@ -270,7 +270,7 @@ export class LaunchesComponent implements OnInit {
 
   }
 
-  resetInputs(type: string) {
+  resetInputs() {
     {
       this.incoming = {
         id: '',

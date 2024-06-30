@@ -117,10 +117,11 @@
         </h5>
         <div class="flex items-center justify-center mb-4 w-9/12">
           <ng-container  >
-            <label class="text-center m-0">
+            <label class="text-center m-0"  for="amount">
               {{categorySelected.amount | currency:'BRL':'symbol':'1.2-2'}} de 
             </label>
-            <label *ngIf="!editLimit; else editMode" class="text-center ml-1">
+
+            <label *ngIf="!editLimit; else editMode" class="text-center ml-1" for="max">
                 {{categorySelected.limit | currency:'BRL':'symbol':'1.2-2'}}
             </label>
           </ng-container>

@@ -21,7 +21,7 @@ export class UserEffects {
         this.actions$.pipe(
             ofType(UserActionTypes.Login),
             withLatestFrom(this.store),
-            switchMap(([action, _]) => {
+            switchMap(([action]) => {
                 return this.authService.auth((action as any).payload).pipe(
                     take(1),
                     switchMap((response: User) => {

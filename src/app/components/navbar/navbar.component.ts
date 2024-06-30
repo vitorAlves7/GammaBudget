@@ -14,11 +14,19 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
 
   currentRoute!: string;
+  dropdownMenu: boolean  = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
     });
+  }
+
+  openMenu(){
+    console.log(this.dropdownMenu)
+    this.dropdownMenu = !this.dropdownMenu;
+    console.log(this.dropdownMenu)
+
   }
 
   navigateTo(route: string): void {

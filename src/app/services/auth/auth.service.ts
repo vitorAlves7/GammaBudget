@@ -58,7 +58,7 @@ export class AuthService {
     refreshToken() {
         let refreshToken = '';
         const token = JSON.parse(localStorage.getItem('token') || '{}');
-        if (token.hasOwnProperty('refresh_token')) {
+        if ('refresh_token' in token) {
             refreshToken = token.refresh_token;
         }
 

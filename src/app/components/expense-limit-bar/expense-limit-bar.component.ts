@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
 @Component({
@@ -9,7 +9,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   templateUrl: './expense-limit-bar.component.html',
   styleUrl: './expense-limit-bar.component.scss',
 })
-export class ExpenseLimitBarComponent implements OnInit {
+export class ExpenseLimitBarComponent   {
 
   @Input()label!: string;
   @Input()value!: number;
@@ -47,5 +47,4 @@ export class ExpenseLimitBarComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
 }

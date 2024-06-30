@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ExpensesService } from '../../services/expenses/expenses.service';
 import { Expense } from '../../types/expense-type';
 import { NgApexchartsModule} from 'ng-apexcharts';
@@ -29,7 +29,7 @@ export type ChartOptions = {
   templateUrl: './top-expenses.component.html',
   styleUrls: ['./top-expenses.component.scss']
 })
-export class TopExpensesComponent implements OnInit{
+export class TopExpensesComponent {
 
   
   public chartOptions: Partial<ChartOptions> | any;
@@ -131,9 +131,7 @@ export class TopExpensesComponent implements OnInit{
    
   }
 
-  ngOnInit(): void {
-    
-  }
+
 
 
 
