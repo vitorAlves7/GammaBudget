@@ -1,0 +1,19 @@
+<div class="progress-container">
+  <img [src]="getIconPath(label)" [alt]="label" class="category-icon">
+  <div class="cursor-pointer progress-details ">
+    <div class="progress-header">
+      <span class="progress-label">{{ label }}</span>
+      <span class="progress-value">{{ value | currency:'BRL':'symbol':'1.2-2' }} de {{ max | currency:'BRL':'symbol':'1.2-2' }}</span>
+    </div>
+
+    
+    <div class="progress-bar-background">
+      <div *ngIf="max!=0"  class="progress-bar-fill"
+           [style.width.%]="percentage"
+           [ngClass]="{ 'exceeded': value >= max  }">
+      </div>
+    </div>
+  </div>
+</div>
+
+
