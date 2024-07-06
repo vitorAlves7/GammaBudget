@@ -16,7 +16,7 @@ before_script:
   - apt-get update && apt-get install -y firefox-esr
   - npm install -g @angular/cli
   - npm install
-  - npm install karma karma-cli --save-dev
+  - npm install karma-typescript-typesc karma-cli --save-dev
   - npm install webpack webpack-cli --save-dev
 
 

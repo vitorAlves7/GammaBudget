@@ -1,15 +1,15 @@
 module.exports = function(config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine',"karma-typescript"],
     files: [
       'src/**/*.spec.ts'
     ],
     exclude: [],
     preprocessors: {
-      'src/**/*.spec.ts': ['webpack'] 
-    },
-    reporters: ['progress', 'junit'],
+      "**/*.spec.ts": "karma-typescript" 
+  },
+    reporters: ['progress', 'junit' ,"karma-typescript" ],
     junitReporter: {
       outputDir: 'tests/reports',
       useBrowserName: true
