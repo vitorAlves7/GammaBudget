@@ -1,19 +1,15 @@
 module.exports = function(config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular'],
-    plugins: [
-      require('karma-jasmine'),
-      require('karma-junit-reporter'),
-      require('karma-firefox-launcher'),
-      require('@angular-devkit/build-angular/plugins/karma')
-    ],
+    frameworks: ['jasmine'],
     files: [
-      'src/**/*.spec.ts' // Ajuste o caminho para seus arquivos de teste
+  
+      'src/app/**/*.spec.ts'
     ],
-    exclude: [],
+    exclude: [
+    ],
     preprocessors: {
-      'src/**/*.spec.ts': ['@angular-devkit/build-angular']
+      
     },
     reporters: ['progress', 'junit'],
     junitReporter: {
@@ -32,6 +28,7 @@ module.exports = function(config) {
     autoWatch: true,
     browsers: ['FirefoxHeadless'],
     singleRun: true,
-    concurrency: Infinity
+    concurrency: Infinity,
+ 
   });
 };
