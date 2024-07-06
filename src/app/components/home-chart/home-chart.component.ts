@@ -210,5 +210,9 @@ export class HomeChartComponent implements OnInit {
     ];
   }
 
+  teste(){
+    console.log('teste');
+  }
+
 
 }
