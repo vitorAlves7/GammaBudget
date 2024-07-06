@@ -1,18 +1,20 @@
-const webpackConfig = require('./webpack.config');  // Ajuste o caminho para seu arquivo de configuração do webpack
-
 module.exports = function(config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-junit-reporter'),
+      require('karma-firefox-launcher'),
+      require('@angular-devkit/build-angular/plugins/karma')
+    ],
     files: [
-      'src/app/**/*.spec.ts'
+      'src/**/*.spec.ts' // Ajuste o caminho para seus arquivos de teste
     ],
-    exclude: [
-    ],
+    exclude: [],
     preprocessors: {
-      'src/app/**/*.spec.ts': ['webpack']
+      'src/**/*.spec.ts': ['@angular-devkit/build-angular']
     },
-    webpack: webpackConfig,
     reporters: ['progress', 'junit'],
     junitReporter: {
       outputDir: 'tests/reports',

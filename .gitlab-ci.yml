@@ -16,7 +16,7 @@ before_script:
   - apt-get update && apt-get install -y firefox-esr
   - npm install -g @angular/cli
   - npm install
-  - npm install karma karma-cli karma-jasmine karma-firefox-launcher karma-junit-reporter karma-webpack webpack webpack-cli --save-dev
+  - npm install karma karma-jasmine karma-firefox-launcher karma-junit-reporter @angular-devkit/build-angular --save-dev
 
 Angular Lint:
   stage: Lint
