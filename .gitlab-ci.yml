@@ -15,7 +15,6 @@ image: node:20
 before_script:
   - npm install -g @angular/cli  # Install Angular CLI globally
   - npm install
-
 Angular Lint:
   stage: Lint
   only:
@@ -29,7 +28,7 @@ Angular Test:
   ## https://www.npmjs.com/package/karma-junit-reporter
   stage: Testing
   script:
-    - karma start
+    - ./node_modules/.bin/karma start karma.conf.js  # Use the local Karma binary and specify the config file
   artifacts:
     when: always
     paths:
