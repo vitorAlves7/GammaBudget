@@ -17,7 +17,7 @@ before_script:
   - npm install -g @angular/cli
   - npm install
   - npm install karma-typescript karma-cli --save-dev
-  - npm install webpack webpack-cli --save-dev
+  
 
 
 Angular Lint:
