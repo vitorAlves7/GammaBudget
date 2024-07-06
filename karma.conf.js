@@ -3,32 +3,23 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-  
-      { pattern: 'src/**/*.spec.ts', type: 'module' } 
+      'src/**/*.spec.ts'
     ],
-    exclude: [
-    ],
+    exclude: [],
     preprocessors: {
-      
+      'src/**/*.spec.ts': ['webpack'] 
     },
     reporters: ['progress', 'junit'],
     junitReporter: {
       outputDir: 'tests/reports',
-      outputFile: undefined,
-      suite: '',
-      useBrowserName: true,
-      nameFormatter: undefined,
-      classNameFormatter: undefined,
-      properties: {},
-      xmlVersion: null
+      useBrowserName: true
     },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
+    autoWatch: false,
     browsers: ['FirefoxHeadless'],
     singleRun: true,
-    concurrency: Infinity,
- 
+    concurrency: Infinity
   });
 };
