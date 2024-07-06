@@ -16,9 +16,7 @@ before_script:
   - apt-get update && apt-get install -y firefox-esr
   - npm install -g @angular/cli
   - npm install
-  - npm install karma-typescript karma-cli --save-dev
-  
-
+  - npm install karma karma-jasmine karma-firefox-launcher karma-typescript jasmine-core --save-dev
 
 Angular Lint:
   stage: Lint
