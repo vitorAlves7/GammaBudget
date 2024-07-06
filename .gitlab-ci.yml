@@ -6,15 +6,19 @@ stages:
   - Deploy
 
 variables:
-  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
-  GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
+  GIT_DEPTH: "0"
 
-# Use a Node.js image for Angular tasks
 image: node:20
 
 before_script:
-  - npm install -g @angular/cli  # Install Angular CLI globally
+  - apt-get update && apt-get install -y wget gnupg
+  - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+  - sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+  - apt-get update && apt-get install -y google-chrome-stable firefox-esr
+  - npm install -g @angular/cli
   - npm install
+  - npm install karma karma-cli --save-dev
 
 Angular Lint:
   stage: Lint
@@ -24,12 +28,9 @@ Angular Lint:
     - ng lint
 
 Angular Test:
-  # Angular Testing
-  ## https://browserstack.com/guide/angular-js-testing
-  ## https://www.npmjs.com/package/karma-junit-reporter
   stage: Testing
   script:
-      - ./node_modules/.bin/karma start karma.conf.js  # Use the local Karma binary and specify the config file
+    - CHROME_BIN=/usr/bin/google-chrome FIREFOX_BIN=/usr/bin/firefox ./node_modules/.bin/karma start karma.conf.js
   artifacts:
     when: always
     paths:
