@@ -4,7 +4,7 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     files: [
   
-      'src/app/**/*.spec.ts'
+      { pattern: 'src/**/*.spec.ts', type: 'module' } 
     ],
     exclude: [
     ],
