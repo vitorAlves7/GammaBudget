@@ -16,7 +16,7 @@
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meus Alertas</a>
+              <a (click)="redirectTo('/alerts')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meus Alertas</a>
             </li>
             <li>
               <a (click)="redirectTo('/login')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sair</a>
@@ -46,8 +46,8 @@
               <div class="h-1 bg-white" *ngIf="currentRoute === '/report'"></div>
           </li>
           <li>
-              <a class="block py-2 px-3 text-white hover:text-gray-200 hover:cursor-pointer">Limite de gastos</a>
-              <div class="h-1 bg-white" *ngIf="currentRoute === '/limit'"></div>
+              <a (click)="navigateTo('/limits')"class="block py-2 px-3 text-white hover:text-gray-200 hover:cursor-pointer">Limite de gastos</a>
+              <div class="h-1 bg-white" *ngIf="currentRoute === '/limits'"></div>
           </li>
           <li>
               <a href="#" class="block py-2 px-3 text-white"></a>
