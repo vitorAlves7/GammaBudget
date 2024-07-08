@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { switchMap, map, retry } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
-import { environment } from '../../../environments/environment.prod'
+import { environment } from '../../../environments/environment'
 
 
 @Injectable({
