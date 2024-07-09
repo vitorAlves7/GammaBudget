@@ -29,12 +29,6 @@ Angular Test:
   stage: Testing
   script:
     - FIREFOX_BIN=/usr/bin/firefox ./node_modules/.bin/karma start karma.conf.js
-  artifacts:
-    when: always
-    paths:
-      - coverage/
-    reports:
-      junit: junit.xml
   rules:
     - if: $CI_COMMIT_REF_PROTECTED == "true"
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
