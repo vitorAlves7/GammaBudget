@@ -35,6 +35,8 @@ Angular Lint:
 
 sonarcloud-check:
   stage: QA
+  inherit:
+    default: false
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
