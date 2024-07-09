@@ -5,9 +5,8 @@ import { Expense } from '../../types/expense-type';
 import { NgApexchartsModule} from 'ng-apexcharts';
 
 
-
 export type ChartOptions = {
-  series?: any;
+  series: any;
   chart: any;
   xaxis: any;
   title?: any;
@@ -32,7 +31,8 @@ export type ChartOptions = {
 export class TopExpensesComponent {
 
   
-  public chartOptions: Partial<ChartOptions> | any;
+  @ViewChild("chart") chart: ChartComponent | any;
+  public chartOptions: Partial<ChartOptions> = {};
 
 
   expenses: Expense[] = [];

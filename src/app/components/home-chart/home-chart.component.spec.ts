@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeChartComponent } from './home-chart.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('HomeChartComponent', () => {
   let component: HomeChartComponent;
@@ -8,7 +9,7 @@ describe('HomeChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeChartComponent]
+      imports: [HomeChartComponent, HttpClientModule]
     })
     .compileComponents();
     

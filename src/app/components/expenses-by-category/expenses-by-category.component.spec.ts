@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExpensesByCategoryComponent } from './expenses-by-category.component';
+import { HttpClientModule } from '@angular/common/http';
 
-describe('TotalExpensesComponent', () => {
+describe('ExpensesByCategoryComponent', () => {
   let component: ExpensesByCategoryComponent;
   let fixture: ComponentFixture<ExpensesByCategoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExpensesByCategoryComponent]
+      imports: [ExpensesByCategoryComponent, HttpClientModule]
     })
     .compileComponents();
     
