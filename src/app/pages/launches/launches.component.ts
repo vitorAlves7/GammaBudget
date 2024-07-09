@@ -224,6 +224,7 @@ export class LaunchesComponent {
         name: this.selectedItem.name,
         description: this.selectedItem.description,
         amount: this.selectedItem.amount,
+        launch_date: this.selectedItem.launch_date,
         category: this.selectedItem.category.id
       }
 
@@ -319,7 +320,7 @@ export class LaunchesComponent {
 
 
       if( this.expense.paid && this.expense.payment_date=== ''){
-        console.log('aaaaaaaaaaaaaaaaaaaaaaa expense pago , logo data vazia e null');
+        console.log(' expense pago e logo data vazia ');
         this.expense.paid = false;
         this.expense.payment_date= null;
       }
@@ -350,18 +351,19 @@ export class LaunchesComponent {
     else {
       this.items.push({ ...this.incoming });
 
-      const incomingWithoutDate = {
+      const incoming = {
         name: this.incoming.name,
-        description: this.incoming.description  === '' ? "Sem descrição" : this.expense.description,
+        description: this.incoming.description  === '' ? "Sem descrição" : this.incoming.description,
         amount: this.incoming.amount,
+        launch_date: this.incoming.launch_date,
         category: this.incoming.category.id
       };
 
-      console.log(incomingWithoutDate)
+      console.log('incoming que vai', incoming)
 
 
 
-      this.addItemToIncomingList(incomingWithoutDate)
+      this.addItemToIncomingList(incoming)
     }
 
 
