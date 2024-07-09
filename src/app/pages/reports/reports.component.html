@@ -52,7 +52,7 @@
                         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
                             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="diario-tab" data-tabs-toggle="#default-tab-content" role="tablist">
                                 <li class="me-2" role="presentation">
-                                    <button class="inline-block p-4 border-b-2 rounded-t-lg focus:text-green-600 dark:text-green-600 focus:border-green-600 aria-selected:text-green-600 aria-selected:border-green-600     "  id="diario-tab" data-tabs-target="#diario" type="button" role="tab" aria-controls="entradasxsaidas" aria-selected="false">diário</button>
+                                    <button class="inline-block p-4 border-b-2 rounded-t-lg focus:text-green-600 dark:text-green-600 focus:border-green-600 aria-selected:text-green-600 aria-selected:border-green-600"  id="diario-tab" data-tabs-target="#diario" type="button" role="tab" aria-controls="entradasxsaidas" aria-selected="false">diário</button>
                                 </li>
                                 <li class="me-2" role="presentation">
                                     <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-green-600 focus:text-green-600 focus:border-green-600 dark:text-green-600 aria-selected:text-green-600 aria-selected:border-green-600 " id="semanal-tab" data-tabs-target="#semanal" type="button" role="tab" aria-controls="semanal" aria-selected="false">semanal</button>
@@ -64,7 +64,9 @@
                         </div>
                         <div id="default-tab-content">
                             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="diario" role="tabpanel" aria-labelledby="diario-tab">
-                                <h2 class="text-sm text-gray-500 dark:text-gray-400">Gráfico 1</h2>
+                                <h2 class="text-sm text-gray-500 dark:text-gray-400">Gráfico 1</h2> 
+                                <app-daily-chart (monthYearChanged)="onMonthYearChanged($event)" [selectedMonth]="selectedMonth"
+                                [selectedYear]="selectedYear">" ></app-daily-chart>        
                             </div>
                             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="semanal" role="tabpanel" aria-labelledby="semanal-tab">
                                 <h2 class="text-sm text-gray-500 dark:text-gray-400">Gráfico 2</h2>

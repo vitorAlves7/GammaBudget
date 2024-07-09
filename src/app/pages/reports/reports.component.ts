@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { MonthYearFilterPipe } from '../../components/month-selector/month-year-filter/month-year-filter.pipe';
 import { MonthSelectorComponent } from '../../components/month-selector/month-selector.component';
-
+import { DailyChartComponent } from '../../components/daily-chart/daily-chart.component';
 
 @Component({
   selector: 'reports',
@@ -11,6 +11,7 @@ import { MonthSelectorComponent } from '../../components/month-selector/month-se
     NavbarComponent,
     MonthSelectorComponent,
     MonthYearFilterPipe,
+    DailyChartComponent,
   ],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.scss'
