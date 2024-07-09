@@ -22,7 +22,7 @@ export class NavbarComponent {
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
 
-      this.user_email = localStorage.getItem('user');
+      this.user_email = JSON.parse(localStorage.getItem('user') as string);
 
     });
   }
@@ -43,7 +43,6 @@ export class NavbarComponent {
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
-
 
 
 }

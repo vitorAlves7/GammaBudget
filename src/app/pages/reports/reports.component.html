@@ -44,7 +44,7 @@
                         </li>
                     </ul>
                 </div>
-                <div id="default-tab-content">
+                <div ngIf="isTabOpen" id="default-tab-content">
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <h2 class="text-sm text-gray-500 dark:text-gray-400">Entradas X Saídas</h2>
                         
@@ -65,9 +65,17 @@
                         <div id="default-tab-content">
                             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="diario" role="tabpanel" aria-labelledby="diario-tab">
                                 <h2 class="text-sm text-gray-500 dark:text-gray-400">Gráfico 1</h2> 
-                                <app-daily-chart (monthYearChanged)="onMonthYearChanged($event)" [selectedMonth]="selectedMonth"
-                                [selectedYear]="selectedYear">" ></app-daily-chart>        
-                            </div>
+                                  <div id="chart">
+                                    <apx-chart
+                                      [series]="chartOptions.series"
+                                      [chart]="chartOptions.chart"
+                                      [xaxis]="chartOptions.xaxis"
+                                      [dataLabels]="chartOptions.dataLabels"
+                                      [plotOptions]="chartOptions.plotOptions"
+                                      [title]="chartOptions.title">
+                                    </apx-chart>
+                                  </div>        
+                              </div>
                             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="semanal" role="tabpanel" aria-labelledby="semanal-tab">
                                 <h2 class="text-sm text-gray-500 dark:text-gray-400">Gráfico 2</h2>
                             </div>

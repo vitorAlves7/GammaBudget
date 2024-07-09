@@ -30,7 +30,7 @@ export const environment = {
       updateLimit: 'budget/v1/limit/update',
       deleteLimit: 'budget/v1/limit/delete'
     },
-    userId: '1',
+    userId: '3',
     email: 'gammabudgetapp@gmail.com',
     apiUrlTerms: 'https://terms-qynk.onrender.com/term/generate',
     apiURlPrivacyTerms: 'https://privacy-terms-ypsw.onrender.com/privacy/generate'
