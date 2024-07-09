@@ -53,7 +53,7 @@ sonarcloud-check:
 Build Angular:
   stage: Build
   script:
-    - ng build --prod
+    - ng build
   artifacts:
     paths:
       - dist/
