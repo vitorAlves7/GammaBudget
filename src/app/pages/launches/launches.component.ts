@@ -43,7 +43,7 @@ export interface Expense {
   amount: number;
   expiration_date: string;
   paid: boolean;
-  payment_date: string;
+  payment_date: string| null;
   category: ExpenseCategory;
 }
 
@@ -108,7 +108,7 @@ export class LaunchesComponent {
     amount: 0,
     expiration_date: '',
     paid: false,
-    payment_date: '',
+    payment_date: null,
     category: {
       id: '',
       name: '',
@@ -313,30 +313,38 @@ export class LaunchesComponent {
     console.log(this.expense.expiration_date)
     if (this.itemType === 'expense') {
 
-      console.log()
+      console.log(this.expense.payment_date)
       this.items.push({ ...this.expense });
+  
 
 
-
-
-      const expenseWithStringValue = {
-
-
-        name: this.expense.name,
-        description: this.expense.description,
-        amount: this.expense.amount,
-        expiration_date: this.expense.expiration_date,
-        paid: this.expense.paid.toString(),
-        payment_date: this.expense.payment_date,
-        category: this.expense.category.id,
-
-
+      if( this.expense.paid && this.expense.payment_date=== ''){
+        console.log('aaaaaaaaaaaaaaaaaaaaaaa expense pago , logo data vazia e null');
+        this.expense.paid = false;
+        this.expense.payment_date= null;
       }
 
 
 
 
+      const expenseWithStringValue = {
+        name: this.expense.name,
+        description: this.expense.description === '' ? "Sem descrição" : this.expense.description,
+        amount: this.expense.amount,
+        expiration_date: this.expense.expiration_date === '' ? null : this.expense.expiration_date,
+        paid: this.expense.paid.toString(),
+        payment_date: this.expense.payment_date === '' ? null : this.expense.payment_date,
+        category: this.expense.category.id,
+      };
+      
+      // Aqui você tem o objeto expenseWithStringValue com os valores ajustados conforme necessário
+      
+
+
+
+
       this.addItemToExpenses(expenseWithStringValue)
+      console.log('description aqui' , this.expense.description)
       console.log('vai pro back no add', expenseWithStringValue)
     }
     else {
@@ -344,7 +352,7 @@ export class LaunchesComponent {
 
       const incomingWithoutDate = {
         name: this.incoming.name,
-        description: this.incoming.name,
+        description: this.incoming.description  === '' ? "Sem descrição" : this.expense.description,
         amount: this.incoming.amount,
         category: this.incoming.category.id
       };
