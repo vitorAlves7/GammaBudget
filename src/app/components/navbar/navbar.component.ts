@@ -13,12 +13,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+  isDropdownOpen = false;
 
   currentRoute!: string;
+  user_email: any;
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
+
+      this.user_email = localStorage.getItem('user');
+
     });
   }
 
@@ -29,10 +34,16 @@ export class NavbarComponent {
   redirectTo(route: string): void {
     if(route === '/login'){
       localStorage.clear();
+      sessionStorage.clear();
       this.navigateTo(route)
     } else {
       this.navigateTo(route)
     }
   }
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+
 
 }
