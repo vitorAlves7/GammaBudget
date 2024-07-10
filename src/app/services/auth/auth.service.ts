@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { switchMap, map, retry } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
 import { environment } from '../../../environments/environment.prod'
 
@@ -58,7 +58,7 @@ export class AuthService {
     refreshToken() {
         let refreshToken = '';
         const token = JSON.parse(localStorage.getItem('token') || '{}');
-        if (token.hasOwnProperty('refresh_token')) {
+        if ('refresh_token' in token) {
             refreshToken = token.refresh_token;
         }
 

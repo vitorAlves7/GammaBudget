@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { routes } from '../../app.routes';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +15,7 @@ export class NavbarComponent {
   isDropdownOpen = false;
 
   currentRoute!: string;
+  dropdownMenu: boolean  = false;
   user_email: any;
 
   constructor(private router: Router) {
@@ -25,6 +25,13 @@ export class NavbarComponent {
       this.user_email = localStorage.getItem('user');
 
     });
+  }
+
+  openMenu(){
+    console.log(this.dropdownMenu)
+    this.dropdownMenu = !this.dropdownMenu;
+    console.log(this.dropdownMenu)
+
   }
 
   navigateTo(route: string): void {

@@ -8,13 +8,13 @@
         </div>
         <div class="ml-4">
           <ng-container>
-            <div *ngIf="dayPeriod == 'Bom dia'">
+            <div *ngIf="dayPeriod === 'Bom dia'">
               <img src="../../../assets/svg/morning-icon.png" alt="imgmorning" class="w-14 h-14">
             </div>
-            <div *ngIf="dayPeriod == 'Boa Tarde'">
+            <div *ngIf="dayPeriod === 'Boa Tarde'">
               <img src="../../../assets/svg/afternoon-icon.png" alt="imgafternoon" class="w-14 h-14">
             </div>
-            <div *ngIf="dayPeriod == 'Boa noite'">
+            <div *ngIf="dayPeriod === 'Boa noite'">
               <img src="../../../assets/svg/night-icon.png" alt="imgnight" class="w-14 h-14">
             </div>
           </ng-container>

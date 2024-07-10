@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExpenseCategory } from '../../types/expense-category';
 import { MonthSelectorComponent } from '../../components/month-selector/month-selector.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -6,14 +6,12 @@ import {
   FormBuilder,
   FormGroup,
   FormsModule,
-  NgForm,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MonthYearFilterPipe } from '../../components/month-selector/month-year-filter/month-year-filter.pipe';
 import { ExpenseLimitBarComponent } from '../../components/expense-limit-bar/expense-limit-bar.component';
-import { Expense } from '../../types/expense-type';
 import { LimitService } from '../../services/limits/limit.service';
 import { ExpenseCategoryService } from '../../services/category/expense-category.service';
 import { ExpensesService } from '../../services/expenses/expenses.service';
@@ -56,7 +54,7 @@ interface CategoryLimited {
     ReactiveFormsModule,
   ],
 })
-export class LimitComponent {
+export class LimitComponent implements OnInit {
   expenseCategories: ExpenseCategory[] = [];
 
   expenses: Expense2[] = [];

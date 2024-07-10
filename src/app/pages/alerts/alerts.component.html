@@ -171,7 +171,7 @@
 
 
         
-               <ng-container *ngIf="alerts.length ==0">
+               <ng-container *ngIf="alerts.length ===0">
                 <h1  class="px-4 py-4 font-medium text-xl text-gray-600 whitespace-nowrap text-center ">Sem alertas configurados</h1>
                </ng-container>
 
@@ -268,7 +268,7 @@
     </div>
   </div>
 
-  <div class="fixed top-0 right-0 bottom-0 left-0 z-50 flex justify-center items-center" tabindex="-1" *ngIf="showModal && expenses.length==0">
+  <div class="fixed top-0 right-0 bottom-0 left-0 z-50 flex justify-center items-center" tabindex="-1" *ngIf="showModal && expenses.length===0">
     <div class="absolute inset-0 bg-black bg-opacity-10 backdrop-blur-sm"></div>
     <div class="relative p-4 w-full max-w-4xl h-full overflow-auto">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">

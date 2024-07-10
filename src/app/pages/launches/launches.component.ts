@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -69,7 +69,7 @@ export interface Expense {
 
     ]
 })
-export class LaunchesComponent {
+export class LaunchesComponent implements OnInit {
 
   categoriesExpense : Expense[] =[];
 
@@ -263,7 +263,7 @@ export class LaunchesComponent {
 
   openAddModal(type: string) {
 
-    this.resetInputs(type)
+    this.resetInputs()
 
     this.itemType = type;
     this.calculateBalance();
@@ -271,7 +271,7 @@ export class LaunchesComponent {
 
   }
 
-  resetInputs(type: string) {
+  resetInputs() {
     {
       this.incoming = {
         id: '',
