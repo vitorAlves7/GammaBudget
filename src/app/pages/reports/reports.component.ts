@@ -38,8 +38,8 @@ export class ReportsComponent implements OnInit {
   selectedYear: number = new Date().getFullYear();
   isTabOpen: boolean = true;
 
-  expenses: Expense[] = []
-  incomings: Incoming[] = []
+  expenses: any[] = []
+  incomings: any[] = []
 
   limit_date: string = '';
 
@@ -126,13 +126,19 @@ export class ReportsComponent implements OnInit {
     const arrData = Array.from({ length: this.getDiasNoMes()}, () => 0);
     console.log('generete arrData = ', arrData);
     const exp = this.incomings.map(elem => {
-      return {
-        ...elem,
-        day: new Date(elem.launch_date).getDate(),
+      const month = new Date(elem.launch_date).getMonth();
+      if(month === this.selectedMonth){
+        return {
+          ...elem,
+          day: new Date(elem.launch_date).getDate(),
+        }
       }
     });
+  
     exp.forEach((elem) => {
-      arrData[elem.day - 2] += elem.amount;
+      if(elem?.day){
+        arrData[elem.day - 2] += elem.amount;
+      }
     })
     console.log('exp = ', arrData);
     return arrData;
@@ -144,14 +150,25 @@ export class ReportsComponent implements OnInit {
     const arrData = Array.from({ length: this.getDiasNoMes()}, () => 0);
     console.log('generete arrData = ', arrData);
     const exp = this.expenses.map(elem => {
-      return {
-        ...elem,
-        day: elem.payment_date.slice(-2)
+      const month = elem.expiration_date.split("-");
+      if((parseInt(month[1]) - 1) === this.selectedMonth) {
+        console.log('caiu aqui');
+        console.log('Mês selecionado = ', (parseInt(month[1]) - 1))
+        const data = {
+          ...elem,
+          day: elem.expiration_date.slice(-2),
+        }
+        console.log('data = ', data);
+        return data
       }
     });
-    exp.forEach((elem) => {
-      arrData[parseInt(elem.day) -1] += elem.amount;
-    })
+    console.log('exp antes do arrData = ',exp);
+      exp.forEach((elem) => {
+        if(elem?.day){
+          arrData[(parseInt(elem.day) -1)] += elem.amount;
+        }
+      })
+    
     console.log('exp = ', arrData);
     return arrData;
   }
