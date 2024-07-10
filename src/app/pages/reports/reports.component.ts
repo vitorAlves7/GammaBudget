@@ -116,17 +116,18 @@ export class ReportsComponent implements OnInit {
         this.expenses = expenses;
         console.log('expenses = ', this.expenses)
         // this.sumExpensesMonth = this.calculateMonthlyExpenses(this.expenses);
-        // this.updateChart();
+        this.updateChart();
       }
     );
   }
 
   private generateData(): number[] {
-    this.getDiasNoMes();  
-    return Array.from({ length: this.getDiasNoMes()}, () => Math.floor(Math.random() * 100));
+    this.getDiasNoMes();
+    return Array.from({ length: this.getDiasNoMes()}, () => 0);
   }
 
   updateChart(): void {
+    const arrData = Array.from({ length: this.getDiasNoMes() }, (_, i) => (i + 1).toString());
     this.chartOptions = {
       series: [
         {
