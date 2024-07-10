@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -43,7 +43,7 @@ export interface Expense {
   amount: number;
   expiration_date: string;
   paid: boolean;
-  payment_date: string;
+  payment_date: string| null;
   category: ExpenseCategory;
 }
 
@@ -69,7 +69,7 @@ export interface Expense {
 
     ]
 })
-export class LaunchesComponent {
+export class LaunchesComponent implements OnInit {
 
   categoriesExpense : Expense[] =[];
 
@@ -108,7 +108,7 @@ export class LaunchesComponent {
     amount: 0,
     expiration_date: '',
     paid: false,
-    payment_date: '',
+    payment_date: null,
     category: {
       id: '',
       name: '',
@@ -224,6 +224,7 @@ export class LaunchesComponent {
         name: this.selectedItem.name,
         description: this.selectedItem.description,
         amount: this.selectedItem.amount,
+        launch_date: this.selectedItem.launch_date,
         category: this.selectedItem.category.id
       }
 
@@ -262,7 +263,7 @@ export class LaunchesComponent {
 
   openAddModal(type: string) {
 
-    this.resetInputs(type)
+    this.resetInputs()
 
     this.itemType = type;
     this.calculateBalance();
@@ -270,7 +271,7 @@ export class LaunchesComponent {
 
   }
 
-  resetInputs(type: string) {
+  resetInputs() {
     {
       this.incoming = {
         id: '',
@@ -313,47 +314,56 @@ export class LaunchesComponent {
     console.log(this.expense.expiration_date)
     if (this.itemType === 'expense') {
 
-      console.log()
+      console.log(this.expense.payment_date)
       this.items.push({ ...this.expense });
+  
 
 
-
-
-      const expenseWithStringValue = {
-
-
-        name: this.expense.name,
-        description: this.expense.description,
-        amount: this.expense.amount,
-        expiration_date: this.expense.expiration_date,
-        paid: this.expense.paid.toString(),
-        payment_date: this.expense.payment_date,
-        category: this.expense.category.id,
-
-
+      if( this.expense.paid && this.expense.payment_date=== ''){
+        console.log(' expense pago e logo data vazia ');
+        this.expense.paid = false;
+        this.expense.payment_date= null;
       }
 
 
 
 
+      const expenseWithStringValue = {
+        name: this.expense.name,
+        description: this.expense.description === '' ? "Sem descrição" : this.expense.description,
+        amount: this.expense.amount,
+        expiration_date: this.expense.expiration_date === '' ? null : this.expense.expiration_date,
+        paid: this.expense.paid.toString(),
+        payment_date: this.expense.payment_date === '' ? null : this.expense.payment_date,
+        category: this.expense.category.id,
+      };
+      
+      // Aqui você tem o objeto expenseWithStringValue com os valores ajustados conforme necessário
+      
+
+
+
+
       this.addItemToExpenses(expenseWithStringValue)
+      console.log('description aqui' , this.expense.description)
       console.log('vai pro back no add', expenseWithStringValue)
     }
     else {
       this.items.push({ ...this.incoming });
 
-      const incomingWithoutDate = {
+      const incoming = {
         name: this.incoming.name,
-        description: this.incoming.name,
+        description: this.incoming.description  === '' ? "Sem descrição" : this.incoming.description,
         amount: this.incoming.amount,
+        launch_date: this.incoming.launch_date,
         category: this.incoming.category.id
       };
 
-      console.log(incomingWithoutDate)
+      console.log('incoming que vai', incoming)
 
 
 
-      this.addItemToIncomingList(incomingWithoutDate)
+      this.addItemToIncomingList(incoming)
     }
 
 

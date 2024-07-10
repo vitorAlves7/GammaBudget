@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Incoming } from '../../types/incoming-type';
 import { Expense } from '../../types/expense-type';
 import { IncomingsService } from '../../services/incomings/incomings.service';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './general-information.component.html',
   styleUrl: './general-information.component.scss'
 })
-export class GeneralInformationComponent {
+export class GeneralInformationComponent implements OnInit {
   incomings: Incoming[] = [];
   expenses: Expense[] = [];
   totalMonthIncome: number = 0;
@@ -33,12 +33,12 @@ export class GeneralInformationComponent {
     const currentDate = new Date(); 
   
 
-    let totalIncomings = incomings
+    const totalIncomings = incomings
       .filter(incoming => new Date(incoming.launch_date) <= currentDate) 
       .reduce((total, incoming) => total + incoming.amount, 0);
   
     
-    let totalExpenses = expenses
+    const totalExpenses = expenses
       .filter(expense => expense.paid) 
       .reduce((total, expense) => total + Math.abs(expense.amount), 0);
   
@@ -112,7 +112,7 @@ export class GeneralInformationComponent {
 
   verifyDayPeriod(): string {
     
-    let hour = new Date().getHours();
+    const hour = new Date().getHours();
 
     if (hour >= 5 && hour < 12) {
       return "Bom dia";

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ExpensesService } from '../../services/expenses/expenses.service';
 import { Expense } from '../../types/expense-type';
-import { ChartComponent, NgApexchartsModule} from 'ng-apexcharts';
-
+import { NgApexchartsModule} from 'ng-apexcharts';
+import { ChartComponent } from 'ng-apexcharts';
 
 export type ChartOptions = {
   series: any;
@@ -28,7 +28,7 @@ export type ChartOptions = {
   templateUrl: './top-expenses.component.html',
   styleUrls: ['./top-expenses.component.scss']
 })
-export class TopExpensesComponent implements OnInit{
+export class TopExpensesComponent {
 
   
   @ViewChild("chart") chart: ChartComponent | any;
@@ -130,9 +130,8 @@ export class TopExpensesComponent implements OnInit{
 
    
   }
-  ngOnInit(): void {
-    
-  }
+
+
 
 
 

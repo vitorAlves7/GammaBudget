@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { MonthSelectorComponent } from '../../components/month-selector/month-selector.component';
 import { Expense } from '../../types/expense-type';
 import { MonthYearFilterPipe } from '../../components/month-selector/month-year-filter/month-year-filter.pipe';
 import { FormsModule } from '@angular/forms';
-import { ExpenseCategory } from '../../types/expense-category';
 import { AlertsService } from '../../services/alerts/alerts.service';
 import { ExpensesService } from '../../services/expenses/expenses.service';
 import { ExpenseCategoryService } from '../../services/category/expense-category.service';
@@ -34,7 +33,7 @@ export interface Alert {
     FormsModule,
   ],
 })
-export class AlertsComponent {
+export class AlertsComponent implements OnInit{
 
   
   selectedMonth: number = new Date().getMonth();

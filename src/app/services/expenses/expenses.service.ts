@@ -1,8 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+<<<<<<< HEAD
 import { environment } from '../../../environments/environment';
 import { Expense } from '../../types/expense-type';
+=======
+import { environment } from '../../../environments/environment.prod';
+>>>>>>> 2e7984280e63a5d6be1dec93115991ec676af44b
 
 @Injectable({
   providedIn: 'root'

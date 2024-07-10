@@ -238,7 +238,7 @@
                 <div class="relative p-4 bg-white rounded-lg shadow ">
                     <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 ">
                         <h3 class="text-lg font-semibold text-gray-900 ">
-                            Adicionar {{itemType == 'incoming' ? 'Receita':'Despesa'}}
+                            Adicionar {{itemType === 'incoming' ? 'Receita':'Despesa'}}
                             
                         </h3>
                         <button type="button" (click)="closeAddModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
@@ -251,7 +251,7 @@
 
                     <form  (ngSubmit)="addItem()">
                         <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                            <ng-container *ngIf="itemType == 'incoming'">
+                            <ng-container *ngIf="itemType === 'incoming'">
                                 <div>
                                     <label for="incomingName" class="block mb-2 text-text-xl font-medium text-gray-500 ">Nome</label>
                                     <input type="text" id="incomingName" [(ngModel)]="incoming.name" name="name"  class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen" />
@@ -263,7 +263,7 @@
                                 </div>
                                 <div>
                                     <label for="incomingData" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Data</label>
-                                    <input type="date" id="incomingData" [value]="actualIncomingDate" name="launch_date" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen " disabled/>
+                                    <input type="date" id="incomingData" [(ngModel)]="incoming.launch_date" name="launch_date" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen " />
 
                                 </div>
                                 <div>
@@ -281,7 +281,7 @@
                                 </div>
                                
                             </ng-container>
-                            <ng-container *ngIf="itemType == 'expense'">
+                            <ng-container *ngIf="itemType === 'expense'">
                                 <div>
                                     <label for="expenseName" class="block mb-2 text-text-xl font-medium text-gray-500 ">Nome</label>
                                     <input type="text" id="expenseName" [(ngModel)]="expense.name" name="name" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen" />
@@ -344,7 +344,7 @@
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h5 class="text-xl font-semibold text-gray-900 "> 
-                        {{itemType == 'incoming' ? 'Receita':'Despesa'}}
+                        {{itemType === 'incoming' ? 'Receita':'Despesa'}}
                    </h5>
                     <button type="button" class="close" aria-label="Fechar" (click)="closeModal()">
                         <span aria-hidden="true">&times;</span>
@@ -354,7 +354,7 @@
                     <form class="space-y-4">
                         <div class="grid gap-4 mb-4 sm:grid-cols-2">
                             
-                            <ng-container *ngIf="itemType == 'incoming'">
+                            <ng-container *ngIf="itemType === 'incoming'">
                                 <div>
                                     <label for="incomingName" class="block mb-2 text-text-xl font-medium text-gray-700 ">Nome</label>
                                     <label for="incomingName" class="block mb-2 text-text-xl font-medium text-gray-500 ">{{selectedItem.name}}</label>
@@ -380,7 +380,7 @@
                                 </div>
                                
                             </ng-container>
-                            <ng-container *ngIf="itemType == 'expense'">
+                            <ng-container *ngIf="itemType === 'expense'">
                                 <div>
                                     <label for="expenseName" class="block mb-2 text-text-xl font-medium text-gray-700 ">Nome</label>
                                     <label for="expenseName" class="block mb-2 text-text-xl font-medium text-gray-500 ">{{selectedItem.name}}</label>
@@ -444,7 +444,7 @@
             <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                 <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Atualizar  {{itemType == 'incoming' ? 'Receita':'Despesa'}}
+                        Atualizar  {{itemType === 'incoming' ? 'Receita':'Despesa'}}
                     </h3>
                     <button type="button"  (click)="closeEditModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
                         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -456,7 +456,7 @@
 
                 <form  (ngSubmit)="updateItem()">
                     <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                        <ng-container *ngIf="itemType == 'incoming'">
+                        <ng-container *ngIf="itemType === 'incoming'">
                             <div>
                                 <label for="incomingName" class="block mb-2 text-text-xl font-medium text-gray-500 ">Nome</label>
                                 <input type="text" id="incomingName" [(ngModel)]="editItem.name" name="name" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen" />
@@ -467,7 +467,7 @@
                             </div>
                             <div>
                                 <label for="incomingData" class="block mb-2 text-text-xl font-medium text-gray-500 dark:text-white">Data</label>
-                                <input type="date" id="incomingData" [(ngModel)]="editItem.launch_date"  name="launch_date" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen" disabled=""/>
+                                <input type="date" id="incomingData" [(ngModel)]="editItem.launch_date"  name="launch_date" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen" />
                             </div>
                             <div>
                                 <label for="incomingCategory" class="block mb-2 text-text-xl font-medium text-gray-500 ">Categoria</label>
@@ -485,7 +485,7 @@
                            
                         </ng-container>
 
-                        <ng-container *ngIf="itemType == 'expense'">
+                        <ng-container *ngIf="itemType === 'expense'">
                             <div>
                                 <label for="expenseName" class="block mb-2 text-text-xl font-medium text-gray-500 ">Nome</label>
                                 <input type="text" id="expenseName" [(ngModel)]="editItem.name" name="name" class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:border-primaryGreen focus:ring-1 focus:ring-primaryGreen" />
