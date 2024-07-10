@@ -19,11 +19,9 @@ before_script:
   - npm install karma karma-cli --save-dev
 
 Angular Lint:
-  stage: Lint
-  only:
-    - merge_requests
-  script:
-    - ng lint
+    stage: Lint
+    script:
+      - ng lint
 
 # Angular Test:
 #   stage: Testing
