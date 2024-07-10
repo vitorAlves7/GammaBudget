@@ -121,23 +121,54 @@ export class ReportsComponent implements OnInit {
     );
   }
 
-  private generateData(): number[] {
+  private generateIncomingsData(): number[] {
     this.getDiasNoMes();
-    return Array.from({ length: this.getDiasNoMes()}, () => 0);
+    const arrData = Array.from({ length: this.getDiasNoMes()}, () => 0);
+    console.log('generete arrData = ', arrData);
+    const exp = this.incomings.map(elem => {
+      return {
+        ...elem,
+        day: new Date(elem.launch_date).getDate(),
+      }
+    });
+    exp.forEach((elem) => {
+      arrData[elem.day - 2] += elem.amount;
+    })
+    console.log('exp = ', arrData);
+    return arrData;
+  }
+
+
+  private generateExpensesData(): number[] {
+    this.getDiasNoMes();
+    const arrData = Array.from({ length: this.getDiasNoMes()}, () => 0);
+    console.log('generete arrData = ', arrData);
+    const exp = this.expenses.map(elem => {
+      return {
+        ...elem,
+        day: elem.payment_date.slice(-2)
+      }
+    });
+    exp.forEach((elem) => {
+      arrData[parseInt(elem.day) -1] += elem.amount;
+    })
+    console.log('exp = ', arrData);
+    return arrData;
   }
 
   updateChart(): void {
     const arrData = Array.from({ length: this.getDiasNoMes() }, (_, i) => (i + 1).toString());
+    console.log('arrData = ', arrData)
     this.chartOptions = {
       series: [
         {
           name: "Receita",
-          data: this.generateData(),
+          data: this.generateIncomingsData(),
           color: '#007E71'
         },
         { 
           name: "Despesa",
-          data: this.generateData(),
+          data: this.generateExpensesData(),
           color: '#FF0606'
         }
       ],
