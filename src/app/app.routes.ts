@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { LaunchesComponent } from './pages/launches/launches.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 import { AlertsComponent } from './pages/alerts/alerts.component';
 import { LimitComponent } from './pages/limit/limit.component';
 
@@ -22,6 +23,10 @@ export const routes: Routes = [
     {
         path: "home",
         component: HomeComponent
+    },
+    {
+        path: "reports",
+        component: ReportsComponent
     },
     {
         path: "",

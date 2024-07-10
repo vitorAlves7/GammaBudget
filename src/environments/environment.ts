@@ -5,8 +5,8 @@
 export const environment = {
     production: false,
     apiUrl: 'http://localhost:8000/',
-    clientId: '',
-    clientSecret: '',
+    clientId: 're7okeDzrXFtcGFdPPupAtBinofdlsCATRHYQAGc',
+    clientSecret: 'J6EpgJljdlojTF7Zp3hAPruUE5hS3cGhseSQeFPF38EzcEVobVU1eyR1XNYKIGBlrGYCABvgxEBf0EmpiNcl989ibhvSwrNUG35yvyDOF2OLBWVBd2CYS9FSnRkYDZUw',
     grantType: 'password',
     apiBaseUrl: 'http://localhost:8000',
     apiEndpoints: {
@@ -30,7 +30,7 @@ export const environment = {
       updateLimit: 'budget/v1/limit/update',
       deleteLimit: 'budget/v1/limit/delete'
     },
-    userId: '1',
+    userId: '3',
     email: 'gammabudgetapp@gmail.com',
     apiUrlTerms: 'https://terms-qynk.onrender.com/term/generate',
     apiURlPrivacyTerms: 'https://privacy-terms-ypsw.onrender.com/privacy/generate'

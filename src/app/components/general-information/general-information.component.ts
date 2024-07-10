@@ -4,6 +4,7 @@ import { Incoming } from '../../types/incoming-type';
 import { Expense } from '../../types/expense-type';
 import { IncomingsService } from '../../services/incomings/incomings.service';
 import { ExpensesService } from '../../services/expenses/expenses.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-general-information',
@@ -20,7 +21,7 @@ export class GeneralInformationComponent implements OnInit {
   dayPeriod: string | undefined;
   balance: number = 0;
   
-  constructor(private incomingsService: IncomingsService, private expensesService: ExpensesService) {}
+  constructor(private incomingsService: IncomingsService, private expensesService: ExpensesService, private router: Router) {}
   
   ngOnInit(): void {
     this.dayPeriod = this.verifyDayPeriod();
@@ -120,6 +121,10 @@ export class GeneralInformationComponent implements OnInit {
     } else {
       return "Boa noite";
     }
+  }
+
+  navigateTo(route: string): void {
+    this.router.navigate([route]);
   }
 
 }

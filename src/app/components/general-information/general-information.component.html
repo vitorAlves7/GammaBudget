@@ -42,7 +42,7 @@
       <p class="text-lg text-gray-700 text-red-500">- {{ totalMonthExpense | currency: 'BRL' }}</p>
     </div>
 
-    <button class="font-semibold hover:bg-gray-100 text-gray-600 bg-white p-4 rounded-xl shadow-md	 flex flex-col justify-center items-center text-lg relative h-20">
+    <button (click)="navigateTo('/reports')" class="font-semibold hover:bg-gray-100 text-gray-600 bg-white p-4 rounded-xl shadow-md	 flex flex-col justify-center items-center text-lg relative h-20">
       Relatório do mês
       <img src="../../../assets/svg/chart-icon.png" alt="Ícone de gráfico" class="w-10 h-10 mt-2">
     </button>
