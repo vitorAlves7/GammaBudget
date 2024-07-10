@@ -13,22 +13,22 @@ export class AlertsService {
 
   headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAlertList(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${environment.apiEndpoints.listAlerts}/${this.getUserId()}/`,this.getHttpOptions());
+    return this.http.get<any>(`${this.apiUrl}/${environment.apiEndpoints.listAlerts}/${this.getUserId()}/`, this.getHttpOptions());
   }
 
 
-  addAlert( item: any): Observable<any> {
-    item.user_id= this.getUserId();
+  addAlert(item: any): Observable<any> {
+    item.user_id = this.getUserId();
     item.user_email = this.getUserEmail();
-    return this.http.post<any>(`${this.apiUrl}/${environment.apiEndpoints.createAlert}/${this.getUserId()}/`, item,this.getHttpOptions());
+    return this.http.post<any>(`${this.apiUrl}/${environment.apiEndpoints.createAlert}/${this.getUserId()}/`, item, this.getHttpOptions());
   }
 
 
   deleteAlert(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${environment.apiEndpoints.deleteAlert}/${this.getUserId()}/${id}/`,this.getHttpOptions());
+    return this.http.delete<any>(`${this.apiUrl}/${environment.apiEndpoints.deleteAlert}/${this.getUserId()}/${id}/`, this.getHttpOptions());
   }
 
   sendEmail(): Observable<any> {
@@ -43,23 +43,25 @@ export class AlertsService {
     };
   }
 
-  private getUserId(){
+  private getUserId() {
     const user = localStorage.getItem("user")
-    if(user){
+    if (user) {
       const userId = JSON.parse(user);
       return userId.id;
     } else {
       return environment.userId;
     }
   }
-  private getUserEmail(){
-    const user = localStorage.getItem("email")
-    if(user){
-      const userId = JSON.parse(user);
-      return userId.email;
-    } else {
+  private getUserEmail() {
+    const user = localStorage.getItem("user");
+
+    if (user) {
+      const userObject = JSON.parse(user);
+      return userObject.email;
+    }
+    else{
       return environment.email;
     }
-  }
 
+  }
 }
