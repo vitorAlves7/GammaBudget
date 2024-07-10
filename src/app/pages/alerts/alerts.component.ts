@@ -8,7 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { AlertsService } from '../../services/alerts/alerts.service';
 import { ExpensesService } from '../../services/expenses/expenses.service';
 import { ExpenseCategoryService } from '../../services/category/expense-category.service';
-import { EmailService } from '../../services/email/email.service';
+
+
 
 
 export interface Alert {
@@ -114,14 +115,7 @@ export class AlertsComponent implements OnInit{
     this.triggerEmail();
   }
   triggerEmail() {
-    this.emailService.sendEmail().subscribe(
-      response => {
-        console.log('Email enviado com sucesso', response);
-      },
-      error => {
-        console.error('Erro ao enviar email', error);
-      }
-    );
+    this.alertsService.sendEmail().subscribe();
   }
 
   onRadioChange(event: Event) {
@@ -157,7 +151,7 @@ export class AlertsComponent implements OnInit{
   }
 
   constructor( private expenseService: ExpensesService,
-     private expenseCategoryService: ExpenseCategoryService, private alertsService: AlertsService,private emailService: EmailService
+     private expenseCategoryService: ExpenseCategoryService, private alertsService: AlertsService
   ) { }
 
  

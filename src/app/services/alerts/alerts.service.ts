@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 export class AlertsService {
 
   private apiUrl: string = `${environment.apiBaseUrl}`;
+  private apiSendEmailUrl = 'https://back-end-d5im.onrender.com/budget/v1/alert/trigger-email/';
+
   headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) {}
@@ -27,6 +29,12 @@ export class AlertsService {
 
   deleteAlert(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${environment.apiEndpoints.deleteAlert}/${this.getUserId()}/${id}/`,this.getHttpOptions());
+  }
+
+  sendEmail(): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body = { send_email: true };
+    return this.http.post<any>(this.apiSendEmailUrl, body, { headers });
   }
 
   private getHttpOptions() {
