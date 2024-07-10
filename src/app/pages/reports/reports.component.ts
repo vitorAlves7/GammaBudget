@@ -20,7 +20,7 @@ export type ChartOptions = {
 
 
 @Component({
-  selector: 'reports',
+  selector: 'app-reports',
   standalone: true,
   imports: [
     NavbarComponent,
