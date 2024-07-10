@@ -15,10 +15,10 @@
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
-              <a (click)="redirectTo('/alerts')" class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meus Alertas</a>
+              <a (click)="redirectTo('/alerts')" (keyup.enter)="redirectTo('/alerts')" tabindex="0" class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meus Alertas</a>
             </li>
             <li>
-              <a (click)="redirectTo('/login')" class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sair</a>
+              <a (click)="redirectTo('/login')" (keyup.enter)="redirectTo('/login')" tabindex="0" class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sair</a>
             </li>
           </ul>
         </div>
