@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ExpensesService } from '../../services/expenses/expenses.service';
 import { Expense } from '../../types/expense-type';
 import { NgApexchartsModule} from 'ng-apexcharts';
-
+import { ChartComponent } from 'ng-apexcharts';
 
 export type ChartOptions = {
   series: any;
