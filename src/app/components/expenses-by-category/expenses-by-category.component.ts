@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Expense } from '../../types/expense-type';
 import { ExpensesService } from '../../services/expenses/expenses.service';
-import {  NgApexchartsModule } from 'ng-apexcharts';
+import {  ChartComponent, NgApexchartsModule } from 'ng-apexcharts';
 import { ExpenseCategory } from '../../types/expense-category';
 
 
@@ -35,24 +35,25 @@ export type ChartOptions = {
   templateUrl: './expenses-by-category.component.html',
   styleUrl: './expenses-by-category.component.scss'
 })
-export class ExpensesByCategoryComponent implements OnInit {
+export class ExpensesByCategoryComponent   {
 
   
 
   expenses: Expense[] = [];
 
 
-  public chartOptions: Partial<ChartOptions>;
-
+  @ViewChild("chart") chart: ChartComponent | any;
+  public chartOptions: Partial<ChartOptions> = {};
+  
   constructor(private expensesService: ExpensesService) {
     this.chartOptions = {
-      series: [44, 55, 13, 43, 22],
+      series: [],
       chart: {
         type: "donut",
         width: '100%', 
         height: 280 
       },
-      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      labels: [],
       responsive: [
         {
           breakpoint: 480,
@@ -92,10 +93,12 @@ export class ExpensesByCategoryComponent implements OnInit {
         }
       },
     };
+    this.loadData();
   }
 
 
-  ngOnInit() {
+
+  loadData() {
     this.expensesService.getExpensesList().subscribe(
       (expenses: Expense[]) => {
         this.expenses = expenses;
@@ -137,3 +140,5 @@ export class ExpensesByCategoryComponent implements OnInit {
   }
   
 }
+
+
